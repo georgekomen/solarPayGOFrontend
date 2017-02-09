@@ -13,22 +13,9 @@ export class SunamiserviceService {
    this.getMarkers();
   }
 
-  getMarkers(): Observable<Imarker[]>
+  getMarkers()
   {
-   const headers: Headers = new Headers();
-   headers.append('Accept', 'application/json');
-   headers.append('Content-Type', 'application/json');
-   headers.append('Access-Control-Allow-Origin', '*');
-
-   const options = new RequestOptions({
-     headers: headers
-   });
-
-
-     return this._http.get('http://api.sunamiapp.net/api/customers/',options)
-     .map((res:Response) => res.json())
-                         //...errors if any
-                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+   //ecdc
       
   }
 }
