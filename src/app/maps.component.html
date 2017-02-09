@@ -1,0 +1,35 @@
+<div *ngIf = "customers" class = "sebm-google-map-container">
+        <div class="row">
+          <div  class= "col-md-8">
+          <sebm-google-map
+           [latitude]="Customer_Lat" 
+           [longitude]="Customer_Lon"
+           [zoom]="zoom"
+           [disableDefaultUI]=false
+           [zoomControl]="true"
+           >
+
+           <sebm-google-map-marker
+
+           *ngFor="let m of customers; let i = index"
+           (markerClick)="clickedMarker(m,i)"
+           [latitude]="m.Customer_Lat"
+           [longitude]="m.Customer_Lon"
+           [iconUrl] = "m.Customer_Icon"
+
+           >
+
+           <sebm-google-map-info-window>
+
+             <strong>{{m.Customer_Name}}</strong>
+
+           </sebm-google-map-info-window>
+
+           </sebm-google-map-marker>
+          </sebm-google-map>
+          </div>
+          <div class= "col-md-4">
+
+          </div>
+        </div><!--row-->
+      </div>
