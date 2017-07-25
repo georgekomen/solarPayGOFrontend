@@ -1,0 +1,48 @@
+
+  <app-loading-snipper></app-loading-snipper>
+  <div *ngIf="customers" class="sebm-google-map-container">
+    {{hideloader()}}
+    <sebm-google-map [latitude]="Customer_Lat" [longitude]="Customer_Lon" [zoom]="zoom" [disableDefaultUI]=false [zoomControl]="true">
+
+      <sebm-google-map-marker *ngFor="let m of customers; let i = index" (markerClick)="clickedMarker(m,i)" [latitude]="m.Customer_Lat"
+        [longitude]="m.Customer_Lon" [iconUrl]="m.Customer_Icon">
+
+        <sebm-google-map-info-window>
+
+          <strong>{{m.Customer_Name}}</strong>
+
+        </sebm-google-map-info-window>
+
+      </sebm-google-map-marker>
+    </sebm-google-map>
+    <!--<div class= "col-md-4">
+              <div class="panel panel-info">
+                   <div class="panel-heading">
+                       <h3 class="panel-title">INVENTORY</h3>
+                   </div>
+                      <div class="panel-body">
+                        <ul class="list-group">
+                                <li class="list-group-item acive">
+                                <span class="badge ">?</span> Active payed
+                                </li>
+                                <li class="list-group-item">
+                                <span class="badge">?</span> Active Not Payed
+                                </li>
+                                <li class="list-group-item">
+                                <span class="badge">?</span> In stock waiting installation
+                                </li>
+                                <li class="list-group-item">
+                                <span class="badge">?</span> Not payed hence de-activated
+                                </li>
+                                <li class="list-group-item">
+                                <span class="badge">?</span> With technical issues
+                                </li>
+                                <li class="list-group-item">
+                                <span class="badge">?</span> with other issues
+                                </li>
+                             
+                        </ul>
+                      </div>
+           </div>
+          </div>-->
+  </div>

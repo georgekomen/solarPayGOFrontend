@@ -1,0 +1,29 @@
+.main{
+    padding: 0px;
+}
+
+.hamburger{
+    margin-top: 3em;
+}
+.navbar{
+    margin-top: 3em;
+}
+.container-fluid {
+    margin-top: 0.5em;
+}
+
+@media (max-width: 600px) {
+ .hamburger{
+    margin-top: 0;
+}
+.navbar{
+    margin-top: 0;
+}
+.container-fluid{
+    margin-left: 0;
+    margin-top: -6.5em;
+}
+ app-su-navbar{
+     display: none;
+ }
+}

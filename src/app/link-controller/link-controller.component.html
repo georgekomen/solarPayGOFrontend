@@ -1,0 +1,114 @@
+
+<app-loading-snipper></app-loading-snipper>
+<div *ngIf="searchData && customers">
+  {{hideloader()}}
+  <div *ngIf="!showlinkbutton" class="col-sm-10">
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">IMEI NUMBER</label>
+      <div class="col-sm-10">
+        <ng2-completer class="form-control" [(ngModel)]="imei" placeholder="IMEI NUMBER" [datasource]="searchData" [minSearchLength]="0"
+          [clearSelected]="false" [textSearching]=""></ng2-completer>
+
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Customer</label>
+      <div class="col-sm-10">
+        <ng2-completer class="form-control" [(ngModel)]="customer_id" placeholder="customer id" [datasource]="customers" [minSearchLength]="0"
+          [clearSelected]="false" [textSearching]=""></ng2-completer>
+
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary" (click)="submit()">SUBMIT</button>
+      </div>
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-warning" (click)="CANCEL()">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showlinkbutton" class="col-sm-10">
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+      <div class="col-sm-7">
+        <button type="submit" class="btn btn-primary" (click)="Fshowlinkbutton()">LINK NEW CONTROLLER</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-12 scroll3">
+
+    <div>
+
+
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4">
+              <h3> Customer System Details</h3>
+            </div>
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table table-responsive">
+        <table class="table table-striped" [mfData]="data| generalFilter : filterQuery " #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+          [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+          <thead>
+            <tr>
+
+              <th style="width: auto">
+                Index
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="Owner">Name</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="installdate">Install Date</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="Last_System_Communication">Last_System_Communication</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="Imei">Imei</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="SystemPhoneNumber">SystemPhoneNumber</mfDefaultSorter>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of mf.data; let i = index">
+              <tr>
+                <td>{{i+1}}</td>
+                <td *ngIf="item.Active_Status==1"><span class="label label-warning">{{item.Owner}}</span></td>
+                <td *ngIf="item.Active_Status==0"><span class="label label-info">{{item.Owner}}</span></td>
+                <td>{{item.installdate}}</td>
+                <td>{{item.Last_System_Communication}}</td>
+                <td>{{item.Imei}}</td>
+                <td>{{item.SystemPhoneNumber}}</td>
+              </tr>
+
+            </ng-container>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="12">
+                <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <app-add-stock></app-add-stock>
+            </div>
+            <div class="col-md-3">
+                <input [(ngModel)]="date1" type="date" id="myDate" value="2014-02-09" (change)="requestdata()">
+            </div>
+            <div class="col-md-3">
+                <input class="form-control" [(ngModel)]="filterQuery" placeholder="search" />
+            </div>
+            <div class="col-md-3">
+                <app-stock-details [Cdata]="itemselected"></app-stock-details>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table table-responsive scroll3">
+    <table class="table table-striped" [mfData]="data| generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+        [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+        <thead>
+            <tr>
+                <th style="width: auto">
+                    Index
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Item">Item</mfDefaultSorter>
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="stock">Stock</mfDefaultSorter>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of mf.data; let i = index">
+
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td (click)="updateitemselected(item.Item)">{{item.Item}}</td>
+                    <td>{{item.stock}}</td>
+
+                </tr>
+
+            </ng-container>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="12">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

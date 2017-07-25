@@ -1,0 +1,205 @@
+<app-loading-snipper>
+</app-loading-snipper>
+<div *ngIf="!showlinkbutton" class="col-sm-10">
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Customer Id</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="id" type="text" class="form-control" placeholder="customer id">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">customer name</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="name" type="text" class="form-control" placeholder="customer name">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Phone number 1</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="number1" type="text" class="form-control" placeholder="phone number 1">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Phone number 2</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="number2" type="text" class="form-control" placeholder="phone number 2">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Phone number 3</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="number3" type="text" class="form-control" placeholder="phone number 3">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Box Address</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="box" type="text" class="form-control" placeholder="Box Address">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Occupation</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="occupation" type="text" class="form-control" placeholder="occupation">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Witness Name</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="witness" type="text" class="form-control" placeholder="witness">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Witness Id</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="witnessid" type="text" class="form-control" placeholder="witness id">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Witness Name</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="witness" type="text" class="form-control" placeholder="witness">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">village</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="village" type="text" class="form-control" placeholder="village">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">city</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="city" type="text" class="form-control" placeholder="city">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="description" type="text" class="form-control" placeholder="description">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Location</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="location" type="text" class="form-control" placeholder="location">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Date</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="date1" type="date" id="myDate" value="2014-02-09">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-4">
+      <button type="submit" class="btn btn-primary" (click)="submit()">SUBMIT</button>
+    </div>
+    <div class="col-sm-4">
+      <button type="submit" class="btn btn-warning" (click)="CANCEL()">CANCEL</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showlinkbutton" class="col-sm-10">
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-7">
+      <button type="submit" class="btn btn-primary" (click)="Fshowlinkbutton()">REGISTER NEW CUSTOMER</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="data">
+  {{hideloader()}}
+  <div class="panel panel-primary">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-5">
+          <h3> Customer Personal Details</h3>
+        </div>
+        <div class="col-md-4">
+           <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
+        </div>
+        <div class="col-md-3">
+          <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search" />
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div style="height: 600px; overflow-y: scroll" class="table table-responsive">
+    <table class="table table-striped" [mfData]="data | generalFilter : filterQuery " #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+      [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+      <thead>
+        <tr>
+          <th style="width: auto">
+            Index
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="Name">Name</mfDefaultSorter>
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="ID">ID</mfDefaultSorter>
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="Occupation">Occupation</mfDefaultSorter>
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="Mobile">Mobile</mfDefaultSorter>
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="village">village</mfDefaultSorter>
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="location">location</mfDefaultSorter>
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="city">city</mfDefaultSorter>
+          </th>
+          <th style="width: auto">
+            Install Date
+          </th>
+          <th style="width: auto">
+            Witness
+          </th>
+          <th style="width: auto">
+            Witness_ID
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of mf.data; let i = index">
+          <tr>
+            <td>{{i+1}}</td>
+            <td *ngIf="item.status==0"><span class="label label-warning">{{item.Name}}</span></td>
+            <td *ngIf="item.status==1"><span class="label label-info">{{item.Name}}</span></td>
+            <td>{{item.ID}}</td>
+            <td>{{item.Occupation}}</td>
+            <td>{{item.Mobile}}</td>
+            <td>{{item.village}}</td>
+            <td>{{item.location}}</td>
+            <td>{{item.city}}</td>
+            <td>{{item.installdate}}</td>
+            <td>{{item.Witness}}</td>
+            <td>{{item.Witness_ID}}</td>
+
+          </tr>
+
+        </ng-container>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="12">
+            <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

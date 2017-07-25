@@ -1,0 +1,14 @@
+
+<div class="form-container">
+    <header [@fallIn]="state">
+      <button (click)="logout()" class="btn btn-primary">Logout</button>
+    </header>
+    <div id="page" [@moveInLeft]="state">
+      <h2>Welcome {{ name.auth.displayName }}!</h2>
+      <h5>{{email}}</h5>
+      <img src={{name.auth.photoURL}} alt="Smiley face" height="100%" width="100%">
+      
+    </div>
+    
+    
+</div>

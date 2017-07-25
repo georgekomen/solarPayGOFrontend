@@ -1,0 +1,86 @@
+
+<app-loading-snipper></app-loading-snipper>
+<div *ngIf="data" class="table table-responsive">
+    {{hideloader()}}
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3> Switching history</h3>
+                </div>
+                <div class="col-md-4">
+                     <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped" [mfData]="data | generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+        [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+        <thead>
+            <tr>
+                <th style="width: auto">
+                    Index
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Name">Name</mfDefaultSorter>
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Id">Id</mfDefaultSorter>
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Imei">Imei</mfDefaultSorter>
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Sim">Sim</mfDefaultSorter>
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Switch_Off_Date">Switch_Off_Date</mfDefaultSorter>
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Switch_Off_payrate">Switch_Off_payrate</mfDefaultSorter>
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Switch_Off_by">Switch_Off_by</mfDefaultSorter>
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Switch_On_Date">Switch_On_Date</mfDefaultSorter>
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Switch_on_payrate">Switch_on_payrate</mfDefaultSorter>
+                </th>
+                <th style="width: auto">
+                    <mfDefaultSorter by="Switch_On_by">Switch_on_by</mfDefaultSorter>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of mf.data; let i = index">
+
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Id}}</td>
+                    <td>{{item.Imei}}</td>
+                    <td>{{item.Sim}}</td>
+                    <td>{{item.Switch_Off_Date}}</td>
+                    <td>{{item.Switch_Off_payrate}}</td>
+                    <td>{{item.Switch_Off_by}}</td>
+                    <td>{{item.Switch_On_Date}}</td>
+                    <td>{{item.Switch_on_payrate}}</td>
+                    <td>{{item.Switch_on_by}}</td>
+                </tr>
+
+            </ng-container>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="12">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

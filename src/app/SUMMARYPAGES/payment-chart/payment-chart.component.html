@@ -1,0 +1,16 @@
+
+<div *ngIf="data5" class="row placeholders">     
+      <h1 class="page-header">Income Graph</h1>
+      <div class="col-md-10">
+      <canvas baseChart
+         [datasets]="data5[0].LineChartData"
+         [labels]="data5[0].LineChartLabels"
+         [options]="lineChartOptions"
+         [colors]="lineChartColors"
+         [legend]="lineChartLegend"
+         [chartType]="lineChartType"
+         (chartHover)="chartHovered($event)"
+         (chartClick)="chartClicked($event)">
+      </canvas>
+      </div>
+</div>

@@ -1,0 +1,136 @@
+<div *ngIf="!showlinkbutton" class="col-sm-10">
+    <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">customer id</label>
+        <div class="col-sm-10">
+            <ng2-completer class="form-control" [(ngModel)]="customer_id" placeholder="customer id" [datasource]="customer_ids" [minSearchLength]="0"
+                [clearSelected]="false" [textSearching]=""></ng2-completer>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">Date</label>
+        <div class="col-sm-10">
+            <input [(ngModel)]="date1" type="date" id="myDate" value="2014-02-09">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">Amount</label>
+        <div class="col-sm-10">
+            <input [(ngModel)]="amount" type="text" class="form-control" placeholder="amount">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">Reference Code</label>
+        <div class="col-sm-10">
+            <input [(ngModel)]="Code1" type="text" class="form-control" placeholder="code">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-4">
+            <button type="submit" class="btn btn-primary" (click)="linkpayment()">SUBMIT</button>
+        </div>
+        <div class="col-sm-4">
+            <button type="submit" class="btn btn-warning" (click)="CANCEL()">CANCEL</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showlinkbutton" class="col-sm-10">
+    <div class="form-group row">
+        <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-7">
+            <button type="submit" class="btn btn-primary" (click)="Fshowlinkbutton()">Record New Cash</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div *ngIf="data" class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <H3>CASH PAYMENTS</H3>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+            <h4><span class="label label-success">Total: {{sum1 | currency:'KSH':true}}</span></h4>
+        </div>
+
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search" (keyup)="changesum()" />
+                </div>
+            </div>
+
+
+
+            <div class="table table-responsive scroll3">
+                <table class="table table-striped" [mfData]="data | generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+                    [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                    <thead>
+                        <tr>
+                            <th style="width: auto">
+                                Index
+                            </th>
+                            <th style="width: auto">
+                                <mfDefaultSorter by="Date">Customer_Id</mfDefaultSorter>
+                            </th>
+                            <th style="width: auto">
+                                <mfDefaultSorter by="Reference">Customer_Name</mfDefaultSorter>
+                            </th>
+                            <th style="width: auto">
+                                <mfDefaultSorter by="Amount">Date</mfDefaultSorter>
+                            </th>
+                            <th style="width: auto">
+                                <mfDefaultSorter by="Number">Reference</mfDefaultSorter>
+                            </th>
+                            <th style="width: auto">
+                                <mfDefaultSorter by="Message">Amount</mfDefaultSorter>
+                            </th>
+                            <th style="width: auto">
+                                <mfDefaultSorter by="Message">Recorded By</mfDefaultSorter>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of mf.data; let i = index">
+
+                            <tr>
+
+
+                                <td>{{i+1}}</td>
+                                <td>{{item.Customer_Id}}</td>
+                                <td>{{item.Customer_Name}}</td>
+                                <td>{{item.Date}} </td>
+                                <td>{{item.Reference}}</td>
+                                <td>{{item.Amount}}</td>
+                                <td>{{item.RecordedBy}}</td>
+
+                            </tr>
+
+                        </ng-container>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="12">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>

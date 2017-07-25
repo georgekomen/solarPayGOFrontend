@@ -1,0 +1,120 @@
+
+  <div *ngIf="!showlinkbutton" class="col-sm-10">
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">IMEI NUMBER</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="imei" type="text" class="form-control" placeholder="IMEI NUMBER">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">SIM NUMBER</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="sim" type="text" class="form-control" placeholder="SIM NUMBER">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">NETWORK PROVIDER</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="provider" type="text" class="form-control" placeholder="NETWORK PROVIDER">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">VERSION</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="version" type="text" class="form-control" placeholder="VERSION">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary" (click)="submit()">SUBMIT</button>
+      </div>
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-warning" (click)="CANCEL()">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showlinkbutton" class="col-sm-10">
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+      <div class="col-sm-7">
+        <button type="submit" class="btn btn-primary" (click)="Fshowlinkbutton()">REGISTER NEW CONTROLLER</button>
+      </div>
+    </div>   
+  </div>
+
+
+  <div class="col-sm-12 scroll3">
+    <app-loading-snipper></app-loading-snipper>
+    <div *ngIf="data">
+      {{hideloader()}}
+
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4">
+               <h3> Sunami system controllers</h3>
+            </div>
+            <div class="col-md-4">
+               <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
+                </div>
+            <div class="col-md-4">
+                       <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search"/>
+                </div>
+          </div>
+        </div>
+      </div>
+      <div class="table table-responsive">
+        <table class="table table-striped" [mfData]="data | generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+          <thead>
+            <tr>
+              <th style="width: auto">
+                Index
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="Imei">IMEI NUMBER</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="Sim_Number">SIM NUMBER</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="Provider">NETWORK PROVIDER</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="Version">VERSION</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="Reg_Date">Reg_Date</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="Recorded_By">Recorded_By</mfDefaultSorter>
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of mf.data; let i = index">
+
+              <tr>
+                <td>{{i+1}}</td>
+                <td>{{item.Imei}}</td>
+                <td>{{item.Sim_Number}}</td>
+                <td>{{item.Provider}}</td>
+                <td>{{item.Version}}</td>
+                <td>{{item.Reg_Date}}</td>
+                <td>{{item.Recorded_By}}</td>
+              </tr>
+
+            </ng-container>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="12">
+                <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>

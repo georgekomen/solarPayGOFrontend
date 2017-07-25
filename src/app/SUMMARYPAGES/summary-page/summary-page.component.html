@@ -1,0 +1,62 @@
+      
+          <app-loading-snipper></app-loading-snipper>
+          <div *ngIf ="data"  class="row placeholders">
+            <h1 class="page-header">Summary Report {{date1}}</h1>
+            <h3><input [(ngModel)]="date1" type="date" id="myDate" value="2014-02-09" (change)="requestdata()"></h3>
+            
+            {{hideloader()}}
+
+            <div class="col-md-4">
+              <h1> <span class="label label-success labelfixed">{{data[0].CustomerNumber}}</span></h1>
+              <h4>active customers</h4>
+              <span class="text">currently</span>
+            </div>
+            
+            <div class="col-md-4">
+              <h1> <span class="label label-warning labelfixed">{{data[0].Issues}}</span></h1>
+              <h4>issues</h4>
+              <span class="text">this month</span>
+            </div>
+            
+            <div class="col-md-4">
+              <h1> <span class="label label-info labelfixed">{{data[0].Maintenance}}</span></h1>
+              <h4>maintenance</h4>
+              <span class="text">done this month</span>
+            </div>
+
+            <div class="col-md-4">
+              <h1> <span class="label label-info labelfixed">{{data[0].Payrate}}%</span></h1>
+              <h4>current</h4>
+              <span class="text">payment rate</span>
+            </div>
+
+            <div class="col-md-4">
+              <h1> <span class="label label-success labelfixed">{{data[0].NewInstallations}}</span></h1>
+              <h4>new</h4>
+              <span class="text">installations this month</span>
+            </div>
+
+            <div class="col-md-4">
+              <h1> <span class="label label-info labelfixed">?</span></h1>
+              <h4>clients waiting</h4>
+              <span class="text">for installation</span>
+            </div>
+
+            <div class="col-md-4">
+              <h1> <span class="label label-warning labelfixed">{{data[0].Uninstallations}}</span></h1>
+              <h4>uninstallations</h4>
+              <span class="text">this month</span>
+            </div>
+
+            <div class="col-md-4">
+              <h1> <span class="label label-info labelfixed">{{data[0].RemoteControls}}</span></h1>
+              <h4>customers</h4>
+              <span class="text">with remote control system</span>
+            </div>
+
+            <div class="col-md-4">
+              <h1> <span class="label label-info labelfixed">?</span></h1>
+              <h4>follow ups</h4>
+              <span class="text">done this month</span>
+            </div>
+          </div>

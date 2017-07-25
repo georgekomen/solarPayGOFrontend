@@ -1,0 +1,135 @@
+
+<app-loading-snipper></app-loading-snipper>
+<div *ngIf="customer_ids">
+  {{hideloader()}}
+  <div *ngIf="!showlinkbutton" class="col-sm-10">
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Customer Id</label>
+      <div class="col-sm-10">
+        <ng2-completer class="form-control" [(ngModel)]="customer_id" placeholder="customer id number" [datasource]="customer_ids"
+          [minSearchLength]="0" [clearSelected]="false" [textSearching]=""></ng2-completer>
+          
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Issue</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="issue1" placeholder="issue">
+
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary" (click)="submit()">SUBMIT</button>
+      </div>
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-warning" (click)="CANCEL()">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showlinkbutton" class="col-sm-10">
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+      <div class="col-sm-7">
+        <button type="submit" class="btn btn-primary" (click)="Fshowlinkbutton()">REPORT NEW ISSUE</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-12 scroll3">
+    <div>
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3">
+              <h3> Customer Issues</h3>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search" />
+            </div>
+          </div>
+          <div *ngIf="solveissuediv" class="row">
+            <div  class="col-md-8">
+              <input type="text" class="form-control" [(ngModel)]="issuesolvecomment" placeholder="how did you solve the issue?" />
+            </div>
+            <div class="col-md-2">
+              <button type="submit" class="btn btn-primary" (click)="submitissuesolve()">SUBMIT</button>
+            </div>
+            <div class="col-md-2">
+              <button type="submit" class="btn btn-warning" (click)="cancelsubmitissuesolve()">CANCEL</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="table table-responsive scroll3">
+        <table class="table table-striped" [mfData]="data| generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+          [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+          <thead>
+            <tr>
+              <th style="width: auto">
+                Index
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="customer">customer</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="reporter">reporter</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="issue">issue</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="date">date</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="priority">priority</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="status">status</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="solvedOn">solvedOn</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="solvedBy">solvedBy</mfDefaultSorter>
+              </th>
+              <th style="width: auto">
+                <mfDefaultSorter by="comment">comment</mfDefaultSorter>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <ng-container *ngFor="let item of mf.data; let i = index">
+              <tr>
+                <td>{{i+1}}</td>
+                <td>{{item.customer}}</td>
+                <td>{{item.reporter}}</td>
+                <td>{{item.issue}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.priority}}</td>
+                <td *ngIf="item.status=='pending'"><button class="btn btn-primary" (click)="solveIssue(item.Id)">{{item.status}}</button></td>
+                <td *ngIf="item.status=='solved'"><button class="btn btn-warning">{{item.status}}</button></td>
+                <td>{{item.solvedOn}}</td>
+                <td>{{item.solvedBy}}</td>
+                <td>{{item.comment}}</td>
+              </tr>
+
+            </ng-container>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="12">
+                <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      <a class="navbar-brand" [routerLink]="[]">Sunami App</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+
+      <ul class="nav navbar-nav">
+        <li class="dropdown ">
+          <a [routerLink]="[]" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-eye-open"></span>OVERVIEW<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><button [routerLink]="['summarytabs']" class="btn btn-primary" data-toggle="" data-target="#navbar">Summary Reports</button></li>
+            <li><button [routerLink]="['map']" class="btn btn-primary" data-toggle="" data-target="#navbar">Map & Inventory</button></li>
+          </ul>
+          <!--client dropdown-->
+          <li class="dropdown ">
+            <a [routerLink]="[]" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-star"></span>CUSTOMER<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><button [routerLink]="['customerdetails']" class="btn btn-primary" data-toggle="" data-target="#navbar">Personal Information</button></li>
+
+            </ul>
+          </li>
+          <!--client dropdown-->
+
+          <!--Accounting dropdown-->
+          <li class="dropdown">
+            <a [routerLink]="[]" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-usd"></span>FINANCE<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><button [routerLink]="['income']" class="btn btn-primary" data-toggle="" data-target="#navbar">Income</button></li>
+              <li><button [routerLink]="['allexpenses']" class="btn btn-primary" data-toggle="" data-target="#navbar">Expenses</button></li>
+              <li><button [routerLink]="['assets']" class="btn btn-primary" data-toggle="" data-target="#navbar">Assets</button></li>
+              <li><button [routerLink]="['stocks']" class="btn btn-primary" data-toggle="" data-target="#navbar">Inventory</button></li>
+            </ul>
+          </li>
+          <!--Accounting dropdown-->
+
+          <li class="dropdown">
+            <a [routerLink]="[]" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-tasks"></span>SERVICE<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><button [routerLink]="['issues']" class="btn btn-primary" data-toggle="" data-target="#navbar">Issues/Maintenance</button></li>
+              <li><button [routerLink]="['unistallation']" class="btn btn-primary" data-toggle="" data-target="#navbar">Uninstallations</button></li>
+              <li><button [routerLink]="['switchinglogs']" class="btn btn-primary" data-toggle="" data-target="#navbar">Switching Logs</button></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a [routerLink]="[]" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-wrench"></span>TECHNICAL<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><button [routerLink]="['addcontroller']" class="btn btn-primary" data-toggle="" data-target="#navbar">System Controllers</button></li>
+              <li><button [routerLink]="['link-controller']" class="btn btn-primary" data-toggle="" data-target="#navbar">Link Controller</button></li>
+            </ul>
+          </li>
+
+          <li class="dropdown ">
+            <a [routerLink]="[]" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-briefcase"></span>SALES<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><button [routerLink]="['sales']" class="btn btn-primary" data-toggle="" data-target="#navbar">sales</button></li>
+            </ul>
+          </li>
+      </ul>
+
+      <ul *ngIf="name" class="nav navbar-nav navbar-right">
+        <li><a [routerLink]="['members']"><span class="glyphicon glyphicon-user"></span>{{name.auth.displayName}}</a></li>
+      </ul>
+    </div>
+  <!--/.container-fluid -->
+</nav>

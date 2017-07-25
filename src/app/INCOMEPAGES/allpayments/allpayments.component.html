@@ -1,0 +1,104 @@
+<!-- Button trigger modal -->
+<button type="button" id="openModalButton" [hidden]="true" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">
+     </button>
+<!-- Modal -->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4 class="modal-title" id="myModalLabel">Individual Transactions</h4>
+                    </div>
+                    <div class="col-md-7">
+
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div *ngIf="data" class="container-fluid">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <H4>ALL PAYMENTS</H4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" [(ngModel)]="filterQuery" placeholder="search" (keyup)="changesum()" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h4> <span class="label label-success">Paid: {{sum1 | currency:'KSH':true}}</span></h4>
+                                    </div>
+                                    <!-- <div class="col-md-3">
+                                    <select class="form-control input-sm" [(ngModel)]="customer_id" (change)="requestData()">
+                               <ng-container *ngFor="let item of data1">
+                                  <option [ngValue] =item.Customer_id>{{item.Name}}</option>
+                               </ng-container>                               
+                      </select>
+                                </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div style="height: 400px; overflow-y: scroll" class="table table-responsive">
+                            <table class="table table-striped" [mfData]="data[0].Payrecord | generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+                                [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                                <thead>
+                                    <tr>
+                                        <th style="width: auto">
+                                            Index
+                                        </th>
+                                        <th style="width: auto">
+                                            <mfDefaultSorter by="Amount">Amount</mfDefaultSorter>
+                                        </th>
+                                        <th style="width: auto">
+                                            <mfDefaultSorter by="PayDate">Pay Date</mfDefaultSorter>
+                                        </th>
+                                        <th style="width: auto">
+                                            <mfDefaultSorter by="PayMethod">Pay Method</mfDefaultSorter>
+                                        </th>
+                                        <th style="width: auto">
+                                            <mfDefaultSorter by="Code">Code</mfDefaultSorter>
+                                        </th>
+                                        <th style="width: auto">
+                                            <mfDefaultSorter by="MpesaNumber">Mpesa Number</mfDefaultSorter>
+                                        </th>
+                                        <th style="width: auto">
+                                            <mfDefaultSorter by="Receiver">Receiver</mfDefaultSorter>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let item of mf.data; let i = index">
+                                        <tr>
+                                            <td>{{i+1}}</td>
+                                            <td>{{item.Amount}} </td>
+                                            <td>{{item.PayDate}}</td>
+                                            <td>{{item.PayMethod}}</td>
+                                            <td>{{item.Code}}</td>
+                                            <td>{{item.MpesaNumber}}</td>
+                                            <td>{{item.Receiver}}</td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="12">
+                                            <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

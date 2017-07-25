@@ -1,0 +1,103 @@
+<!-- Button trigger modal -->
+<button type="button" id="openModalButton" [hidden]="true" class="btn btn-primary" data-toggle="modal" data-target="#myModal4">     
+     </button>
+<!-- Modal -->
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="modal-title" id="myModalLabel">Add new item</h4>
+          </div>
+          <div class="col-md-7">
+          </div>
+          <div class="col-md-1">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div *ngIf="!enter" class="row">
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-primary" (click)="addstock()">ADD STOCK</button>
+              </div>
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-primary" (click)="dispstock()">DISPENSE STOCK</button>
+              </div>
+            </div>
+            <br>
+            <div *ngIf="enter" class="row">
+              <div class="col-md-2">
+                <input type="text" class="form-control" [(ngModel)]="number1" placeholder="number">
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" [(ngModel)]="comment1" placeholder="comments">
+              </div>
+              <div class="col-md-3">
+                <button type="submit" class="btn btn-primary" (click)="updatestock()">Submit</button>
+              </div>
+              <div class="col-md-3">
+                <button type="submit" class="btn btn-primary" (click)="enter = !enter">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="form-group row">
+
+              <div style="height: 400px; overflow-y: scroll" class="table table-responsive">
+                <table class="table table-striped" [mfData]="data| generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+                  [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                  <thead>
+                    <tr>
+                      <th style="width: auto">
+                        Index
+                      </th>
+                      <th style="width: auto">
+                        <mfDefaultSorter by="stock">Stock</mfDefaultSorter>
+                      </th>
+                      <th style="width: auto">
+                        <mfDefaultSorter by="date">Date</mfDefaultSorter>
+                      </th>
+                      <th style="width: auto">
+                        <mfDefaultSorter by="comments">Comments</mfDefaultSorter>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let item of mf.data; let i = index">
+
+                      <tr>
+                        <td>{{i+1}}</td>
+                        <td>{{item.stock}}</td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.comments}}</td>
+                      </tr>
+
+                    </ng-container>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="12">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

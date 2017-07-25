@@ -1,5 +1,23 @@
-<div class="container">
-  <app-su-navbar></app-su-navbar>
-  <app-maps></app-maps>
-      
+<div id="wrapper">
+  <div class="overlay"></div>
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+    <app-sidebar></app-sidebar>
+  </nav>
+  <!-- Page Content -->
+
+  <div id="page-content-wrapper">
+    <app-su-navbar></app-su-navbar>
+
+    <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+       <span class="hamb-top"></span>
+       <span class="hamb-middle"></span>
+       <span class="hamb-bottom"></span>
+    </button>
+
+    <div class="container-fluid">
+      <toaster-container [toasterconfig]="config1"></toaster-container>
+      <router-outlet></router-outlet>
+    </div>
+    
+  </div>
 </div>
