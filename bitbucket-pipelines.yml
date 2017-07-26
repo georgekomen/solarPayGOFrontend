@@ -10,6 +10,12 @@ pipelines:
     - step:
         caches:
           - node
-        script: # Modify the commands below to build your repository.
-          - npm install
-          - npm serve
+        script:
+          - npm install && npm run build
+  branches:
+    develop:
+      - step:
+          caches:
+            - node
+          script:
+            - npm install && npm run build
