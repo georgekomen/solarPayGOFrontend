@@ -172,6 +172,14 @@ export class PaymentsComponent implements OnInit {
         this.sumAmountInvoiced = 0;
         this.sumAmountDebt = 0;
         for (let key in data) {
+
+            //clear debt for inactive customers
+            if (data[key].Active_status === 'inactive' && this.isOnload) {
+                data[key].Debt = 0;
+                data[key].Percent1 = 100;
+                data[key].Invoice = data[key].Amount;
+            }
+
             this.sumAmountDebt += data[key].Debt;
             this.sumAmountInvoiced += data[key].Invoice;
             if (!this.isOnload) {
