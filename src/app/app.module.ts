@@ -52,6 +52,7 @@ import { StocksComponent } from './INVENTORY/./stocks/stocks.component';
 import { AddStockComponent } from './INVENTORY/./add-stock/add-stock.component';
 import { StockDetailsComponent } from './INVENTORY/./stock-details/stock-details.component';
 import { DateFilterPipe } from './date-filter.pipe';
+import { BaddebtsComponent } from './INCOMEPAGES/baddebts/baddebts.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBGIvamMbCC3gbrPJcHVs15zC0_cPHG_L8",
@@ -100,7 +101,8 @@ export const firebaseConfig = {
     StocksComponent,
     AddStockComponent,
     StockDetailsComponent,
-    DateFilterPipe
+    DateFilterPipe,
+    BaddebtsComponent
   ],
 
   imports: [

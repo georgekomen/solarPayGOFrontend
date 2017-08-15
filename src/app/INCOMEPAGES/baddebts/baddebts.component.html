@@ -1,0 +1,170 @@
+<div *ngIf="data">
+    {{hideloader()}}
+
+    <!--<div class="col-md-2">
+                <label class="label-control">Rows on page</label>
+                <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="20">20</option>
+                    <option [ngValue]="50">50</option>
+                    <option [ngValue]="100">100</option>
+                    <option [ngValue]="500">500</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                            <label class="col-xs-12 label-control">Sort by</label>
+                            <select class="form-control input-sm" [(ngModel)]="sortBy">
+                               <option ngValue ="Name">Name</option>
+                               <option ngValue="Percent">Percent</option>
+                               <option ngValue="Comment">Comment</option>
+                               <option [ngValue]="sortByWordLength">Comment</option>
+                            </select>
+                    </div>
+                <div class="col-md-2">
+                        <label class="col-xs-12 label-control">Sort Order</label>
+                        <select class="form-control input-sm" [(ngModel)]="sortOrder">
+                            <option ngValue="asc">Ascending</option>
+                            <option ngValue="desc">Descending</option>
+                        </select>
+                </div>
+            </div>-->
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3> Customer Payments</h3>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
+                </div>               
+                <div class="col-md-3">
+                    <app-texting-modal [Cdata]="data | dataFilter : filterQuery"></app-texting-modal>
+                </div>
+
+                <div class="col-md-1">
+                    <div *ngIf="openModalWindow">
+                        <app-allpayments [Cdata]="customer_id"></app-allpayments>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    Filter:
+                    <input class="form-control" [(ngModel)]="filterQuery" placeholder="search" (keyup)="changesumgen()" />
+                </div>
+                <div class="col-md-2">
+                    <!--another filter here-->
+                    Filter from date:
+                    <input class="form-control" [(ngModel)]="filterBeg" placeholder="from date" (keyup)="filterByBeg()" />
+                </div>
+                <div class="col-md-2">
+                    <!--another filter here-->
+                    Filter to date:
+                    <input class="form-control" [(ngModel)]="filterEnd" placeholder="to date" (keyup)="filterByEnd()" />
+                </div>
+                <div class="col-md-2">
+                    <!--another filter here-->
+                    Filter by pay rate:
+                    <input class="form-control" [(ngModel)]="filterPayRate" placeholder="With pay rate below.." (keyup)="filterByPayRate()" />
+                </div>
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <h4> <span class="label label-success">Paid {{ (sumAmountInvoiced - sumAmountDebt) | currency:'KSH':true}}</span></h4>
+                </div>
+                <div class="col-md-4">
+                    <h4> <span class="label label-info">Invoiced {{ sumAmountInvoiced| currency:'KSH':true}}</span></h4>
+                </div>
+                <div class="col-md-3">
+                    <h4> <span class="label label-warning">Not Paid {{sumAmountDebt | currency:'KSH':true}} </span></h4>
+                </div>
+                <div class="col-md-2">
+                    <h4> <span class="label label-primary">Percent {{percent }}%</span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 400px; overflow-y: scroll" class="table table-responsive">
+        <table class="table table-striped" [mfData]="data | generalFilter : filterQuery | dataFilter : filterPayRate1" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+            [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+            <thead>
+                <tr>
+                    <th style="width: auto">
+                        Index
+                    </th>
+                    <th style="width: auto">
+                        <mfDefaultSorter by="Name">Name</mfDefaultSorter>
+                    </th>
+                    <th style="width: auto">
+                        <mfDefaultSorter by="Amount">Paid</mfDefaultSorter>
+                    </th>
+                    <th style="width: auto">
+                        <mfDefaultSorter by="Invoice">Invoiced</mfDefaultSorter>
+                    </th>
+                    <th style="width: auto">
+                        <mfDefaultSorter by="Debt">Debt</mfDefaultSorter>
+                    </th>
+                    <th style="width: auto">
+                        <mfDefaultSorter by="Percent">Percent</mfDefaultSorter>
+                    </th>
+                    <th style="width: auto">
+                        <mfDefaultSorter by="From">From - To</mfDefaultSorter>
+                    </th>
+                    <th style="width: auto">
+                        Comments
+                    </th>
+                    <th style="width: auto">
+                        Vilage
+                    </th>
+                    <th style="width: auto">
+                        Contacts
+                    </th>
+                    <th style="width: auto">
+                        Switch
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let item of mf.data; let i = index">
+                    <tr>
+                        <td>{{i+1}}</td>
+                        <td (click)="OpenPayHistory(item.Id)">{{item.Name}}</td>
+                        <td>
+                            <h5><span class="label label-success">{{item.Amount | currency:'KSH':true}} </span></h5>
+                        </td>
+                        <td>
+                            <h5><span class="label label-info">{{item.Invoice | currency:'KSH':true}} </span></h5>
+                        </td>
+                        <td>
+                            <h5><span class="label label-danger">{{item.Debt | currency:'KSH':true}} </span></h5>
+                        </td>
+                        <td>
+                            <h5><span class="label label-primary">{{item.Percent}}%  </span></h5>
+                        </td>
+                        <td>{{item.From}}-<br>{{item.To}}</td>
+                        <td class="text-right">{{item.Comment}}</td>
+                        <td>{{item.Village}}</td>
+                        <td>{{item.Phone}}</td>
+                        <td *ngIf="item.Status==1"><button class="btn btn-primary" (click)="toggleSwitch(item.Id)">Toggle</button></td>
+                        <td *ngIf="item.Status==0"><button class="btn btn-warning" (click)="toggleSwitch(item.Id)">Toggle</button></td>
+                        <td *ngIf="item.Status==null"><button class="btn btn-error">Toggle</button></td>
+                    </tr>
+                </ng-container>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="12">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
