@@ -251,6 +251,13 @@ export class SunamiserviceService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
+     getbankRecords(): Observable<any[]> {
+        return this._http.get('//api.sunamiapp.net/api/customers/getbankRecords/', this.options)
+            .map((res: Response) => res.json())
+            //...errors if any
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
     postNewCustomer(newcustomer: any[]): Observable<any> {
         let bodyString = JSON.stringify(newcustomer); // Stringify payload
         return this._http.post('//api.sunamiapp.net/api/customers/postNewCustomer/', bodyString, this.options) // ...using post request
@@ -281,6 +288,13 @@ export class SunamiserviceService {
 
     getStockDetails(id: string): Observable<any[]> {
         return this._http.get('//api.sunamiapp.net/api/customers/getStockDetails?id=' + id, this.options)
+            .map((res: Response) => res.json())
+            //...errors if any
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    unlinkController(id: string): Observable<any> {
+        return this._http.get('//api.sunamiapp.net/api/customers/unlinkController?id=' + id, this.options)
             .map((res: Response) => res.json())
             //...errors if any
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

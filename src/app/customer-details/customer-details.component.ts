@@ -19,6 +19,7 @@ export class CustomerDetailsComponent implements OnInit {
     private sortOrder = "asc";
     private showlinkbutton = true;
 
+
     private id = "";
     private name = "";
     private number1 = "";
@@ -36,6 +37,7 @@ export class CustomerDetailsComponent implements OnInit {
     private recordedBy = "";
     private date1 = "";
     private location = "";
+    private package = "";
 
     private Fshowlinkbutton() {
         this.showlinkbutton = false;
@@ -53,7 +55,7 @@ export class CustomerDetailsComponent implements OnInit {
             this.customer.push({
                 recordedBy: UserServiceService.email, latG: "", lonG: "", id: this.id, name: this.name, number1: this.number1,
                 number2: this.number2, number3: this.number3, box: this.box, occupation: this.occupation, witness: this.witness, witnessid: this.witnessid,
-                village: this.village, city: this.city, description: this.description, location: this.location, date1: this.date1
+                village: this.village, city: this.city, description: this.description, location: this.location, date1: this.date1, package: this.package
             });
 
             this._SunamiService.postNewCustomer(this.customer).subscribe(

@@ -60,6 +60,13 @@
           </div>
         </div>
       </div>
+
+    <!--OPTIONS HERE -->
+    <div *ngIf="showOptionsDiv" class="option_modal">
+      <button class="btn btn-danger" (click)="unlink()">Unlink Controller</button>
+      <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv">cancel</button>
+    </div>
+
       <div class="table table-responsive">
         <table class="table table-striped" [mfData]="data| generalFilter : filterQuery " #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
           [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
@@ -88,7 +95,7 @@
           </thead>
           <tbody>
             <ng-container *ngFor="let item of mf.data; let i = index">
-              <tr>
+              <tr (click)="setUnlink(item.Imei)">
                 <td>{{i+1}}</td>
                 <td *ngIf="item.Active_Status==1"><span class="label label-warning">{{item.Owner}}</span></td>
                 <td *ngIf="item.Active_Status==0"><span class="label label-info">{{item.Owner}}</span></td>

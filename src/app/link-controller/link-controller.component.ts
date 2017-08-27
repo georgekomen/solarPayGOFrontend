@@ -28,6 +28,8 @@ export class LinkControllerComponent implements OnInit {
   private rowsOnPage = 100;
   private sortOrder = "asc";
   private showlinkbutton = true;
+  imeitoUnlink;
+  private showOptionsDiv: boolean = false;
 
   constructor(private completerService: CompleterService, private _SunamiService: SunamiserviceService, private toasterService: ToasterService,private userservice: UserServiceService) {
     
@@ -136,12 +138,40 @@ export class LinkControllerComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
+  private popToast1(t: string, b: string) {
+    var toast: Toast = {
+      type: 'error',
+      title: t,
+      body: b
+    };
+    this.toasterService.pop(toast);
+  }
+
   private hideloader() {
     document.getElementById("loading").style.display = "none";
   }
 
   private exporttoexcel() {
         this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+    }
+
+    private unlink(){
+      if(confirm(`are you sure you want to unlink this controller imei: ${this.imeitoUnlink}? this action is unreversable`)){
+      this._SunamiService.unlinkController(this.imeitoUnlink).subscribe(res=>{
+        this.showOptionsDiv = false;
+        this.popToast1('Result', res);
+      });
+    } else {
+      this.showOptionsDiv = false;
+
+      }
+    }
+
+    
+
+    private setUnlink(value) {
+      this.showOptionsDiv = true;
+      this.imeitoUnlink = value;
     }
 
 }
