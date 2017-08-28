@@ -128,7 +128,7 @@ export class CashRecordsComponent implements OnInit {
   private paymentName;
   private deleteRecord() {
     if (confirm(`are you sure you want to delete this payment linked to: ${this.paymentName}? this action is unreversable`)) {
-      this._SunamiService.unlinkController(this.idToDelete).subscribe(res => {
+      this._SunamiService.deletePayment(this.idToDelete).subscribe(res => {
         this.showOptionsDiv = false;
         this.popToast('Result', res);
       });
