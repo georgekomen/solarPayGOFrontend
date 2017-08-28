@@ -124,4 +124,25 @@ export class BankRecordsComponent implements OnInit {
   private exporttoexcel() {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
   }
+
+   private idToDelete;
+  private showOptionsDiv: boolean = false;
+  private paymentName;
+  private deleteRecord() {
+    if (confirm(`are you sure you want to delete this payment linked to: ${this.paymentName}? this action is unreversable`)) {
+      this._SunamiService.deletePayment(this.idToDelete).subscribe(res => {
+        this.showOptionsDiv = false;
+        this.popToast('Result', res);
+      });
+    } else {
+      this.showOptionsDiv = false;
+
+    }
+  }
+
+  private setIdToDelete(value,name) {
+    this.showOptionsDiv = true;
+    this.idToDelete = value;
+    this.paymentName = name;
+  }
 }

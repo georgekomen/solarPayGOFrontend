@@ -119,10 +119,18 @@
                             </th>
                         </tr>
                     </thead>
+
+                     <!--OPTIONS HERE -->
+                    <div *ngIf="showOptionsDiv" class="option_modal">
+                        <button class="btn btn-danger" (click)="deleteRecord()">Delete Record</button>
+                        <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv">cancel</button>
+                    </div>
+
+                    
                     <tbody>
                         <ng-container *ngFor="let item of mf.data; let i = index">
 
-                            <tr>
+                            <tr (click)="setIdToDelete(item.Id, item.Customer_Name)">
 
 
                                 <td>{{i+1}}</td>

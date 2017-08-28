@@ -142,6 +142,5 @@ export class CashRecordsComponent implements OnInit {
     this.showOptionsDiv = true;
     this.idToDelete = value;
     this.paymentName = name;
-    alert(value);
   }
 }

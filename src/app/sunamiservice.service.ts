@@ -297,7 +297,7 @@ export class SunamiserviceService {
     unlinkController(id1: any): Observable<any> {
         let payload1 = [];
         payload1.push({id: id1, user: UserServiceService.email});
-        return this._http.get('//api.sunamiapp.net/api/customers/unlinkController?id=' + payload1, this.options)
+        return this._http.post('//api.sunamiapp.net/api/customers/unlinkController',payload1, this.options)
             .map((res: Response) => res.json())
             //...errors if any
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -305,7 +305,7 @@ export class SunamiserviceService {
 
     postUpdateStock(update: any[]): Observable<any> {
         let bodyString = JSON.stringify(update);
-        return this._http.post('//api.sunamiapp.net/api/customers/postUpdateStock/', bodyString, this.options)
+        return this._http.post('//api.sunamiapp.net/api/customers/postUpdateStock/',bodyString, this.options)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'server error'));
     }
@@ -313,7 +313,7 @@ export class SunamiserviceService {
     deletePayment(id1: any): Observable<any> {
         let payload1 = [];
         payload1.push({id: id1, user: UserServiceService.email});
-        return this._http.get('//api.sunamiapp.net/api/customers/deletePayment?id=' + payload1, this.options)
+        return this._http.post('//api.sunamiapp.net/api/customers/deletePayment',payload1, this.options)
             .map((res: Response) => res.json())
             //...errors if any
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
