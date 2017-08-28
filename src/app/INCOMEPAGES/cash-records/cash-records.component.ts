@@ -34,8 +34,8 @@ export class CashRecordsComponent implements OnInit {
   }
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
-   this.date1 = this.userservice.getdate();
-   this._SunamiService.getActiveCustomersDetails().subscribe(
+    this.date1 = this.userservice.getdate();
+    this._SunamiService.getActiveCustomersDetails().subscribe(
       (data) => this.createObj2(data), //Bind to view
       err => {
         // Log errors if any
@@ -121,5 +121,27 @@ export class CashRecordsComponent implements OnInit {
 
   private exporttoexcel() {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+  }
+
+  private idToDelete;
+  private showOptionsDiv: boolean = false;
+  private paymentName;
+  private deleteRecord() {
+    if (confirm(`are you sure you want to delete this payment linked to: ${this.paymentName}? this action is unreversable`)) {
+      this._SunamiService.unlinkController(this.idToDelete).subscribe(res => {
+        this.showOptionsDiv = false;
+        this.popToast('Result', res);
+      });
+    } else {
+      this.showOptionsDiv = false;
+
+    }
+  }
+
+  private setIdToDelete(value,name) {
+    this.showOptionsDiv = true;
+    this.idToDelete = value;
+    this.paymentName = name;
+    alert(value);
   }
 }

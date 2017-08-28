@@ -166,9 +166,7 @@ export class LinkControllerComponent implements OnInit {
 
       }
     }
-
     
-
     private setUnlink(value) {
       this.showOptionsDiv = true;
       this.imeitoUnlink = value;

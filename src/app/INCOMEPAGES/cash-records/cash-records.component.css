@@ -1,3 +1,18 @@
 button {
     width:100%;
 }
+
+
+.option_modal{
+    /*center it*/
+    left: 40%;
+    background: #88CBFF;
+    display: block;
+    position: fixed;
+    margin: .3em;
+    padding: .5em;
+    width: 20em;
+    height: auto;
+    z-index: 1;
+    box-shadow: 0.2em 0.2em #1C6CAB;
+}
