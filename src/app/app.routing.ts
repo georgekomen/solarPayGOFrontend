@@ -32,13 +32,14 @@ import { MpesaRecordsComponent } from './INCOMEPAGES/mpesa-records/mpesa-records
 import { SalesComponent } from './sales/sales.component';
 import { AssetsComponent } from './assets/assets.component';
 import { StocksComponent } from './INVENTORY/./stocks/stocks.component';
+import { ListOfPurchaseOrderComponent } from './INVENTORY/list-of-purchase-order/list-of-purchase-order.component';
 
 const APP_ROUTES: Routes = [
   { path: 'paymentchart', component: PaymentChartComponent, canActivate: [AuthGuard] },
   { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuard] },
   { path: 'map', component: MapsComponent, canActivate: [AuthGuard] },
   { path: 'summary', component: SummaryPageComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'lpo', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login-email', component: EmailComponent },
@@ -60,6 +61,7 @@ const APP_ROUTES: Routes = [
   { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },
   { path: 'assets', component: AssetsComponent, canActivate: [AuthGuard] },
   { path: 'stocks', component: StocksComponent, canActivate: [AuthGuard] },
+  { path: 'lpo', component: ListOfPurchaseOrderComponent },
   { path: '**', redirectTo: '' }
 ];
 //export const routing = RouterModule.forRoot(APP_ROUTES);

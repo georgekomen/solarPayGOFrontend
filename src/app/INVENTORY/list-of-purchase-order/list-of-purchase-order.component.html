@@ -1,0 +1,59 @@
+<div class="add container">
+  <h1>NEW ITEM</h1>
+  <form [formGroup]="listOfPurchaseForm" novalidate (ngSubmit)="save(listOfPurchaseForm.value, listOfPurchaseForm.valid)">
+    <div class="form-group">
+      <label for="item">Item</label>
+      <input type="text" class="form-control" id="item" required formControlName="item">
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select class="form-control" id="category" required formControlName="category" >
+        <option  value="Tool">Tool</option>
+        <option value="Customer Package">Customer Package</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+
+  </form>
+</div>
+
+
+<div class="container">
+  <h1>ITEMS</h1>
+    <div style="height: 250px; overflow-y: scroll" class="table table-responsive">
+    <table class="table table-striped" [mfData]="items | async" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+      [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+      <thead>
+        <tr>
+          <th style="width: auto">
+            Index
+          </th>
+          <th style="width: auto">
+            Item
+          </th>
+          <th style="width: auto">
+            Category
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let o of mf.data; let i = index">
+          <tr>
+            <td>{{i+1}}</td>
+            <td>{{o.item}}</td>
+            <td>{{o.category}}</td>
+
+          </tr>
+
+        </ng-container>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="12">
+            <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

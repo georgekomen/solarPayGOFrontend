@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AppComponent } from './app.component';
@@ -54,6 +54,7 @@ import { StockDetailsComponent } from './INVENTORY/./stock-details/stock-details
 import { DateFilterPipe } from './date-filter.pipe';
 import { BaddebtsComponent } from './INCOMEPAGES/baddebts/baddebts.component';
 import { BankRecordsComponent } from './INCOMEPAGES/bank-records/bank-records.component';
+import { ListOfPurchaseOrderComponent } from './INVENTORY/list-of-purchase-order/list-of-purchase-order.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBGIvamMbCC3gbrPJcHVs15zC0_cPHG_L8",
@@ -104,7 +105,8 @@ export const firebaseConfig = {
     StockDetailsComponent,
     DateFilterPipe,
     BaddebtsComponent,
-    BankRecordsComponent
+    BankRecordsComponent,
+    ListOfPurchaseOrderComponent
   ],
 
   imports: [
@@ -114,6 +116,7 @@ export const firebaseConfig = {
     DataTableModule,
     ChartsModule,
     routing,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyBsoX3FMNVz8UJKkOWIZiUvl-BMW8O2VQs' }),//google maps
     ToasterModule,
