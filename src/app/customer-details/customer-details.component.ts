@@ -94,7 +94,9 @@ export class CustomerDetailsComponent implements OnInit {
       alert(id.value);
       this._SunamiService.getSingleCustomerDetails(id.value).subscribe(res => {
        // Todo - fill all fields next time
-       this.date1 = res['installdate'];
+
+       this.date1 = res['installdate'].substring(0, res['installdate'].indexOf('T'));
+       this.package = res['Package'];
       });
 
     /*
