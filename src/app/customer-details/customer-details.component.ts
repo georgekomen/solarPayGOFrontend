@@ -93,7 +93,8 @@ export class CustomerDetailsComponent implements OnInit {
   fetchDetailsIfExisting(id) {
       alert(id.value);
       this._SunamiService.getSingleCustomerDetails(id.value).subscribe(res => {
-       this.name = res['Name'];
+       // Todo - fill all fields next time
+       this.date1 = res['installdate'];
       });
 
     /*
@@ -105,7 +106,6 @@ export class CustomerDetailsComponent implements OnInit {
         village;
         location;
         city;
-        installdate;
         Witness;
         Witness_ID;
         status;
