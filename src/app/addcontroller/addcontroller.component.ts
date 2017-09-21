@@ -21,8 +21,8 @@ export class AddcontrollerComponent implements OnInit {
   private rowsOnPage = 100;
   private showlinkbutton = true;
 
-  imeitoUnlink;
-  private showOptionsDiv: boolean = false;
+  imeiToDelete;
+  showOptionsDiv: boolean = false;
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
 
@@ -86,8 +86,8 @@ export class AddcontrollerComponent implements OnInit {
 
 
   private deleteController(){
-    if(confirm(`are you sure you want to delete this controller imei: ${this.imeitoUnlink}? this action is unreversable`)){
-      this._SunamiService.deleteController(this.imeitoUnlink).subscribe(res=>{
+    if(confirm(`are you sure you want to delete this controller imei: ${this.imeiToDelete}? this action is unreversable`)){
+      this._SunamiService.deleteController(this.imeiToDelete).subscribe(res=>{
         this.showOptionsDiv = false;
         this.popToast1('Result', res);
       });
@@ -95,6 +95,11 @@ export class AddcontrollerComponent implements OnInit {
       this.showOptionsDiv = false;
 
     }
+  }
+
+  private setdelete(value) {
+    this.showOptionsDiv = true;
+    this.imeiToDelete = value;
   }
 
   private popToast1(t: string, b: string) {
