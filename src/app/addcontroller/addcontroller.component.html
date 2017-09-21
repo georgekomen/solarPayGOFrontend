@@ -106,7 +106,7 @@
           <tbody>
             <ng-container *ngFor="let item of mf.data; let i = index">
 
-              <tr>
+              <tr (click)="deleteController(item.Imei)">
                 <td>{{i+1}}</td>
                 <td>{{item.Imei}}</td>
                 <td>{{item.Sim_Number}}</td>
