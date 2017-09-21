@@ -39,7 +39,7 @@ const APP_ROUTES: Routes = [
   { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuard] },
   { path: 'map', component: MapsComponent, canActivate: [AuthGuard] },
   { path: 'summary', component: SummaryPageComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: 'lpo', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login-email', component: EmailComponent },

@@ -32,7 +32,7 @@ export class LinkControllerComponent implements OnInit {
   private showOptionsDiv: boolean = false;
 
   constructor(private completerService: CompleterService, private _SunamiService: SunamiserviceService, private toasterService: ToasterService,private userservice: UserServiceService) {
-    
+
   }
 
 
@@ -166,7 +166,7 @@ export class LinkControllerComponent implements OnInit {
 
       }
     }
-    
+
     private setUnlink(value) {
       this.showOptionsDiv = true;
       this.imeitoUnlink = value;

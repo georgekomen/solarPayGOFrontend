@@ -41,7 +41,7 @@
       <div class="col-sm-7">
         <button type="submit" class="btn btn-primary" (click)="Fshowlinkbutton()">REGISTER NEW CONTROLLER</button>
       </div>
-    </div>   
+    </div>
   </div>
 
 
@@ -66,7 +66,15 @@
         </div>
       </div>
     </div>
-    
+
+
+    <!--OPTIONS HERE -->
+    <div *ngIf="showOptionsDiv" class="option_modal">
+      <button class="btn btn-danger" (click)="deleteController()">Delete Controller</button>
+      <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv">cancel</button>
+    </div>
+
+
       <div class="table table-responsive">
         <table class="table table-striped" [mfData]="data | generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
           <thead>
