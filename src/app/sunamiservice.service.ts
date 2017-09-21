@@ -280,6 +280,13 @@ export class SunamiserviceService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  getSingleCustomerDetails(id: string): Observable<any[]> {
+    return this._http.get('//api.sunamiapp.net/api/customers/getSingleCustomerDetails?id=' + id, this.options)
+      .map((res: Response) => res.json())
+      //...errors if any
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
   postRecordItem(newitem: any[]): Observable<any> {
     let bodyString = JSON.stringify(newitem); // Stringify payload
     return this._http.post('//api.sunamiapp.net/api/customers/postRecordItem/', bodyString, this.options) // ...using post request

@@ -89,6 +89,28 @@ export class CustomerDetailsComponent implements OnInit {
                 this.popToast("no internet", err);
             });
     }
+
+  fetchDetailsIfExisting(id) {
+      alert(id.value);
+      this._SunamiService.getSingleCustomerDetails(id.value).subscribe(res => {
+       this.name = res['Name'];
+      });
+
+    /*
+      ID;
+        Occupation;
+        Mobile;
+        Mobile2;
+        Mobile3;
+        village;
+        location;
+        city;
+        installdate;
+        Witness;
+        Witness_ID;
+        status;
+      */
+  }
     /*
         private filterByVillage(){
              this.filterQuery="Village"+this.filterVillage;
