@@ -91,12 +91,14 @@ export class CustomerDetailsComponent implements OnInit {
     }
 
   fetchDetailsIfExisting(id) {
-      alert(id.value);
+      this.showloader();
       this._SunamiService.getSingleCustomerDetails(id.value).subscribe(res => {
        // Todo - fill all fields next time
-
+        this.hideloader();
        this.date1 = res['installdate'].substring(0, res['installdate'].indexOf('T'));
        this.package = res['Package'];
+      }, error2 => {
+        this.hideloader();
       });
 
     /*
@@ -125,6 +127,10 @@ export class CustomerDetailsComponent implements OnInit {
     private hideloader() {
         document.getElementById("loading").style.display = "none";
     }
+
+  private showloader() {
+    document.getElementById("loading").style.display = "block";
+  }
 
     private popToast(t: string, b: string) {
         var toast: Toast = {
