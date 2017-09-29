@@ -71,6 +71,7 @@
     <!--OPTIONS HERE -->
     <div *ngIf="showOptionsDiv" class="option_modal">
       <button class="btn btn-danger" (click)="deleteController()">Delete Controller</button>
+      <button class="btn btn-warning" (click)="editController()">Edit Controller</button>
       <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv">cancel</button>
     </div>
 
@@ -106,7 +107,7 @@
           <tbody>
             <ng-container *ngFor="let item of mf.data; let i = index">
 
-              <tr (click)="setdelete(item.Imei)">
+              <tr (click)="setdelete(item)">
                 <td>{{i+1}}</td>
                 <td>{{item.Imei}}</td>
                 <td>{{item.Sim_Number}}</td>
