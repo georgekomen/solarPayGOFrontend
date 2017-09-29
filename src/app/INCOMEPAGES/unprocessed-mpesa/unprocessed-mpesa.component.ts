@@ -21,9 +21,11 @@ export class UnprocessedMpesaComponent implements OnInit {
     private customer_id: string = "";
     private Code1: string = "";
     private paydiv = false;
+    selectedPayment: any;
 
-    private showpaydiv(Code2: string) {
-        this.Code1 = Code2;
+    private showpaydiv(value) {
+        this.Code1 = value.Reference;
+        this.selectedPayment = value;
         this.paydiv = true;
     }
     private hidepaydiv() {
@@ -71,23 +73,26 @@ export class UnprocessedMpesaComponent implements OnInit {
 
     private linkpayment() {
         this.hidepaydiv();
-        this.payment = [];
-        if (this.customer_id != null || this.customer_id != "") {
+        if (confirm('are you sure you want to credit ' + this.selectedPayment.Amount + ' to customer id number ' + this.customer_id)) {
+          this.payment = [];
+          if (this.customer_id != null || this.customer_id != "") {
             this.payment.push({
-                loggedUser: UserServiceService.email, PayMode: "mpesa",
-                Customer_Id: this.customer_id, Code: this.Code1
+              loggedUser: UserServiceService.email, PayMode: "mpesa",
+              Customer_Id: this.customer_id, Code: this.Code1
             });
             this._SunamiService.postmakePayment(this.payment).subscribe(
-                (data) => this.popToast2(data), //Bind to view
-                err => {
-                    // Log errors if any
-                    this.popToast("no internet", err);
-                });
-        }
-        else {
+              (data) => this.popToast2(data), //Bind to view
+              err => {
+                // Log errors if any
+                this.popToast("no internet", err);
+              });
+          } else {
             this.popToast("error!", "Please enter id number");
+          }
+          this.getUnprocessedMpesa();
+        } else {
+
         }
-        this.getUnprocessedMpesa();
     }
 
     ngOnInit() {
