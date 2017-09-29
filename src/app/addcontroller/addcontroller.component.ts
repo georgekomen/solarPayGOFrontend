@@ -43,7 +43,6 @@ export class AddcontrollerComponent implements OnInit {
     if (this.imei.length > 10 && this.sim != "" && this.provider != "") {
       this.controller.push({ imei: this.imei, sim: this.sim, provider: this.provider, version: this.version, action: this.action, loogeduser: UserServiceService.email });
       this._SunamiService.postAddController(this.controller).subscribe(data1 => {
-        alert(JSON.stringify(data1));
           this.popToast("Result", data1[0].message, data1[1].content);
         }, err => {
           // Log errors if any
