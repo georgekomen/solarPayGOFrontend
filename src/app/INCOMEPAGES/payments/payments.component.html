@@ -7,7 +7,7 @@
 <!--OPTIONS HERE -->
 <div *ngIf="showOptionsDiv" class="option_modal">
   <button class="btn btn-danger" (click)="OpenPayHistory()"> Statement </button>
-  <button class="btn btn-warning" (click)="FshowInvoiceCustomerDiv()"> Invoice </button>
+  <button class="btn btn-warning" (click)="FshowInvoiceCustomerDiv()"> Invoice Customer </button>
   <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv"> Cancel </button>
 </div>
 
@@ -16,6 +16,7 @@
 
 <!--OPTIONS HERE -->
 <div *ngIf="showInvoiceCustomerDiv" class="invoice_modal">
+  <span style="font-size: small; font-style: italic; color: firebrick"> click on the item you want to invoice this customer and confirm your action</span> <br>
   <div class="row">
     <div class="col-md-6 title"> Item </div>
     <div class="col-md-6 title"> Amount </div>

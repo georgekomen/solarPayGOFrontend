@@ -99,7 +99,7 @@ export class PaymentsComponent implements OnInit {
   private invoiceCustomer(value: any) {
     const customerName = this.data.find(t => t.Id === this.currentlySelectedCustomer).Name || '';
     if(confirm('are you sure you want to invoice ' + customerName + ' a ' + value)){
-      this._SunamiService.invoiceCustomer([{customerId: this.currentlySelectedCustomer, item: value}]).subscribe(res => {
+      this._SunamiService.invoiceCustomer([{customerId: this.currentlySelectedCustomer, item: value, loogedUser: UserServiceService.email}]).subscribe(res => {
         this.popToast("Result", res);
       }, error2 => {
         this.popToast("Error", error2);
