@@ -334,4 +334,18 @@ export class SunamiserviceService {
       //...errors if any
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  getInvoiceItems(): Observable<any[]> {
+    return this._http.get('//api.sunamiapp.net/api/customers/invoiceItems', this.options)
+      .map((res: Response) => res.json())
+      //...errors if any
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  invoiceCustomer(invoice: any): Observable<any> {
+    let bodyString = JSON.stringify(invoice);
+    return this._http.post('//api.sunamiapp.net/api/customers/invoiceCustomer/', bodyString, this.options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'server error'));
+  }
 }

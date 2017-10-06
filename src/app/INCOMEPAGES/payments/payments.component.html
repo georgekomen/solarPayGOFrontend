@@ -7,7 +7,7 @@
 <!--OPTIONS HERE -->
 <div *ngIf="showOptionsDiv" class="option_modal">
   <button class="btn btn-danger" (click)="OpenPayHistory()"> Statement </button>
-  <button class="btn btn-warning" (click)="invoiceCustomer()"> Invoice </button>
+  <button class="btn btn-warning" (click)="FshowInvoiceCustomerDiv()"> Invoice </button>
   <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv"> Cancel </button>
 </div>
 
@@ -16,13 +16,22 @@
 
 <!--OPTIONS HERE -->
 <div *ngIf="showInvoiceCustomerDiv" class="invoice_modal">
-  <div>
-
+  <div class="row">
+    <div class="col-md-6 title"> Item </div>
+    <div class="col-md-6 title"> Amount </div>
+  </div>
+  <div *ngFor="let item of invoiceItems">
+     <div class="row" (click)="invoiceCustomer(item.Item)">
+       <div class="col-md-6"> {{item.Item}}</div>
+       <div class="col-md-6"> {{item.Deposit}}</div>
+     </div>
   </div>
   <div>
-
+    <button class="btn btn-danger" (click)="showInvoiceCustomerDiv = !showInvoiceCustomerDiv"> Cancel </button>
   </div>
 </div>
+
+
 
 
 
@@ -148,7 +157,7 @@
           <mfDefaultSorter by="From">From - To</mfDefaultSorter>
         </th>
         <th style="width: auto">
-          Comments
+          Invoices
         </th>
         <th style="width: auto">
           Vilage

@@ -26,7 +26,13 @@ button {
   margin: .3em;
   padding: .5em;
   width: 50%;
-  height: 70%;
+  height: auto;
   z-index: 1;
   box-shadow: 0.2em 0.2em #1C6CAB;
+}
+
+.title{
+  font-size: large;;
+  font-weight: bold;
+  color: #953b39;
 }

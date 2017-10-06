@@ -34,6 +34,7 @@ export class PaymentsComponent implements OnInit {
   private debtOrPaid: string = " paid";
   private excludeactive: boolean = true;
   private excludeinactive: boolean = true;
+  private invoiceItems: any[] = [];
   private showOptionsDiv = false;
   currentlySelectedCustomer = '';
   private showInvoiceCustomerDiv = false;
@@ -46,6 +47,11 @@ export class PaymentsComponent implements OnInit {
 
   private cancelImageModel() {
     this.openModalWindow = false;
+  }
+
+  private FshowInvoiceCustomerDiv() {
+    this.showOptionsDiv = !this.showOptionsDiv;
+    this.showInvoiceCustomerDiv = !this.showInvoiceCustomerDiv;
   }
 
   private selectCustomerAndShowOptionsDiv(id: any) {
@@ -87,11 +93,23 @@ export class PaymentsComponent implements OnInit {
         // Log errors if any
         this.popToast("no internet", err);
       });
+    this.getInvoiceItems();
   }
 
-  private invoiceCustomer() {
-    this.showOptionsDiv = false;
-      this.showInvoiceCustomerDiv = true;
+  private invoiceCustomer(value: any) {
+    if(confirm('are you sure you want to invoice customer '+ this.currentlySelectedCustomer + ' a ' + value)){
+      this._SunamiService.invoiceCustomer([{customerId: this.currentlySelectedCustomer, item: value}]).subscribe(res => {
+        this.popToast("Result", res);
+      }, error2 => {
+        this.popToast("Error", error2);
+      });
+    }
+  }
+
+  private getInvoiceItems() {
+    this._SunamiService.getInvoiceItems().subscribe(res => {
+      this.invoiceItems = res;
+    });
   }
 
   private createdata(data1: any[], type: any) {
