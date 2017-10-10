@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: node:6.9.4
+image: node:7.5.0
 
 pipelines:
   default:
@@ -19,3 +19,5 @@ pipelines:
             - node
           script:
             - npm install && npm run build
+            - git config git-ftp.syncroot dist/
+            - git ftp push --user $Username --passwd $Pwd ftp://ftp.Smarterasp.net
