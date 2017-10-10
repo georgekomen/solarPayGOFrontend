@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { SunamiserviceService } from '../sunamiservice.service';
-import { SMS } from '../classes/sendSMS';
 import { UserServiceService } from '../user-service.service';
 import { GeneralFilterPipe } from '../general-filter.pipe';
 
@@ -42,7 +41,7 @@ export class TextingModalComponent {
         console.log(err);
       });
     this.SMStext = "";
-    
+
   }
 
   private res1(re:any){
@@ -51,7 +50,7 @@ export class TextingModalComponent {
   }
 
   private data: any[];
-  
+
   private getMessages() {
     this.data = [];
     this._SunamiService.getMessages().subscribe(
