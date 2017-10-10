@@ -11,14 +11,16 @@ pipelines:
         caches:
           - node
         script:
-          - npm install && npm run build
+          - npm install
+          - npm run build --prod
   branches:
     master:
       - step:
           caches:
             - node
           script:
-            - npm install && npm run build
+            - npm install
+            - npm run build --prod
             - git config git-ftp.syncroot dist/
             - git ftp push --user $Username --passwd $Pwd ftp://ftp.Smarterasp.net
 
