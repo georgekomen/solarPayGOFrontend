@@ -12,7 +12,7 @@ pipelines:
           - node
         script:
           - npm install
-          - npm run build
+          - npm run build-prod
   branches:
     master:
       - step:
@@ -20,7 +20,7 @@ pipelines:
             - node
           script:
             - npm install
-            - npm run build
+            - npm run build-prod
 #           - git config git-ftp.syncroot dist/
             - echo "Let's go in to our dist/ and initialize there with git"
             - cd dist/
