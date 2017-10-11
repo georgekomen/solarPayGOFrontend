@@ -12,7 +12,7 @@ pipelines:
           - node
         script:
           - npm install
-          - npm run build --prod
+          - ng build --prod
   branches:
     master:
       - step:
@@ -20,6 +20,6 @@ pipelines:
             - node
           script:
             - npm install
-            - npm run build --prod
+            - ng build --prod
             - git config git-ftp.syncroot dist/
             - git ftp push --user $Username --passwd $Pwd ftp://ftp.smarterasp.net/site3/
