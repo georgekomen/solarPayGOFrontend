@@ -25,6 +25,8 @@ export class AddcontrollerComponent implements OnInit {
   showOptionsDiv: boolean = false;
   selectedController: any;
   action: string = 'create';
+  sortBy;
+  sortOrder;
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
 

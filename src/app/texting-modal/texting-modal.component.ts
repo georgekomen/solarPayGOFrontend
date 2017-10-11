@@ -17,6 +17,8 @@ export class TextingModalComponent {
    res: any[];
    filterQuery = "";
    rowsOnPage = 100;
+  sortBy;
+  sortOrder;
 
   constructor(private _SunamiService: SunamiserviceService,private userservice: UserServiceService) {
   }

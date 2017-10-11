@@ -13,6 +13,8 @@ import { UserServiceService } from '../../user-service.service';
 export class StockDetailsComponent implements OnInit {
   @Input() Cdata: any = "";
    enter: boolean;
+  sortBy;
+  sortOrder;
    cd: any = "";
    data: any[] = [];
    filterQuery = "";

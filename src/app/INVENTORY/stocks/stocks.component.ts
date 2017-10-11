@@ -14,6 +14,8 @@ export class StocksComponent implements OnInit {
    date1: string = "2017-06-01";
    data: any[] = [];
    itemselected: any = "";
+  sortBy;
+  sortOrder;
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private _user: UserServiceService) { }
 
