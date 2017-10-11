@@ -14,7 +14,7 @@ pipelines:
 #          - npm install
 #          - npm run build-prod
   branches:
-    master:
+    develop:
       - step:
           caches:
             - node
