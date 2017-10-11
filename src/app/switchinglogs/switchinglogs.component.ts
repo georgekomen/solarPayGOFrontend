@@ -7,8 +7,8 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
 
 @Component({
   selector: 'app-switchinglogs',
-  templateUrl: './switchinglogs.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./switchinglogs.component.css?v=${new Date().getTime()}']
+  templateUrl: './switchinglogs.component.html',
+  styleUrls: ['./switchinglogs.component.css']
 })
 export class SwitchinglogsComponent implements OnInit {
   data: any[];

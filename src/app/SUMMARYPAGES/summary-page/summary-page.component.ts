@@ -6,7 +6,7 @@ import { UserServiceService } from '../../user-service.service';
 
 @Component({
   selector: 'app-summary-page',
-  templateUrl: './summary-page.component.html?v=${new Date().getTime()}'
+  templateUrl: './summary-page.component.html'
 })
 
 export class SummaryPageComponent implements OnInit {

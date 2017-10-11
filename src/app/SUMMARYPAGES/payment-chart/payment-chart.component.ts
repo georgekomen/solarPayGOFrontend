@@ -5,7 +5,7 @@ import { ToasterService, Toast } from 'angular2-toaster';
 
 @Component({
   selector: 'app-payment-chart',
-  templateUrl: './payment-chart.component.html?v=${new Date().getTime()}',
+  templateUrl: './payment-chart.component.html',
 })
 export class PaymentChartComponent {
   data5: any[];
@@ -45,14 +45,14 @@ export class PaymentChartComponent {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
-  
+
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService) {
-        
+
   }
-  
+
   popToast(t: string, b: string) {
         var toast: Toast = {
             type: 'error',

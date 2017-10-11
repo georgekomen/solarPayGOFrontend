@@ -6,8 +6,8 @@ import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-members',
-  templateUrl: './members.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./members.component.css?v=${new Date().getTime()}'],
+  templateUrl: './members.component.html',
+  styleUrls: ['./members.component.css'],
   animations: [moveIn(), fallIn(), moveInLeft()],
   host: { '[@moveIn]': '' }
 })
@@ -16,7 +16,7 @@ export class MembersComponent implements OnInit {
   private name: any;
   private user: UserServiceService;
   private state ="";
-  
+
   ngOnInit() {
 
   }

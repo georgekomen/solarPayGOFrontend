@@ -9,8 +9,8 @@ import 'rxjs/Rx';
 
 @Component({
   selector: 'app-sales',
-  templateUrl: './sales.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./sales.component.css?v=${new Date().getTime()}']
+  templateUrl: './sales.component.html',
+  styleUrls: ['./sales.component.css']
 })
 export class SalesComponent implements OnInit {
   constructor(private toasterService: ToasterService) {

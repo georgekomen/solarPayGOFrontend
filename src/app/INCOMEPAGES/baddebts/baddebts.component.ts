@@ -8,8 +8,8 @@ import { UserServiceService } from '../../user-service.service';
 
 @Component({
   selector: 'app-baddebts',
-  templateUrl: './baddebts.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./baddebts.component.css?v=${new Date().getTime()}']
+  templateUrl: './baddebts.component.html',
+  styleUrls: ['./baddebts.component.css']
 })
 export class BaddebtsComponent implements OnInit {
     //public data: paymentRatesClass[];

@@ -4,15 +4,15 @@ import { paymentRatesClass, paymentRatesClassPerClient } from '../classes/paymen
 import { ToasterService, Toast } from 'angular2-toaster';
 @Component({
   selector: 'app-image-modal',
-  templateUrl: './image-modal.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./image-modal.component.css?v=${new Date().getTime()}']
+  templateUrl: './image-modal.component.html',
+  styleUrls: ['./image-modal.component.css']
 })
 export class ImageModalComponent implements OnInit {
   @Input() Cdata: any;
   private data1: string;
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService) {
-    
+
   }
 
 //detect any changes in bound data
@@ -29,7 +29,7 @@ export class ImageModalComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+
   }
 
   private popToast(t: string, b: string, d: any) {

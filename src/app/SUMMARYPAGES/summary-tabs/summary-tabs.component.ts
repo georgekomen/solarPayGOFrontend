@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-summary-tabs',
-  templateUrl: './summary-tabs.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./summary-tabs.component.css?v=${new Date().getTime()}']
+  templateUrl: './summary-tabs.component.html',
+  styleUrls: ['./summary-tabs.component.css']
 })
 export class SummaryTabsComponent implements OnInit {
 

@@ -7,8 +7,8 @@ import { UserServiceService } from '../../user-service.service';
 
 @Component({
     selector: 'app-unprocessed-mpesa',
-    templateUrl: './unprocessed-mpesa.component.html?v=${new Date().getTime()}',
-    styleUrls: ['./unprocessed-mpesa.component.css?v=${new Date().getTime()}']
+    templateUrl: './unprocessed-mpesa.component.html',
+    styleUrls: ['./unprocessed-mpesa.component.css']
 })
 export class UnprocessedMpesaComponent implements OnInit {
     private data: any[];

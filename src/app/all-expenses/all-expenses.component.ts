@@ -7,8 +7,8 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
 
 @Component({
     selector: 'app-all-expenses',
-    templateUrl: './all-expenses.component.html?v=${new Date().getTime()}',
-    styleUrls: ['./all-expenses.component.css?v=${new Date().getTime()}']
+    templateUrl: './all-expenses.component.html',
+    styleUrls: ['./all-expenses.component.css']
 })
 export class AllExpensesComponent implements OnInit {
     data: any[];

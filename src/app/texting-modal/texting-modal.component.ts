@@ -6,8 +6,8 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
 
 @Component({
   selector: 'app-texting-modal',
-  templateUrl: './texting-modal.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./texting-modal.component.css?v=${new Date().getTime()}']
+  templateUrl: './texting-modal.component.html',
+  styleUrls: ['./texting-modal.component.css']
 })
 export class TextingModalComponent {
   @Input() Cdata: any[];

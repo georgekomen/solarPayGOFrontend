@@ -5,8 +5,8 @@ import { ToasterService, Toast } from 'angular2-toaster';
 
 @Component({
   selector: 'app-mpesa-expenses',
-  templateUrl: './mpesa-expenses.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./mpesa-expenses.component.css?v=${new Date().getTime()}']
+  templateUrl: './mpesa-expenses.component.html',
+  styleUrls: ['./mpesa-expenses.component.css']
 })
 
 export class MpesaExpensesComponent implements OnInit {

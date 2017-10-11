@@ -9,8 +9,8 @@ import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-issues',
-  templateUrl: './issues.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./issues.component.css?v=${new Date().getTime()}']
+  templateUrl: './issues.component.html',
+  styleUrls: ['./issues.component.css']
 })
 export class IssuesComponent implements OnInit {
 
@@ -29,7 +29,7 @@ export class IssuesComponent implements OnInit {
   private Id: Number = 0;
 
   constructor(private completerService: CompleterService, private _SunamiService: SunamiserviceService, private toasterService: ToasterService) {
-    
+
   }
 
 

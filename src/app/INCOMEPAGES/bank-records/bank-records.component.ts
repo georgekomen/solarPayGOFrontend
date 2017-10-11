@@ -7,8 +7,8 @@ import { UserServiceService } from '../../user-service.service';
 
 @Component({
   selector: 'app-bank-records',
-  templateUrl: './bank-records.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./bank-records.component.css?v=${new Date().getTime()}']
+  templateUrl: './bank-records.component.html',
+  styleUrls: ['./bank-records.component.css']
 })
 export class BankRecordsComponent implements OnInit {
   private data: any[];

@@ -5,8 +5,8 @@ import { moveIn } from '../router.animations';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./login.component.css?v=${new Date().getTime()}'],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
   animations: [moveIn()],
   host: { '[@moveIn]': '' }
 })

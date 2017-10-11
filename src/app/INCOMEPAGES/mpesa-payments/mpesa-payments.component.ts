@@ -7,8 +7,8 @@ import { UserServiceService } from '../../user-service.service';
 
 @Component({
     selector: 'app-mpesa-payments',
-    templateUrl: './mpesa-payments.component.html?v=${new Date().getTime()}',
-    styleUrls: ['./mpesa-payments.component.css?v=${new Date().getTime()}']
+    templateUrl: './mpesa-payments.component.html',
+    styleUrls: ['./mpesa-payments.component.css']
 })
 export class MpesaPaymentsComponent implements OnInit {
     private data: any[];

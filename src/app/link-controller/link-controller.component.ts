@@ -10,8 +10,8 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
 
 @Component({
   selector: 'app-link-controller',
-  templateUrl: './link-controller.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./link-controller.component.css?v=${new Date().getTime()}'],
+  templateUrl: './link-controller.component.html',
+  styleUrls: ['./link-controller.component.css'],
   providers: [SunamiserviceService]
 })
 export class LinkControllerComponent implements OnInit {

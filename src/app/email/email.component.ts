@@ -5,8 +5,8 @@ import { moveIn, fallIn } from '../router.animations';
 
 @Component({
   selector: 'app-email',
-  templateUrl: './email.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./email.component.css?v=${new Date().getTime()}'],
+  templateUrl: './email.component.html',
+  styleUrls: ['./email.component.css'],
   animations: [moveIn(), fallIn()],
   host: {'[@moveIn]': ''}
 })
@@ -18,7 +18,7 @@ export class EmailComponent implements OnInit {
     error: any;
 
     constructor(public af: AngularFire,private router: Router) {
-    this.af.auth.subscribe(auth => { 
+    this.af.auth.subscribe(auth => {
       if(auth) {
         this.router.navigateByUrl('/members');
       }

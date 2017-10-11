@@ -10,8 +10,8 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
 
 @Component({
   selector: 'app-uninstallations',
-  templateUrl: './uninstallations.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./uninstallations.component.css?v=${new Date().getTime()}']
+  templateUrl: './uninstallations.component.html',
+  styleUrls: ['./uninstallations.component.css']
 })
 export class UninstallationsComponent implements OnInit {
 

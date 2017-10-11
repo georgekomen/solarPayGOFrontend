@@ -7,8 +7,8 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
 
 @Component({
   selector: 'app-addcontroller',
-  templateUrl: './addcontroller.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./addcontroller.component.css?v=${new Date().getTime()}']
+  templateUrl: './addcontroller.component.html',
+  styleUrls: ['./addcontroller.component.css']
 })
 export class AddcontrollerComponent implements OnInit {
   private controller: any[] = [];
