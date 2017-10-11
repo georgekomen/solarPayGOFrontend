@@ -14,47 +14,47 @@ import { GeneralFilterPipe } from "app/general-filter.pipe";
 })
 export class PaymentsComponent implements OnInit {
   //public data: paymentRatesClass[];
-  private data: customerPayDetails[];
-  private data3: customerPayDetails[];
-  private dataSwitch: any;
-  private filterQuery = "";
-  private querydate1: Date;
-  private querydate2: Date;
-  private rowsOnPage = 100;
-  private sortBy = "";
-  private sortOrder = "asc";
-  private sumAmountDebt: number = 0;
-  private sumAmountInvoiced: number = 0;
-  private percent: string = "";
-  private state: string = '';
-  private openModalWindow: boolean = false;
-  private customer_id: any = "";
-  private debtAmount: number = 0;
-  private focusOnDebt: boolean = false;
-  private debtOrPaid: string = " paid";
-  private excludeactive: boolean = true;
-  private excludeinactive: boolean = true;
-  private invoiceItems: any[] = [];
-  private showOptionsDiv = false;
+  data: customerPayDetails[];
+  data3: customerPayDetails[];
+  dataSwitch: any;
+  filterQuery = "";
+  querydate1: Date;
+  querydate2: Date;
+  rowsOnPage = 100;
+  sortBy = "";
+  sortOrder = "asc";
+  sumAmountDebt: number = 0;
+  sumAmountInvoiced: number = 0;
+  percent: string = "";
+  state: string = '';
+  openModalWindow: boolean = false;
+  customer_id: any = "";
+  debtAmount: number = 0;
+  focusOnDebt: boolean = false;
+  debtOrPaid: string = " paid";
+  excludeactive: boolean = true;
+  excludeinactive: boolean = true;
+  invoiceItems: any[] = [];
+  showOptionsDiv = false;
   currentlySelectedCustomer = '';
-  private showInvoiceCustomerDiv = false;
-
-  private OpenPayHistory() {
+  showInvoiceCustomerDiv = false;
+  isOnload: boolean = true;
+  OpenPayHistory() {
     this.showOptionsDiv = false;
     this.openModalWindow = true;
     this.customer_id = this.currentlySelectedCustomer;
   }
 
-  private cancelImageModel() {
+  cancelImageModel() {
     this.openModalWindow = false;
   }
 
-  private FshowInvoiceCustomerDiv() {
+  FshowInvoiceCustomerDiv() {
     this.showOptionsDiv = !this.showOptionsDiv;
     this.showInvoiceCustomerDiv = !this.showInvoiceCustomerDiv;
   }
 
-  private selectCustomerAndShowOptionsDiv(id: any) {
+  selectCustomerAndShowOptionsDiv(id: any) {
     this.currentlySelectedCustomer = id;
     this.openModalWindow = false;
     this.showOptionsDiv = true;
@@ -96,7 +96,7 @@ export class PaymentsComponent implements OnInit {
     this.getInvoiceItems();
   }
 
-  private invoiceCustomer(value: any) {
+  invoiceCustomer(value: any) {
     const customerName = this.data.find(t => t.Id === this.currentlySelectedCustomer).Name || '';
     if(confirm('are you sure you want to invoice ' + customerName + ' a ' + value)){
       this._SunamiService.invoiceCustomer([{customerId: this.currentlySelectedCustomer, item: value, loogedUser: UserServiceService.email}]).subscribe(res => {
@@ -107,13 +107,13 @@ export class PaymentsComponent implements OnInit {
     }
   }
 
-  private getInvoiceItems() {
+  getInvoiceItems() {
     this._SunamiService.getInvoiceItems().subscribe(res => {
       this.invoiceItems = res;
     });
   }
 
-  private createdata(data1: any[], type: any) {
+  createdata(data1: any[], type: any) {
     for (let key in data1) {
       this.debtAmount = parseInt(data1[key].Invoice) - parseInt(data1[key].Amount);
       this.data.push({
@@ -137,19 +137,19 @@ export class PaymentsComponent implements OnInit {
 
   }
 
-  private excludeInactive() {
+  excludeInactive() {
     this.isOnload = true;
     this.excludeinactive = !this.excludeinactive;
     this.exxc();
   }
 
-  private excludeActive() {
+  excludeActive() {
     this.isOnload = true;
     this.excludeactive = !this.excludeactive;
     this.exxc();
   }
 
-  private exxc() {
+  exxc() {
     if (this.excludeinactive == true && this.excludeactive == false) {
       this.data3 = this.data.filter(f => f.Active_status == "active");
     }
@@ -167,12 +167,12 @@ export class PaymentsComponent implements OnInit {
     this.fc1();
   }
 
-  private focusChange() {
+  focusChange() {
     this.focusOnDebt = !this.focusOnDebt;
     this.fc1();
   }
 
-  private fc1() {
+  fc1() {
     if (this.focusOnDebt == true) {
 
       this.debtOrPaid = " debt";
@@ -185,7 +185,7 @@ export class PaymentsComponent implements OnInit {
     }
   }
 
-  private sortArrayDebt(data: any[]) {
+  sortArrayDebt(data: any[]) {
     //create a new array
     //Amount, Invoice, Percent, To, Comment, Village, Phone, Status
     //sort the complex array
@@ -200,9 +200,9 @@ export class PaymentsComponent implements OnInit {
     this.data3 = data;
   }
 
-  private isOnload: boolean = true;
 
-  private sortArrayPaid(data: any[]) {
+
+  sortArrayPaid(data: any[]) {
     this.sumAmountInvoiced = 0;
     this.sumAmountDebt = 0;
     for (let key in data) {
@@ -225,7 +225,7 @@ export class PaymentsComponent implements OnInit {
     this.isOnload = false;
   }
 
-  private changesumgen() {
+  changesumgen() {
     if (this.focusOnDebt == true) {
       this.sumAmountDebt = 0;
       this.sumAmountInvoiced = 0;
@@ -246,7 +246,7 @@ export class PaymentsComponent implements OnInit {
     }
   }
 
-  private changesumdata() {
+  changesumdata() {
     if (this.focusOnDebt == true) {
       this.sumAmountDebt = 0;
       this.sumAmountInvoiced = 0;
@@ -268,16 +268,16 @@ export class PaymentsComponent implements OnInit {
   }
 
 
-  private filterbydate() {
+  filterbydate() {
     this.data3 = this.data.filter(f => f.From >= this.querydate1);
     //this.data = this._datefilter.transform(this.data, this.dates1);
   }
 
-  private switch1(d: any) {
+  switch1(d: any) {
     this.popToast("Results", d);
   }
 
-  private toggleSwitch(k1: string) {
+  toggleSwitch(k1: string) {
     this._SunamiService.getSwitch(k1, UserServiceService.email).subscribe(
       (dataSwitch) => this.switch1(dataSwitch), //Bind to view
       err => {
@@ -286,23 +286,23 @@ export class PaymentsComponent implements OnInit {
       });
   }
 
-  private toInt(num: string) {
+  toInt(num: string) {
     return +num;
   }
 
-  private sortByWordLength = (a: any) => {
+  sortByWordLength = (a: any) => {
     return a.Comment.length;
   }
 
-  private hideloader() {
+  hideloader() {
     document.getElementById("loading").style.display = "none";
   }
 
-  private showloader() {
+  showloader() {
     document.getElementById("loading").style.display = "initial";
   }
 
-  private popToast(t: string, b: string) {
+  popToast(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,
@@ -311,7 +311,7 @@ export class PaymentsComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
-  private exporttoexcel() {
+  exporttoexcel() {
     this.userservice.exporttoexcel(DataFilterPipe.filteredArray, "test1");
   }
 }

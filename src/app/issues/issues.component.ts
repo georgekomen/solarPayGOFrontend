@@ -14,19 +14,19 @@ import { UserServiceService } from '../user-service.service';
 })
 export class IssuesComponent implements OnInit {
 
-  protected dataService: CompleterData;
-  private customer_ids: any[];
-  private customer_id: string = "";
-  private issue1: string = "";
-  private issuearray: any[];
-  private data: any[];
-  private filterQuery = "";
-  private rowsOnPage = 100;
-  private sortOrder = "asc";
-  private showlinkbutton = true;
-  private issuesolvecomment: string = "";
-  private solveissuediv: boolean = false;
-  private Id: Number = 0;
+   dataService: CompleterData;
+   customer_ids: any[];
+   customer_id: string = "";
+   issue1: string = "";
+   issuearray: any[];
+   data: any[];
+   filterQuery = "";
+   rowsOnPage = 100;
+   sortOrder = "asc";
+   showlinkbutton = true;
+   issuesolvecomment: string = "";
+   solveissuediv: boolean = false;
+   Id: Number = 0;
 
   constructor(private completerService: CompleterService, private _SunamiService: SunamiserviceService, private toasterService: ToasterService) {
 
@@ -52,7 +52,7 @@ export class IssuesComponent implements OnInit {
 
   }
 
-  private getIssues() {
+   getIssues() {
 
 
     this.data = null;
@@ -64,7 +64,7 @@ export class IssuesComponent implements OnInit {
       });
   }
 
-  private createObj1(data1: any[]) {
+   createObj1(data1: any[]) {
     //this.searchData = data1;
     this.customer_ids = [];
     for (let key in data1) {
@@ -72,7 +72,7 @@ export class IssuesComponent implements OnInit {
     }
   }
 
-  private submit() {
+   submit() {
     this.issuearray = [];
     if (this.customer_id.length > 4 && this.customer_id != "") {
       this.issuearray.push({ id: this.customer_id, issue: this.issue1, reporter: UserServiceService.email, priority: "High" });
@@ -89,22 +89,22 @@ export class IssuesComponent implements OnInit {
     this.showlinkbutton = true;
   }
 
-  private CANCEL() {
+   CANCEL() {
     //clear all fields
     this.showlinkbutton = true;
   }
 
-  private Fshowlinkbutton() {
+   Fshowlinkbutton() {
     this.showlinkbutton = false;
   }
 
-  private solveIssue(s1: number) {
+   solveIssue(s1: number) {
     this.Id = s1;
     //show div
     this.solveissuediv = true;
   }
 
-  private submitissuesolve() {
+   submitissuesolve() {
     this.issuearray = [];
     if (this.Id > 0 && this.issuesolvecomment.length > 4) {
       this.issuearray.push({ Id: this.Id, Ssolver: UserServiceService.email, Scomment: this.issuesolvecomment });
@@ -123,13 +123,13 @@ export class IssuesComponent implements OnInit {
     this.issuesolvecomment = "";
   }
 
-  private cancelsubmitissuesolve() {
+   cancelsubmitissuesolve() {
     //clear other fields
     this.issuesolvecomment = "";
     this.solveissuediv = false;
   }
 
-  private popToastpost(t: string, d: any[]) {
+   popToastpost(t: string, d: any[]) {
     var toast: Toast = {
       type: 'error',
       title: t,
@@ -141,7 +141,7 @@ export class IssuesComponent implements OnInit {
   }
 
 
-  private popToast(t: string, b: string, d: any[]) {
+   popToast(t: string, b: string, d: any[]) {
     this.data = d;
     var toast: Toast = {
       type: 'error',
@@ -151,7 +151,7 @@ export class IssuesComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
-  private hideloader() {
+   hideloader() {
     document.getElementById("loading").style.display = "none";
   }
 

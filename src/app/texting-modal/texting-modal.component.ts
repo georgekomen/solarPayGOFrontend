@@ -11,12 +11,12 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
 })
 export class TextingModalComponent {
   @Input() Cdata: any[];
-  private SMStext = "";
-  private SMS1: any[];
-  private SMSn: any[];
-  private res: any[];
-  private filterQuery = "";
-  private rowsOnPage = 100;
+   SMStext = "";
+   SMS1: any[];
+   SMSn: any[];
+   res: any[];
+   filterQuery = "";
+   rowsOnPage = 100;
 
   constructor(private _SunamiService: SunamiserviceService,private userservice: UserServiceService) {
   }
@@ -25,7 +25,7 @@ export class TextingModalComponent {
     this.getMessages();
   }
   //"Jambo " + name + "\n" + msg +"\n Kumbuka una deni ya KSH" + deni + " tafadhali lipa au tutakatiza huusiano nawe"
-  private sendSMS() {
+   sendSMS() {
     this.SMSn = [];
     this.SMS1 = [];
     for (let key in this.Cdata) {
@@ -44,14 +44,14 @@ export class TextingModalComponent {
 
   }
 
-  private res1(re:any){
+   res1(re:any){
     this.res = re
     this.getMessages();
   }
 
-  private data: any[];
+   data: any[];
 
-  private getMessages() {
+   getMessages() {
     this.data = [];
     this._SunamiService.getMessages().subscribe(
       (data) => this.data = data, //Bind to view
@@ -61,7 +61,7 @@ export class TextingModalComponent {
       });
   }
 
-  private exporttoexcel() {
+   exporttoexcel() {
         this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
     }
 

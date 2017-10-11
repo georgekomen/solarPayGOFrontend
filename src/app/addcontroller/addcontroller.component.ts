@@ -11,15 +11,15 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
   styleUrls: ['./addcontroller.component.css']
 })
 export class AddcontrollerComponent implements OnInit {
-  private controller: any[] = [];
-  private data: any[];
-  private imei: string = "";
-  private sim: string = "";
-  private provider: string = "";
-  private version: string = "";
-  private filterQuery = "";
-  private rowsOnPage = 100;
-  private showlinkbutton = true;
+   controller: any[] = [];
+   data: any[];
+   imei: string = "";
+   sim: string = "";
+   provider: string = "";
+   version: string = "";
+   filterQuery = "";
+   rowsOnPage = 100;
+   showlinkbutton = true;
 
   imeiToDelete;
   showOptionsDiv: boolean = false;
@@ -39,7 +39,7 @@ export class AddcontrollerComponent implements OnInit {
       });
   }
 
-  private submit() {
+   submit() {
     if (this.imei.length > 10 && this.sim != "" && this.provider != "") {
       this.controller.push({ imei: this.imei, sim: this.sim, provider: this.provider, version: this.version, action: this.action, loogeduser: UserServiceService.email });
       this._SunamiService.postAddController(this.controller).subscribe(data1 => {
@@ -57,7 +57,7 @@ export class AddcontrollerComponent implements OnInit {
     this.showlinkbutton = true;
   }
 
-  private editController() {
+   editController() {
     if(confirm(`are you sure you want to edit this controller imei: ${this.imeiToDelete}? this action is unreversable`)){
       this.showOptionsDiv = false;
       this.Fshowlinkbutton();
@@ -75,20 +75,20 @@ export class AddcontrollerComponent implements OnInit {
   }
 
 
-  private Fshowlinkbutton() {
+   Fshowlinkbutton() {
     this.showlinkbutton = false;
   }
 
-  private CANCEL() {
+   CANCEL() {
     //clear all fields
     this.showlinkbutton = true;
   }
 
-  private hideloader() {
+   hideloader() {
     document.getElementById("loading").style.display = "none";
   }
 
-  private popToast(t: string, b: string, d: any[]) {
+   popToast(t: string, b: string, d: any[]) {
     this.data = d;
     var toast: Toast = {
       type: 'error',
@@ -99,11 +99,11 @@ export class AddcontrollerComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
-  private exporttoexcel() {
+   exporttoexcel() {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
   }
 
-  private deleteController(){
+   deleteController(){
     if(confirm(`are you sure you want to delete this controller imei: ${this.imeiToDelete}? this action is unreversable`)){
       this._SunamiService.deleteController(this.imeiToDelete).subscribe(res=>{
         this.showOptionsDiv = false;
@@ -115,13 +115,13 @@ export class AddcontrollerComponent implements OnInit {
     }
   }
 
-  private setdelete(value) {
+   setdelete(value) {
     this.showOptionsDiv = true;
     this.imeiToDelete = value.Imei;
     this.selectedController = value;
   }
 
-  private popToast1(t: string, b: string) {
+   popToast1(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,

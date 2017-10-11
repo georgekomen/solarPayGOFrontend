@@ -11,16 +11,19 @@ import { UserServiceService } from '../../user-service.service';
   styleUrls: ['./mpesa-records.component.css']
 })
 export class MpesaRecordsComponent implements OnInit {
-  private data: any[];
-  private filterQuery = "";
-  private rowsOnPage = 100;
-  private sum1: number = 0;
+   data: any[];
+   filterQuery = "";
+   rowsOnPage = 100;
+   sum1: number = 0;
+  idToDelete;
+  showOptionsDiv: boolean = false;
+  paymentName;
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
 
   }
 
-  private popToast(t: string, b: string) {
+   popToast(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,
@@ -36,20 +39,20 @@ export class MpesaRecordsComponent implements OnInit {
     );
   }
 
-  private allMpesaPayments(data1: any[]) {
+   allMpesaPayments(data1: any[]) {
     this.data = data1;
     this.calcSum();
 
   }
 
-  private calcSum() {
+   calcSum() {
     this.sum1 = 0;
     for (let key in this.data) {
       this.sum1 += parseInt(this.data[key].Amount);
     }
   }
 
-  private changesum() {
+   changesum() {
     setTimeout(() => {
       this.sum1 = 0;
       for (let key in GeneralFilterPipe.filteredArray) {
@@ -58,18 +61,16 @@ export class MpesaRecordsComponent implements OnInit {
     }, 1000)
   }
 
-  private hideloader() {
+   hideloader() {
     document.getElementById("loading").style.display = "none";
   }
 
-  private exporttoexcel() {
+   exporttoexcel() {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
   }
 
-   private idToDelete;
-  private showOptionsDiv: boolean = false;
-  private paymentName;
-  private deleteRecord() {
+
+   deleteRecord() {
     if (confirm(`are you sure you want to delete this payment linked to: ${this.paymentName}? this action is unreversable`)) {
       this._SunamiService.deletePayment(this.idToDelete).subscribe(res => {
         this.showOptionsDiv = false;
@@ -81,7 +82,7 @@ export class MpesaRecordsComponent implements OnInit {
     }
   }
 
-  private setIdToDelete(value,name) {
+   setIdToDelete(value,name) {
     this.showOptionsDiv = true;
     this.idToDelete = value;
     this.paymentName = name;

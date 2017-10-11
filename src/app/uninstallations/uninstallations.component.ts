@@ -121,11 +121,11 @@ export class UninstallationsComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
-  public hideloader() {
+   hideloader() {
     document.getElementById("loading").style.display = "none";
   }
 
-   private exporttoexcel() {
+    exporttoexcel() {
         this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
     }
 

@@ -17,8 +17,8 @@ export class UserServiceService {
   public static level: number = 0;
   public static email: string;
   public static name2: string = "";
-  private _http: Http;
-  private toasterService: ToasterService
+   _http: Http;
+   toasterService: ToasterService
 
   constructor(private ToasterService: ToasterService, _Http: Http, private _csvService: CsvService) {
     this.toasterService = ToasterService;
@@ -28,12 +28,12 @@ export class UserServiceService {
   public getdate() {
     var today = new Date();
     var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0! 
+    var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
     return (yyyy + "-" + this.pad(mm) + "-" + this.pad(dd));
   }
 
-  private pad(n) {
+   pad(n) {
     return (n < 10) ? ("0" + n) : n;
   }
 

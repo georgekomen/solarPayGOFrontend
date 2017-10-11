@@ -9,8 +9,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class SunamiserviceService {
   //mark:any[];
-  private headers: Headers = new Headers();
-  private options;
+   headers: Headers = new Headers();
+   options;
   constructor(private _http: Http) {
     this.headers.append('Accept', 'application/json');
     this.headers.append('Content-Type', 'application/json');

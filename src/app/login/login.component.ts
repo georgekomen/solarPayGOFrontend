@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  private loginFb() {
+   loginFb() {
     this.af.auth.login({
       provider: AuthProviders.Facebook,
       method: AuthMethods.Popup,
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       })
   }
 
-  private loginGoogle() {
+   loginGoogle() {
     this.af.auth.login({
       provider: AuthProviders.Google,
       method: AuthMethods.Popup,

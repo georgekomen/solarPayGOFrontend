@@ -11,16 +11,16 @@ import { UserServiceService } from '../../user-service.service';
     styleUrls: ['./mpesa-payments.component.css']
 })
 export class MpesaPaymentsComponent implements OnInit {
-    private data: any[];
-    private filterQuery = "";
-    private rowsOnPage = 100;
-    private sum1: number = 0;
+     data: any[];
+     filterQuery = "";
+     rowsOnPage = 100;
+     sum1: number = 0;
 
     constructor(private _SunamiService: SunamiserviceService,private userservice:UserServiceService, private toasterService: ToasterService) {
 
     }
 
-    private popToast(t: string, b: string) {
+     popToast(t: string, b: string) {
         var toast: Toast = {
             type: 'error',
             title: t,
@@ -38,13 +38,13 @@ export class MpesaPaymentsComponent implements OnInit {
 
     }
 
-    private allMpesaPayments(data1: any[]) {
+     allMpesaPayments(data1: any[]) {
         this.data = data1;
         this.calcSum();
 
     }
 
-    private calcSum() {
+     calcSum() {
 
         this.sum1 = 0;
         for (let key in this.data) {
@@ -52,7 +52,7 @@ export class MpesaPaymentsComponent implements OnInit {
         }
     }
 
-    private changesum() {
+     changesum() {
         setTimeout(() => {
             this.sum1 = 0;
             for (let key in GeneralFilterPipe.filteredArray) {
@@ -62,15 +62,15 @@ export class MpesaPaymentsComponent implements OnInit {
 
     }
 
-    private hideloader() {
+     hideloader() {
         document.getElementById("loading").style.display = "none";
     }
 
-    private exporttoexcel(){
+     exporttoexcel(){
         this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray,"test1");
     }
 
-    private print1() {
+     print1() {
         this.userservice.print1('foo');
     }
 }

@@ -13,28 +13,28 @@ import { UserServiceService } from '../../user-service.service';
 })
 export class BaddebtsComponent implements OnInit {
     //public data: paymentRatesClass[];
-    private data: any[];
-    private dataSwitch: any;
-    private filterQuery = "";
-    private rowsOnPage = 100;
-    private sortBy = "";
-    private sortOrder = "asc";
-    private filterPayRate = "";
-    private filterPayRate1 = "";
-    private sumAmountDebt: number = 0;
-    private sumAmountInvoiced: number = 0;
-    private percent: string;
-    private state: string = '';
-    private data2: any[];
-    private openModalWindow: boolean = false;
-    private customer_id: any = "";
-
-    private OpenPayHistory(i: any) {
+     data: any[];
+     dataSwitch: any;
+     filterQuery = "";
+     rowsOnPage = 100;
+     sortBy = "";
+     sortOrder = "asc";
+     filterPayRate = "";
+     filterPayRate1 = "";
+     sumAmountDebt: number = 0;
+     sumAmountInvoiced: number = 0;
+     percent: string;
+     state: string = '';
+     data2: any[];
+     openModalWindow: boolean = false;
+     customer_id: any = "";
+     debtAmount = 0;
+     OpenPayHistory(i: any) {
         this.openModalWindow = true;
         this.customer_id = i;
     }
 
-    private cancelImageModel() {
+     cancelImageModel() {
         this.openModalWindow = false;
     }
 
@@ -58,8 +58,8 @@ export class BaddebtsComponent implements OnInit {
             });
     }
 
-    private debtAmount = 0;
-    private calcSum(data1: any[]) {
+
+     calcSum(data1: any[]) {
         //create a new array
         //Amount, Invoice, Percent, To, Comment, Village, Phone, Status
         this.data = [];
@@ -92,7 +92,7 @@ export class BaddebtsComponent implements OnInit {
         this.percent = ((100 * this.sumAmountDebt) / this.sumAmountInvoiced).toFixed(2);
     }
 
-    private changesumgen() {
+     changesumgen() {
         this.sumAmountDebt = 0;
         this.sumAmountInvoiced = 0;
         for (let key in GeneralFilterPipe.filteredArray) {
@@ -102,7 +102,7 @@ export class BaddebtsComponent implements OnInit {
         this.percent = ((100 * this.sumAmountDebt) / this.sumAmountInvoiced).toFixed(2);
     }
 
-    private changesumdata() {
+     changesumdata() {
         this.sumAmountDebt = 0;
         this.sumAmountInvoiced = 0;
         for (let key in DataFilterPipe.filteredArray) {
@@ -112,7 +112,7 @@ export class BaddebtsComponent implements OnInit {
         this.percent = ((100 * this.sumAmountDebt) / this.sumAmountInvoiced).toFixed(2);
     }
 
-    private filterByPayRate() {
+     filterByPayRate() {
         this.filterPayRate1 = "PayRate" + this.filterPayRate;
         if (this.filterPayRate == "") {
             this.filterPayRate1 = "";
@@ -122,19 +122,19 @@ export class BaddebtsComponent implements OnInit {
         }, 1000)
     }
 
-    private filterByBeg() {
+     filterByBeg() {
 
     }
 
-    private filterByEnd() {
+     filterByEnd() {
 
     }
 
-    private switch1(d: any) {
+     switch1(d: any) {
         this.popToast("Results", d);
     }
 
-    private toggleSwitch(k1: string) {
+     toggleSwitch(k1: string) {
         this._SunamiService.getSwitch(k1, UserServiceService.email).subscribe(
             (dataSwitch) => this.switch1(dataSwitch), //Bind to view
             err => {
@@ -143,23 +143,23 @@ export class BaddebtsComponent implements OnInit {
             });
     }
 
-    private toInt(num: string) {
+     toInt(num: string) {
         return +num;
     }
 
-    private sortByWordLength = (a: any) => {
+     sortByWordLength = (a: any) => {
         return a.Comment.length;
     }
 
-    private hideloader() {
+     hideloader() {
         document.getElementById("loading").style.display = "none";
     }
 
-    private showloader() {
+     showloader() {
         document.getElementById("loading").style.display = "initial";
     }
 
-    private popToast(t: string, b: string) {
+     popToast(t: string, b: string) {
         var toast: Toast = {
             type: 'error',
             title: t,
@@ -168,7 +168,7 @@ export class BaddebtsComponent implements OnInit {
         this.toasterService.pop(toast);
     }
 
-    private exporttoexcel() {
+     exporttoexcel() {
         this.userservice.exporttoexcel(DataFilterPipe.filteredArray, "test1");
     }
 }

@@ -12,44 +12,44 @@ import { GeneralFilterPipe } from "app/general-filter.pipe";
 })
 export class CustomerDetailsComponent implements OnInit {
     //public data: paymentRatesClass[];
-    private data: any[];
-    private dataSwitch: any;
-    private filterQuery = "";
-    private rowsOnPage = 100;
-    private sortOrder = "asc";
-    private showlinkbutton = true;
+     data: any[];
+     dataSwitch: any;
+     filterQuery = "";
+     rowsOnPage = 100;
+     sortOrder = "asc";
+     showlinkbutton = true;
 
 
-    private id = "";
-    private name = "";
-    private number1 = "";
-    private number2 = "";
-    private number3 = "";
-    private box = "";
-    private occupation = "";
-    private witness = "";
-    private witnessid = "";
-    private village = "";
-    private city = "";
-    private description = "";
-    private latG = "";
-    private lonG = "";
-    private recordedBy = "";
-    private date1 = "";
-    private location = "";
-    private package = "";
+     id = "";
+     name = "";
+     number1 = "";
+     number2 = "";
+     number3 = "";
+     box = "";
+     occupation = "";
+     witness = "";
+     witnessid = "";
+     village = "";
+     city = "";
+     description = "";
+     latG = "";
+     lonG = "";
+     recordedBy = "";
+     date1 = "";
+     location = "";
+     package = "";
 
-    private Fshowlinkbutton() {
+     Fshowlinkbutton() {
         this.showlinkbutton = false;
     }
 
-    private CANCEL() {
+     CANCEL() {
         //clear all fields
         this.showlinkbutton = true;
     }
 
-    private customer: any[];
-    private submit() {
+     customer: any[];
+     submit() {
         this.customer = [];
         if (this.id != null || this.id != "") {
             this.customer.push({
@@ -124,15 +124,15 @@ export class CustomerDetailsComponent implements OnInit {
         }*/
 
 
-    private hideloader() {
+     hideloader() {
         document.getElementById("loading").style.display = "none";
     }
 
-  private showloader() {
+   showloader() {
     document.getElementById("loading").style.display = "block";
   }
 
-    private popToast(t: string, b: string) {
+     popToast(t: string, b: string) {
         var toast: Toast = {
             type: 'error',
             title: t,
@@ -141,7 +141,7 @@ export class CustomerDetailsComponent implements OnInit {
         this.toasterService.pop(toast);
     }
 
-    private exporttoexcel() {
+     exporttoexcel() {
         this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
     }
 
