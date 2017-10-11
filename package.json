@@ -1,6 +1,6 @@
 {
   "name": "sunamifront",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor",
-    "build-prod": "npm version patch && node ./replace.build.js && ng build --prod"
+    "build-prod": "node ./replace.build.js && ng build --prod"
   },
   "private": true,
   "dependencies": {

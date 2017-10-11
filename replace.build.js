@@ -19,3 +19,5 @@ catch (error) {
   console.error('Error occurred:', error);
   throw error
 }
+
+//    "build-prod": "npm version patch && node ./replace.build.js && ng build --prod"
