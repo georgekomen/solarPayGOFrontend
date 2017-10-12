@@ -20,11 +20,9 @@ pipelines:
             - node
           script:
             - npm install
-            - npm run build --prod
-            - apt-get install git-ftp
+            - npm run build
             - git config git-ftp.syncroot dist
             - git config git-ftp.url "ftp://ftp.smarterasp.net/site3/"
             - git config git-ftp.user $Username
             - git config git-ftp.password $Pwd
-            - git-ftp init
-            - git-ftp push
+            - git ftp init
