@@ -21,7 +21,20 @@ pipelines:
           script:
             - npm install
             - npm run build
-            - git config git-ftp.syncroot dist/
+#           - git config git-ftp.syncroot dist/
+            - echo "Let's go in to our dist/ and initialize there with git"
+            - cd dist/
+            - git config --global user.email "gkkomensi79@gmail.com"
+            - git config --global user.name "George Komen"
+            - git init
+            - git add -A && git commit -m "base url updated for prod deployment"
+            - git clone https://github.com/git-ftp/git-ftp.git
+            - cd git-ftp
+            - git checkout 1.3.4
+            - make install
+            - echo "Done with installation of git-ftp"
+            - cd ../
+            - rm -rf git-ftp
             - git config git-ftp.url "ftp://ftp.smarterasp.net/site3/"
             - git config git-ftp.user $Username
             - git config git-ftp.password $Pwd
