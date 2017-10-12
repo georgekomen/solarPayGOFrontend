@@ -21,6 +21,7 @@ pipelines:
           script:
             - npm install
             - npm run build --prod
+            - apt-get install git-ftp
             - git config git-ftp.syncroot dist
             - git config git-ftp.url "ftp://ftp.smarterasp.net/site3/"
             - git config git-ftp.user $Username
