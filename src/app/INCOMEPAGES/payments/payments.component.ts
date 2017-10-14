@@ -39,39 +39,15 @@ export class PaymentsComponent implements OnInit {
   currentlySelectedCustomer = '';
   showInvoiceCustomerDiv = false;
   isOnload: boolean = true;
-  OpenPayHistory() {
-    this.showOptionsDiv = false;
-    this.openModalWindow = true;
-    this.customer_id = this.currentlySelectedCustomer;
-  }
+  selectedInvoiceItem: any;
+  invoiceDate;
 
-  cancelImageModel() {
-    this.openModalWindow = false;
-  }
-
-  FshowInvoiceCustomerDiv() {
-    this.showOptionsDiv = !this.showOptionsDiv;
-    this.showInvoiceCustomerDiv = !this.showInvoiceCustomerDiv;
-  }
-
-  selectCustomerAndShowOptionsDiv(id: any) {
-    this.currentlySelectedCustomer = id;
-    this.openModalWindow = false;
-    this.showOptionsDiv = true;
-  }
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService, private _datefilter: DateFilterPipe) {
 
   }
 
   ngOnInit(): void {
-    /*with delay
-      this._SunamiService.GetPaymentActiveRates().subscribe((data:paymentRatesClass[])=> {
-        setTimeout(()=> {
-            this.data = data;
-        }, 6000);
-    });*/
-
     this._SunamiService.GetPaymentActiveRates().subscribe(
       (data1) => {
         this.data = [];
@@ -93,19 +69,42 @@ export class PaymentsComponent implements OnInit {
         // Log errors if any
         this.popToast("no internet", err);
       });
+    this.invoiceDate = this.userservice.getdate();
     this.getInvoiceItems();
+  }
+
+  OpenPayHistory() {
+    this.showOptionsDiv = false;
+    this.openModalWindow = true;
+    this.customer_id = this.currentlySelectedCustomer;
+  }
+
+  cancelImageModel() {
+    this.openModalWindow = false;
+  }
+
+  FshowInvoiceCustomerDiv() {
+    this.showOptionsDiv = !this.showOptionsDiv;
+    this.showInvoiceCustomerDiv = !this.showInvoiceCustomerDiv;
+  }
+
+  selectCustomerAndShowOptionsDiv(id: any) {
+    this.currentlySelectedCustomer = id;
+    this.openModalWindow = false;
+    this.showOptionsDiv = true;
   }
 
   invoiceCustomer(value: any) {
     const customerName = this.data.find(t => t.Id === this.currentlySelectedCustomer).Name || '';
-    if(confirm('are you sure you want to invoice ' + customerName + ' a ' + value)){
-      this._SunamiService.invoiceCustomer([{customerId: this.currentlySelectedCustomer, item: value, loogedUser: UserServiceService.email}]).subscribe(res => {
+    if (confirm('are you sure you want to invoice ' + customerName + ' a ' + value)) {
+      this._SunamiService.invoiceCustomer([{invoiceDate: this.invoiceDate, customerId: this.currentlySelectedCustomer, item: value, loogedUser: UserServiceService.email}]).subscribe(res => {
         this.popToast("Result", res);
       }, error2 => {
         this.popToast("Error", error2);
       });
     }
   }
+
 
   getInvoiceItems() {
     this._SunamiService.getInvoiceItems().subscribe(res => {

@@ -9,12 +9,12 @@ pipelines:
   default:
     - step:
         caches:
-#          - node
+          - node
         script:
-#          - npm install
-#          - npm run build-prod
+          - npm install
+          - npm run build-prod
   branches:
-    develop:
+    master:
       - step:
           caches:
             - node
