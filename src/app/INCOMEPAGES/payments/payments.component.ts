@@ -16,10 +16,8 @@ export class PaymentsComponent implements OnInit {
   //public data: paymentRatesClass[];
   data: customerPayDetails[];
   data3: customerPayDetails[];
-  dataSwitch: any;
   filterQuery = "";
   querydate1: Date;
-  querydate2: Date;
   rowsOnPage = 100;
   sortBy = "";
   sortOrder = "asc";
@@ -41,6 +39,7 @@ export class PaymentsComponent implements OnInit {
   isOnload: boolean = true;
   selectedInvoiceItem: any;
   invoiceDate;
+  dateInterVals: any[] = [];
 
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService, private _datefilter: DateFilterPipe) {
@@ -48,13 +47,20 @@ export class PaymentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._SunamiService.GetPaymentActiveRates().subscribe(
+    this.dateInterVals.push({startDate: '2016-01-01', endDate: this.userservice.getdate()});
+    this.getPayRates();
+    this.invoiceDate = this.userservice.getdate();
+    this.getInvoiceItems();
+  }
+
+  getPayRates(){
+    this._SunamiService.GetPaymentActiveRates(this.dateInterVals).subscribe(
       (data1) => {
         this.data = [];
         this.createdata(data1, "active");
 
         //after setting data for active customers now set for inactive customers
-        this._SunamiService.GetPaymentInactiveRates().subscribe(
+        this._SunamiService.GetPaymentInactiveRates(this.dateInterVals).subscribe(
           (data4) => {
             this.isOnload = true;
             this.createdata(data4, "inactive");
@@ -69,8 +75,6 @@ export class PaymentsComponent implements OnInit {
         // Log errors if any
         this.popToast("no internet", err);
       });
-    this.invoiceDate = this.userservice.getdate();
-    this.getInvoiceItems();
   }
 
   OpenPayHistory() {

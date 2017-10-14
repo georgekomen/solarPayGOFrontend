@@ -27,16 +27,17 @@ export class SunamiserviceService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  GetPaymentActiveRates(): Observable<any[]> {
-
-    return this._http.post('//api.sunamiapp.net/api/customers/GetPaymentActiveRates/',[{startDate: "2015-01-01", endDate: "2017-10-13"}], this.options)
+  GetPaymentActiveRates(dateInterVal:any[]): Observable<any[]> {
+    let bodyString = JSON.stringify(dateInterVal); // Stringify payload
+    return this._http.post('//api.sunamiapp.net/api/customers/GetPaymentActiveRates/',bodyString, this.options)
       .map((res: Response) => res.json())
       //...errors if any
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  GetPaymentInactiveRates(): Observable<any[]> {
-    return this._http.post('//api.sunamiapp.net/api/customers/GetPaymentInactiveRates/',[{startDate: "2015-01-01", endDate: "2017-10-13"}], this.options)
+  GetPaymentInactiveRates(dateInterVal:any[]): Observable<any[]> {
+    let bodyString = JSON.stringify(dateInterVal); // Stringify payload
+    return this._http.post('//api.sunamiapp.net/api/customers/GetPaymentInactiveRates/',bodyString, this.options)
       .map((res: Response) => res.json())
       //...errors if any
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
