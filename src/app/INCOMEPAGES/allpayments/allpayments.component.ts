@@ -12,14 +12,14 @@ import { UserServiceService } from '../../user-service.service';
 })
 export class AllpaymentsComponent implements OnInit {
   @Input() Cdata: any;
-  private data: any[];
-  private data1: any[];
-  private filterQuery = "";
-  private rowsOnPage = 100;
-  private sortBy = "";
-  private sortOrder = "asc";
-  private customer_id;
-
+  data: any[];
+  data1: any[];
+  filterQuery = "";
+  rowsOnPage = 100;
+  sortBy = "";
+  sortOrder = "asc";
+  customer_id;
+  sum1 = 0;
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
   }
 
@@ -40,8 +40,8 @@ export class AllpaymentsComponent implements OnInit {
     this.requestData();
   }
 
-  private sum1 = 0;
-  private changesum() {
+
+  changesum() {
     setTimeout(() => {
       this.sum1 = 0;
       for (let key in GeneralFilterPipe.filteredArray) {
@@ -50,7 +50,7 @@ export class AllpaymentsComponent implements OnInit {
     }, 1000)
   }
 
-  private requestData() {
+  requestData() {
     this.data = null;
     this._SunamiService.getPaymentPerCustomer(this.Cdata).subscribe( //pass in this.Customer_Id
       (data) => this.datagot(data),
@@ -60,16 +60,16 @@ export class AllpaymentsComponent implements OnInit {
     );
   }
 
-  private datagot(f: any[]) {
+  datagot(f: any[]) {
     this.data = f;
     this.changesum();
   }
 
-  private hideloader() {
+  hideloader() {
     document.getElementById("loading").style.display = "none";
   }
 
-  private popToast(t: string, b: string) {
+  popToast(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,
@@ -79,7 +79,7 @@ export class AllpaymentsComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
-  private exporttoexcel() {
+  exporttoexcel() {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
   }
 }

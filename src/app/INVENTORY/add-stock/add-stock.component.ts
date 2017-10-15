@@ -11,11 +11,11 @@ import { GeneralFilterPipe } from '../../general-filter.pipe';
   styleUrls: ['./add-stock.component.css']
 })
 export class AddStockComponent implements OnInit {
-  private Stock: string = "";
-  private itemName: string = "";
-  private units: string = "";
+   Stock: string = "";
+   itemName: string = "";
+   units: string = "";
 
-  private newitem: any[] = [];
+   newitem: any[] = [];
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) { }
 
@@ -23,7 +23,7 @@ export class AddStockComponent implements OnInit {
 
   }
 
-  private submitData() {
+   submitData() {
     if (this.Stock != "" && this.Stock != null && this.itemName != "" && this.itemName != null) {
       this.newitem.push({ Stock: this.Stock, units: this.units, itemName: this.itemName, loogeduser: UserServiceService.email });
       this._SunamiService.postRecordItem(this.newitem).subscribe(
@@ -35,7 +35,7 @@ export class AddStockComponent implements OnInit {
     }
   }
 
-  private popToast(t: string, b: string) {
+   popToast(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,
@@ -45,7 +45,7 @@ export class AddStockComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
-  private CANCEL() {
+   CANCEL() {
 
   }
 }

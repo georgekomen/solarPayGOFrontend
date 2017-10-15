@@ -12,16 +12,18 @@ import { UserServiceService } from '../../user-service.service';
 })
 export class StockDetailsComponent implements OnInit {
   @Input() Cdata: any = "";
-  private enter: boolean;
-  private cd: any = "";
-  private data: any[] = [];
-  private filterQuery = "";
-  private rowsOnPage = 100;
-  private method: string = "";
-  private number1: number = 0;
-  private comment1: string = "";
-  private update: any[] = [];
-  private item: string = "";
+   enter: boolean;
+  sortBy;
+  sortOrder;
+   cd: any = "";
+   data: any[] = [];
+   filterQuery = "";
+   rowsOnPage = 100;
+   method: string = "";
+   number1: number = 0;
+   comment1: string = "";
+   update: any[] = [];
+   item: string = "";
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService) { }
 
@@ -38,17 +40,17 @@ export class StockDetailsComponent implements OnInit {
     this.cd = this.Cdata;
   }
 
-  private addstock() {
+   addstock() {
     this.enter = !this.enter;
     this.method = "add";
   }
 
-  private dispstock() {
+   dispstock() {
     this.enter = !this.enter;
     this.method = "dispense";
   }
 
-  private updatestock() {
+   updatestock() {
     if (this.number1 > 0) {
       this.item = this.Cdata;
       this.update.push({ item: this.item, comment: this.comment1, number: this.number1, method: this.method, loogeduser: UserServiceService.email });
@@ -71,7 +73,7 @@ export class StockDetailsComponent implements OnInit {
 
   }
 
-  private requestdata(Cdataa: any) {
+   requestdata(Cdataa: any) {
     this.data = [];
     this._SunamiService.getStockDetails(Cdataa).subscribe(
       data => this.data = data, //Bind to view
@@ -80,7 +82,7 @@ export class StockDetailsComponent implements OnInit {
       });
   }
 
-  private popToast(t: string, b: string) {
+   popToast(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,

@@ -10,14 +10,14 @@ import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from
 export class ListOfPurchaseOrderComponent implements OnInit {
 
   sortBy = '';
-  private rowsOnPage = 100;
-  private sortOrder = "asc";
+   rowsOnPage = 100;
+   sortOrder = "asc";
 
 
   listOfPurchaseForm: FormGroup;
   _item_class: item_class = new item_class();
   items: FirebaseListObservable<any>;
-  private url = '/'
+   url = '/'
   constructor(private db: AngularFire) {
 
   }

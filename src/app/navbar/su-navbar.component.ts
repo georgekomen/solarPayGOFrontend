@@ -10,11 +10,12 @@ import { Router } from '@angular/router';
 })
 export class SuNavbarComponent implements OnInit {
   email: string = "email";
+  name: any;
   ngOnInit()
   {
 
   }
-    name: any;
+
     constructor(public af: AngularFire,private router: Router)
     {
     this.af.auth.subscribe(auth =>

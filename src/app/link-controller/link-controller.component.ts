@@ -16,20 +16,20 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
 })
 export class LinkControllerComponent implements OnInit {
 
-  private dataService: CompleterData;
-  private searchData: any[];
-  private customers: any[];
-  private imei: string = "";
-  private customer_id: string = "";
-  private controller: any[];
-  private data: any[];
-  private dataSwitch: any;
-  private filterQuery = "";
-  private rowsOnPage = 100;
-  private sortOrder = "asc";
-  private showlinkbutton = true;
+  dataService: CompleterData;
+  searchData: any[];
+  customers: any[];
+  imei: string = "";
+  customer_id: string = "";
+  controller: any[];
+  data: any[];
+  dataSwitch: any;
+  filterQuery = "";
+  rowsOnPage = 100;
+  sortOrder = "asc";
+  showlinkbutton = true;
   imeitoUnlink;
-  private showOptionsDiv: boolean = false;
+  showOptionsDiv: boolean = false;
 
   constructor(private completerService: CompleterService, private _SunamiService: SunamiserviceService, private toasterService: ToasterService,private userservice: UserServiceService) {
 
@@ -61,7 +61,7 @@ export class LinkControllerComponent implements OnInit {
       });
   }
 
-  private getSytems() {
+  getSytems() {
     this.data = null;
     this._SunamiService.getSystemDetails().subscribe(
       (data) => this.data = data, //Bind to view
@@ -73,7 +73,7 @@ export class LinkControllerComponent implements OnInit {
 
 
 
-  private createObj1(data1: any[]) {
+  createObj1(data1: any[]) {
     //this.searchData = data1;
     this.searchData = [];
     for (let key in data1) {
@@ -81,7 +81,7 @@ export class LinkControllerComponent implements OnInit {
     }
   }
 
-  private createObj2(data2: any[]) {
+  createObj2(data2: any[]) {
     //this.customers = data2;
     this.customers = [];
     for (let key in data2) {
@@ -89,7 +89,7 @@ export class LinkControllerComponent implements OnInit {
     }
   }
 
-  private submit() {
+  submit() {
     this.controller = [];
     if (this.imei.length > 10 && this.customer_id != "") {
       this.controller.push({ imei: this.imei, customer_id: this.customer_id, loogeduser: UserServiceService.email });
@@ -106,17 +106,17 @@ export class LinkControllerComponent implements OnInit {
     this.showlinkbutton = true;
   }
 
-  private Fshowlinkbutton() {
+  Fshowlinkbutton() {
     this.showlinkbutton = false;
   }
 
-  private CANCEL(){
+  CANCEL(){
     //clear all fields
     this.showlinkbutton = true;
   }
 
 
-  private popToastpost(t: string, d: any[]) {
+  popToastpost(t: string, d: any[]) {
     var toast: Toast = {
       type: 'error',
       title: t,
@@ -128,7 +128,7 @@ export class LinkControllerComponent implements OnInit {
   }
 
 
-  private popToast(t: string, b: string, d: any[]) {
+  popToast(t: string, b: string, d: any[]) {
     this.data = d;
     var toast: Toast = {
       type: 'error',
@@ -138,7 +138,7 @@ export class LinkControllerComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
-  private popToast1(t: string, b: string) {
+  popToast1(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,
@@ -147,16 +147,16 @@ export class LinkControllerComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
-  private hideloader() {
+  hideloader() {
     document.getElementById("loading").style.display = "none";
   }
 
-  private exporttoexcel() {
-        this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
-    }
+  exporttoexcel() {
+    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+  }
 
-    private unlink(){
-      if(confirm(`are you sure you want to unlink this controller imei: ${this.imeitoUnlink}? this action is unreversable`)){
+  unlink(){
+    if(confirm(`are you sure you want to unlink this controller imei: ${this.imeitoUnlink}? this action is unreversable`)){
       this._SunamiService.unlinkController(this.imeitoUnlink).subscribe(res=>{
         this.showOptionsDiv = false;
         this.popToast1('Result', res);
@@ -164,12 +164,12 @@ export class LinkControllerComponent implements OnInit {
     } else {
       this.showOptionsDiv = false;
 
-      }
     }
+  }
 
-    private setUnlink(value) {
-      this.showOptionsDiv = true;
-      this.imeitoUnlink = value;
-    }
+  setUnlink(value) {
+    this.showOptionsDiv = true;
+    this.imeitoUnlink = value;
+  }
 
 }

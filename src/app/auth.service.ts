@@ -11,11 +11,11 @@ import { UserServiceService } from './user-service.service';
 @Injectable()
 
 export class AuthGuard implements CanActivate {
-  private user: UserServiceService;
-  private toasterService: ToasterService;
-  private email: string = "email";
-  private name: any;
-  private activeUrl1: string;
+   user: UserServiceService;
+   toasterService: ToasterService;
+   email: string = "email";
+   name: any;
+   activeUrl1: string;
 
   constructor(private auth: AngularFireAuth, private router: Router, toasterService: ToasterService, private user1: UserServiceService) {
     this.user = user1;
@@ -35,13 +35,13 @@ export class AuthGuard implements CanActivate {
       .map(state => !!state)
       .do(authenticated => {
         this.activeUrl1 = route.url.toString();
-        
+
         if (!authenticated) {
           this.popToast('You need to be logged in to access this page', 'Access restricted');
           this.router.navigate(['/login']);
         }
         if (UserServiceService.allowed == true) {
-          
+
           //filter users according to level --user access to routes filtering
            //board - 10, admin - 9, manager - 8, accountant - 7, operations - 6, sales - 5, technician - 4
           if (this.activeUrl1 == "income") {
@@ -116,7 +116,7 @@ export class AuthGuard implements CanActivate {
               this.router.navigate([this.router.url]);
             }
           }
-         
+
         }
         else if (UserServiceService.allowed == false) {
           this.popToast("You don't have clearance to access this page", "Access restricted");
@@ -125,7 +125,7 @@ export class AuthGuard implements CanActivate {
       })
   }
 
-  private popToast(msg: any, title: any) {
+   popToast(msg: any, title: any) {
     var toast: Toast = {
       type: 'info',
       title: title,

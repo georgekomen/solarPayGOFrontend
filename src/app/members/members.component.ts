@@ -12,10 +12,10 @@ import { UserServiceService } from '../user-service.service';
   host: { '[@moveIn]': '' }
 })
 export class MembersComponent implements OnInit {
-  private email: string = "email";
-  private name: any;
-  private user: UserServiceService;
-  private state ="";
+   email: string = "email";
+   name: any;
+   user: UserServiceService;
+   state ="";
 
   ngOnInit() {
 
@@ -31,7 +31,7 @@ export class MembersComponent implements OnInit {
     });
   }
 
-  private logout() {
+   logout() {
     UserServiceService.allowed = false;
     this.af.auth.logout();
     console.log('logged out');

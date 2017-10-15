@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'generalFilter'
 })
 export class GeneralFilterPipe implements PipeTransform {
-    private val: string = "";
+     val: string = "";
     public static filteredArray: any[];
 
     transform(array: any[], query: any): any {

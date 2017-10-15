@@ -9,11 +9,13 @@ import { UserServiceService } from '../../user-service.service';
   styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
-  private filterQuery = "";
-  private rowsOnPage = 100;
-  private date1: string = "2017-06-01";
-  private data: any[] = [];
-  private itemselected: any = "";
+   filterQuery = "";
+   rowsOnPage = 100;
+   date1: string = "2017-06-01";
+   data: any[] = [];
+   itemselected: any = "";
+  sortBy;
+  sortOrder;
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private _user: UserServiceService) { }
 
@@ -26,11 +28,11 @@ export class StocksComponent implements OnInit {
       });
   }
 
-  private updateitemselected(item: string) {
+   updateitemselected(item: string) {
     this.itemselected = item;
   }
 
-  private requestdata() {
+   requestdata() {
     this.data = [];
     this._SunamiService.getInventory(this.date1).subscribe(
       data => this.data = data, //Bind to view
@@ -39,7 +41,7 @@ export class StocksComponent implements OnInit {
       });
   }
 
-  private popToast(t: string, b: string) {
+   popToast(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,

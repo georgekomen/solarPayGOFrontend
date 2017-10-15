@@ -4,9 +4,9 @@ import {Pipe, PipeTransform} from "@angular/core";
 @Pipe({
     name: "mpesaFilter"
 })
-export class MpesaFilterPipe implements PipeTransform 
+export class MpesaFilterPipe implements PipeTransform
 {
-    private len:number;
+     len:number;
     transform(array: any[], query: any): any {
 
     if(query==""){
@@ -21,7 +21,7 @@ export class MpesaFilterPipe implements PipeTransform
         }
         return array;
     }
-    
+
     if(query.startsWith("Number")){
         this.len=query.length;
         query = query.slice(6,this.len);

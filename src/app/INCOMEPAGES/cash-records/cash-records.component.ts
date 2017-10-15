@@ -11,24 +11,24 @@ import { UserServiceService } from '../../user-service.service';
   styleUrls: ['./cash-records.component.css']
 })
 export class CashRecordsComponent implements OnInit {
-  private data: any[];
-  private filterQuery = "";
-  private rowsOnPage = 100;
-  private sum1: number = 0;
-  public showlinkbutton = true;
+   data: any[];
+   filterQuery = "";
+   rowsOnPage = 100;
+   sum1: number = 0;
+   showlinkbutton = true;
 
-  private payment: any[];
-  private customer_ids: any[];
-  private customer_id: string = "";
-  private Code1: string = "";
-  private amount = "";
-  private date1 = "";
+   payment: any[];
+   customer_ids: any[];
+   customer_id: string = "";
+   Code1: string = "";
+   amount = "";
+   date1 = "";
 
-  private Fshowlinkbutton() {
+   Fshowlinkbutton() {
     this.showlinkbutton = false;
   }
 
-  private CANCEL() {
+   CANCEL() {
     //clear all fields
     this.showlinkbutton = true;
   }
@@ -43,7 +43,7 @@ export class CashRecordsComponent implements OnInit {
       });
   }
 
-  private createObj2(data2: any[]) {
+   createObj2(data2: any[]) {
     //this.customers = data2;
     this.customer_ids = [];
     for (let key in data2) {
@@ -51,7 +51,7 @@ export class CashRecordsComponent implements OnInit {
     }
   }
 
-  private linkpayment() {
+   linkpayment() {
     this.payment = [];
     if (this.customer_id != null || this.customer_id != "") {
       this.payment.push({
@@ -72,7 +72,7 @@ export class CashRecordsComponent implements OnInit {
     this.showlinkbutton = true;
   }
 
-  private popToast(t: string, b: string) {
+   popToast(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,
@@ -90,7 +90,7 @@ export class CashRecordsComponent implements OnInit {
 
   }
 
-  private allMpesaPayments(data1: any[]) {
+   allMpesaPayments(data1: any[]) {
     this.data = data1;
     this.calcSum();
 
@@ -98,14 +98,14 @@ export class CashRecordsComponent implements OnInit {
 
 
 
-  private calcSum() {
+   calcSum() {
     this.sum1 = 0;
     for (let key in this.data) {
       this.sum1 += parseInt(this.data[key].Amount);
     }
   }
 
-  private changesum() {
+   changesum() {
     setTimeout(() => {
       this.sum1 = 0;
       for (let key in GeneralFilterPipe.filteredArray) {
@@ -115,7 +115,7 @@ export class CashRecordsComponent implements OnInit {
 
   }
 
-  private hideloader() {
+   hideloader() {
     document.getElementById("loading").style.display = "none";
   }
 
@@ -123,10 +123,10 @@ export class CashRecordsComponent implements OnInit {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
   }
 
-  private idToDelete;
-  private showOptionsDiv: boolean = false;
-  private paymentName;
-  private deleteRecord() {
+   idToDelete;
+   showOptionsDiv: boolean = false;
+   paymentName;
+   deleteRecord() {
     if (confirm(`are you sure you want to delete this payment linked to: ${this.paymentName}? this action is unreversable`)) {
       this._SunamiService.deletePayment(this.idToDelete).subscribe(res => {
         this.showOptionsDiv = false;
@@ -138,7 +138,7 @@ export class CashRecordsComponent implements OnInit {
     }
   }
 
-  private setIdToDelete(value,name) {
+   setIdToDelete(value,name) {
     this.showOptionsDiv = true;
     this.idToDelete = value;
     this.paymentName = name;

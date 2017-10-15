@@ -9,7 +9,7 @@ import { ToasterService, Toast } from 'angular2-toaster';
 })
 export class ImageModalComponent implements OnInit {
   @Input() Cdata: any;
-  private data1: string;
+   data1: string;
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService) {
 
@@ -32,7 +32,7 @@ export class ImageModalComponent implements OnInit {
 
   }
 
-  private popToast(t: string, b: string, d: any) {
+   popToast(t: string, b: string, d: any) {
     this.data1 = d;
     var toast: Toast = {
       type: 'error',

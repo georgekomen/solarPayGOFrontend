@@ -9,8 +9,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class SunamiserviceService {
   //mark:any[];
-  private headers: Headers = new Headers();
-  private options;
+   headers: Headers = new Headers();
+   options;
   constructor(private _http: Http) {
     this.headers.append('Accept', 'application/json');
     this.headers.append('Content-Type', 'application/json');
@@ -27,16 +27,17 @@ export class SunamiserviceService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  GetPaymentActiveRates(): Observable<any[]> {
-
-    return this._http.get('//api.sunamiapp.net/api/customers/GetPaymentActiveRates/', this.options)
+  GetPaymentActiveRates(dateInterVal:any[]): Observable<any[]> {
+    let bodyString = JSON.stringify(dateInterVal); // Stringify payload
+    return this._http.post('//api.sunamiapp.net/api/customers/GetPaymentActiveRates/',bodyString, this.options)
       .map((res: Response) => res.json())
       //...errors if any
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  GetPaymentInactiveRates(): Observable<any[]> {
-    return this._http.get('//api.sunamiapp.net/api/customers/GetPaymentInactiveRates/', this.options)
+  GetPaymentInactiveRates(dateInterVal:any[]): Observable<any[]> {
+    let bodyString = JSON.stringify(dateInterVal); // Stringify payload
+    return this._http.post('//api.sunamiapp.net/api/customers/GetPaymentInactiveRates/',bodyString, this.options)
       .map((res: Response) => res.json())
       //...errors if any
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

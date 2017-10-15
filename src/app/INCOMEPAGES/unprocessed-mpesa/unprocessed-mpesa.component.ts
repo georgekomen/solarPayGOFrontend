@@ -11,24 +11,24 @@ import { UserServiceService } from '../../user-service.service';
     styleUrls: ['./unprocessed-mpesa.component.css']
 })
 export class UnprocessedMpesaComponent implements OnInit {
-    private data: any[];
-    private filterQuery = "";
-    private rowsOnPage = 100;
-    private sum1: number = 0;
-    private payment: any[];
-    private res = "";
-    private customer_ids: any[];
-    private customer_id: string = "";
-    private Code1: string = "";
-    private paydiv = false;
+     data: any[];
+     filterQuery = "";
+     rowsOnPage = 100;
+     sum1: number = 0;
+     payment: any[];
+     res = "";
+     customer_ids: any[];
+     customer_id: string = "";
+     Code1: string = "";
+     paydiv = false;
     selectedPayment: any;
 
-    private showpaydiv(value) {
+     showpaydiv(value) {
         this.Code1 = value.Reference;
         this.selectedPayment = value;
         this.paydiv = true;
     }
-    private hidepaydiv() {
+     hidepaydiv() {
         this.paydiv = false;
     }
 
@@ -43,7 +43,7 @@ export class UnprocessedMpesaComponent implements OnInit {
 
 
 
-    private createObj2(data2: any[]) {
+     createObj2(data2: any[]) {
         //this.customers = data2;
         this.customer_ids = [];
         for (let key in data2) {
@@ -51,7 +51,7 @@ export class UnprocessedMpesaComponent implements OnInit {
         }
     }
 
-    private popToast(t: string, b: string) {
+     popToast(t: string, b: string) {
         var toast: Toast = {
             type: 'error',
             title: t,
@@ -61,7 +61,7 @@ export class UnprocessedMpesaComponent implements OnInit {
         this.toasterService.pop(toast);
     }
 
-    private popToast2(b: string) {
+     popToast2(b: string) {
         var toast: Toast = {
             type: 'error',
             title: "Result",
@@ -71,7 +71,7 @@ export class UnprocessedMpesaComponent implements OnInit {
         this.toasterService.pop(toast);
     }
 
-    private linkpayment() {
+     linkpayment() {
         this.hidepaydiv();
         if (confirm('are you sure you want to credit ' + this.selectedPayment.Amount + ' to customer id number ' + this.customer_id)) {
           this.payment = [];
@@ -101,7 +101,7 @@ export class UnprocessedMpesaComponent implements OnInit {
 
 
 
-    private getUnprocessedMpesa() {
+     getUnprocessedMpesa() {
         this._SunamiService.getUnprocessedMpesaPayments().subscribe(
             (data) => this.UnprocessedMpesaPayments(data), //Bind to view
             err => {
@@ -110,20 +110,20 @@ export class UnprocessedMpesaComponent implements OnInit {
             });
     }
 
-    private UnprocessedMpesaPayments(data1: any[]) {
+     UnprocessedMpesaPayments(data1: any[]) {
         this.data = [];
         this.data = data1;
         this.calcSum();
     }
 
-    private calcSum() {
+     calcSum() {
         this.sum1 = 0;
         for (let key in this.data) {
             this.sum1 += parseInt(this.data[key].Amount);
         }
     }
 
-    private changesum() {
+     changesum() {
         setTimeout(() => {
             this.sum1 = 0;
             for (let key in GeneralFilterPipe.filteredArray) {
@@ -133,11 +133,11 @@ export class UnprocessedMpesaComponent implements OnInit {
 
     }
 
-    private hideloader() {
+     hideloader() {
         document.getElementById("loading").style.display = "none";
     }
 
-    private exporttoexcel(){
+     exporttoexcel(){
         this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray,"test1");
     }
 }
