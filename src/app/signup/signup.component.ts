@@ -11,14 +11,13 @@ import { moveIn, fallIn } from '../router.animations';
   host: {'[@moveIn]': ''}
 })
 export class SignupComponent implements OnInit {
-  ngOnInit() {
-  }
-
   state: string = '';
   error: any;
 
-  constructor(public af: AngularFire,private router: Router) {
+  constructor(public af: AngularFire, private router: Router) {
+  }
 
+  ngOnInit() {
   }
 
   onSubmit(formData) {
@@ -30,12 +29,12 @@ export class SignupComponent implements OnInit {
       }).then(
         (success) => {
         console.log(success);
-        this.router.navigate(['/login'])
+        this.router.navigate(['/login-email']);
       }).catch(
         (err) => {
         console.log(err);
         this.error = err;
-      })
+      });
     }
   }
 
