@@ -302,6 +302,13 @@ export class SunamiserviceService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  eventlogs(): Observable<any[]> {
+    return this._http.get('//api.sunamiapp.net/api/customers/eventlogs', this.options)
+      .map((res: Response) => res.json())
+      //...errors if any
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
   unlinkController(id1: any): Observable<any> {
     let payload1 = [];
     payload1.push({id: id1, user: UserServiceService.email});

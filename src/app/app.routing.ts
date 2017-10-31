@@ -33,6 +33,7 @@ import { SalesComponent } from './sales/sales.component';
 import { AssetsComponent } from './assets/assets.component';
 import { StocksComponent } from './INVENTORY/./stocks/stocks.component';
 import { ListOfPurchaseOrderComponent } from './INVENTORY/list-of-purchase-order/list-of-purchase-order.component';
+import {EventlogsComponent} from './eventlogs/eventlogs.component';
 
 const APP_ROUTES: Routes = [
   { path: 'paymentchart', component: PaymentChartComponent, canActivate: [AuthGuard] },
@@ -61,6 +62,7 @@ const APP_ROUTES: Routes = [
   { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },
   { path: 'assets', component: AssetsComponent, canActivate: [AuthGuard] },
   { path: 'stocks', component: StocksComponent, canActivate: [AuthGuard] },
+  { path: 'eventlogs', component: EventlogsComponent, canActivate: [AuthGuard] },
   { path: 'lpo', component: ListOfPurchaseOrderComponent },
   { path: '**', redirectTo: '' }
 ];
