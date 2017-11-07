@@ -17,11 +17,13 @@ export class MembersComponent implements OnInit {
    user: UserServiceService;
    state ="";
 
-  ngOnInit() {
+
+  constructor(public af: AngularFire, private router: Router, private user1: UserServiceService) {
 
   }
-  constructor(public af: AngularFire, private router: Router, private user1: UserServiceService) {
-    this.user = user1;
+
+  ngOnInit() {
+    this.user = this.user1;
     this.af.auth.subscribe(auth => {
       if (auth) {
         this.name = auth;

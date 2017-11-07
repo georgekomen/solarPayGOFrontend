@@ -11,12 +11,13 @@ import { moveIn } from '../router.animations';
   host: { '[@moveIn]': '' }
 })
 export class LoginComponent implements OnInit {
+  error: any;
 
-  ngOnInit() {
+  constructor(public af: AngularFire, private router: Router) {
 
   }
-  error: any;
-  constructor(public af: AngularFire, private router: Router) {
+
+  ngOnInit() {
     this.af.auth.subscribe(auth => {
       if (auth) {
         this.router.navigateByUrl('/members');
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
       }).catch(
       (err) => {
         this.error = err;
-      })
+      });
   }
 
    loginGoogle() {
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
       }).catch(
       (err) => {
         this.error = err;
-      })
+      });
   }
 
 }
