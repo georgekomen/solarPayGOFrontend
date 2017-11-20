@@ -17,7 +17,6 @@ export class PaymentsComponent implements OnInit {
   data: customerPayDetails[];
   data3: customerPayDetails[];
   filterQuery = "";
-  querydate1: Date;
   rowsOnPage = 100;
   sortBy = "";
   sortOrder = "asc";
@@ -30,8 +29,6 @@ export class PaymentsComponent implements OnInit {
   debtAmount: number = 0;
   focusOnDebt: boolean = false;
   debtOrPaid: string = " paid";
-  excludeactive: boolean = true;
-  excludeinactive: boolean = true;
   invoiceItems: any[] = [];
   showOptionsDiv = false;
   currentlySelectedCustomer = '';
@@ -40,6 +37,8 @@ export class PaymentsComponent implements OnInit {
   selectedInvoiceItem: any;
   invoiceDate;
   dateInterVals: any[] = [];
+  group;
+  installstatus;
 
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService, private _datefilter: DateFilterPipe) {
@@ -132,7 +131,8 @@ export class PaymentsComponent implements OnInit {
         Village: data1[key].Village,
         Phone: data1[key].Phone,
         Status: data1[key].Status,
-        Active_status: type
+        Active_status: type,
+        Description: parseInt(data1[key].Description)
       });
     }
     this.data.sort(function (a, b) { return (a.Percent1 > b.Percent1) ? 1 : ((b.Percent1 > a.Percent1) ? -1 : 0); });
@@ -140,32 +140,31 @@ export class PaymentsComponent implements OnInit {
 
   }
 
-  excludeInactive() {
-    this.isOnload = true;
-    this.excludeinactive = !this.excludeinactive;
-    this.exxc();
-  }
-
-  excludeActive() {
-    this.isOnload = true;
-    this.excludeactive = !this.excludeactive;
-    this.exxc();
-  }
-
   exxc() {
-    if (this.excludeinactive == true && this.excludeactive == false) {
+    this.isOnload = true;
+    if (this.installstatus == 'active') {
       this.data3 = this.data.filter(f => f.Active_status == "active");
     }
-    else if (this.excludeactive == true && this.excludeinactive == false) {
+    else if (this.installstatus == 'inactive') {
       this.data3 = this.data.filter(f => f.Active_status == "inactive");
     }
-    else if (this.excludeinactive == true && this.excludeactive == true) {
+    else if (this.installstatus == 'all') {
       this.data3 = this.data;
     }
-    else {
-      this.data3 = [];
-    }
+    //redo calculations
+    this.fc1();
+  }
 
+  groupfilter(){
+    if(this.group == 'below50'){
+      this.data3 = this.data.filter(f => f.Description < 50 && f.Active_status == 'active');
+    }
+    else if(this.group == 'above50'){
+      this.data3 = this.data.filter(f => f.Description >= 50 && f.Active_status == 'active');
+    }
+    else if(this.group == 'all'){
+      this.data3 = this.data.filter(f => (f.Description >0 || f.Description < 0)  && f.Active_status == 'active');
+    }
     //redo calculations
     this.fc1();
   }
@@ -177,12 +176,10 @@ export class PaymentsComponent implements OnInit {
 
   fc1() {
     if (this.focusOnDebt == true) {
-
       this.debtOrPaid = " debt";
       this.sortArrayDebt(this.data3);
     }
     else {
-
       this.debtOrPaid = " paid";
       this.sortArrayPaid(this.data3);
     }
@@ -271,11 +268,6 @@ export class PaymentsComponent implements OnInit {
   }
 
 
-  filterbydate() {
-    this.data3 = this.data.filter(f => f.From >= this.querydate1);
-    //this.data = this._datefilter.transform(this.data, this.dates1);
-  }
-
   switch1(d: any) {
     this.popToast("Results", d);
   }
@@ -332,5 +324,6 @@ interface customerPayDetails {
   Village: string,
   Phone: string,
   Status: string,
-  Active_status: string
+  Active_status: string,
+  Description: number
 }

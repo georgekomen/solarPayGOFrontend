@@ -96,7 +96,7 @@
           <input type="checkbox" [(ngModel)]="focusOnDebt" (click)="focusChange()" />Focus on Debt?
         </div>
         <div class="col-md-2">
-          <input type="checkbox" [(ngModel)]="excludeinactive" (click)="excludeInactive()" />show active customers?
+
         </div>
         <div class="col-md-2">
           <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
@@ -113,16 +113,23 @@
       </div>
       <div class="row">
         <div class="col-md-2">
-          Filter:
           <input class="form-control" [(ngModel)]="filterQuery" placeholder="search" (keyup)="changesumgen()" />
         </div>
         <div class="col-md-2">
-          <!--another filter here-->
-          Filter from date:
-          <input type="date" class="form-control" [(ngModel)]="querydate1" />
+          Group:
+          <select class="form-control input-sm" [(ngModel)]="group" (change)="groupfilter()">
+            <option value="below50">below 50%</option>
+            <option value="above50">above 50%</option>
+            <option value="all">all</option>
+          </select>
         </div>
         <div class="col-md-2">
-          <input type="checkbox" [(ngModel)]="excludeactive" (click)="excludeActive()" />show inactive customers?
+          Installation Status:
+          <select class="form-control input-sm" [(ngModel)]="installstatus" (change)="exxc()">
+            <option value="active">active</option>
+            <option value="inactive">unistalled</option>
+            <option value="all">all</option>
+          </select>
         </div>
         <div class="col-md-2">
 
