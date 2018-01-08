@@ -19,7 +19,7 @@ export class CustomerDetailsComponent implements OnInit {
      sortOrder = "asc";
      showlinkbutton = true;
 
-
+     invoiceItems: any[] = [];
      id = "";
      name = "";
      number1 = "";
@@ -75,7 +75,14 @@ export class CustomerDetailsComponent implements OnInit {
         this.date1 = this.userservice.getdate();
     }
 
+  getInvoiceItems() {
+    this._SunamiService.getInvoiceItems().subscribe(res => {
+      this.invoiceItems = res;
+    });
+  }
+
     ngOnInit(): void {
+      this.getInvoiceItems();
         /*with delay
          this._SunamiService.getPaymentRates().subscribe((data:paymentRatesClass[])=> {
                  setTimeout(()=> {
