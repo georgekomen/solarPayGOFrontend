@@ -102,7 +102,7 @@
           <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
         </div>
         <div class="col-md-2">
-          <app-texting-modal [Cdata]="data | dataFilter : filterQuery"></app-texting-modal>
+          <app-texting-modal [Cdata]="data3 | generalFilter : filterQuery"></app-texting-modal>
         </div>
 
         <div class="col-md-1">

@@ -14,8 +14,8 @@ import { GeneralFilterPipe } from "app/general-filter.pipe";
 })
 export class PaymentsComponent implements OnInit {
   //public data: paymentRatesClass[];
-  data: customerPayDetails[];
-  data3: customerPayDetails[];
+  data: CustomerPayDetails[];
+  data3: CustomerPayDetails[];
   filterQuery = "";
   querydate1: Date;
   rowsOnPage = 100;
@@ -211,11 +211,11 @@ export class PaymentsComponent implements OnInit {
     for (let key in data) {
 
       //clear debt for inactive customers
-      if (data[key].Active_status === 'inactive' && this.isOnload) {
-        data[key].Debt = 0;
-        data[key].Percent1 = 100;
-        data[key].Invoice = data[key].Amount;
-      }
+      // if (data[key].Active_status === 'inactive' && this.isOnload) {
+      //   data[key].Debt = data[key].Debt;
+      //   data[key].Percent1 = 100;
+      //   data[key].Invoice = data[key].Amount;
+      // }
 
       this.sumAmountDebt += data[key].Debt;
       this.sumAmountInvoiced += data[key].Invoice;
@@ -319,18 +319,18 @@ export class PaymentsComponent implements OnInit {
   }
 }
 
-interface customerPayDetails {
-  Id: string,
-  Name: string,
-  From: Date,
-  Amount: number,
-  Invoice: number,
-  Debt: number,
-  Percent1: number,
-  To: Date,
-  Comment: string,
-  Village: string,
-  Phone: string,
-  Status: string,
-  Active_status: string
+export class CustomerPayDetails {
+  Id: string;
+  Name: string;
+  From: Date;
+  Amount: number;
+  Invoice: number;
+  Debt: number;
+  Percent1: number;
+  To: Date;
+  Comment: string;
+  Village: string;
+  Phone: string;
+  Status: string;
+  Active_status: string;
 }

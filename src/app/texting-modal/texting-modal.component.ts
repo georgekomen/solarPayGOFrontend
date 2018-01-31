@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { SunamiserviceService } from '../sunamiservice.service';
 import { UserServiceService } from '../user-service.service';
 import { GeneralFilterPipe } from '../general-filter.pipe';
+import { CustomerPayDetails} from "../INCOMEPAGES/payments/payments.component";
 
 
 @Component({
@@ -10,7 +11,7 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
   styleUrls: ['./texting-modal.component.css']
 })
 export class TextingModalComponent {
-  @Input() Cdata: any[];
+  @Input() Cdata: CustomerPayDetails[];
    SMStext = "";
    SMS1: any[];
    SMSn: any[];
@@ -30,9 +31,9 @@ export class TextingModalComponent {
    sendSMS() {
     this.SMSn = [];
     this.SMS1 = [];
-    for (let key in this.Cdata) {
-      this.SMSn.push({ idnumber: this.Cdata[key].Id, Invoice: this.Cdata[key].Invoice, Paid: this.Cdata[key].Amount });
-    }
+    this.Cdata.forEach(res => {
+      this.SMSn.push({ idnumber: res.Id, Invoice: res.Invoice, Paid: res.Amount });
+    });
 
     this.SMS1.push({ recipients: this.SMSn, message: this.SMStext });//nested array
 
