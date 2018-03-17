@@ -18,4 +18,6 @@ export class Customer{
   location;
   country;
   package;
+  status;
+  installdate;
 }

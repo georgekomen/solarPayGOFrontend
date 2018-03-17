@@ -85,9 +85,18 @@
     <label class="col-sm-2 col-form-label">Package</label>
     <div class="col-sm-10">
       <select class="form-control input-sm" [(ngModel)]="customer1.package">
-                    <option ngValue="single(100)">single(100)</option>
-                    <option ngValue="double(200)">double(200)</option>
-                </select>
+           <option *ngFor="let item of invoiceItems" [value]="item">{{item}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Country</label>
+    <div class="col-sm-10">
+      <select class="form-control input-sm" [(ngModel)]="customer1.country">
+        <option ngValue="Kenya">Kenya</option>
+        <option ngValue="Uganda">Uganda</option>
+        <option ngValue="Malawi">Malawi</option>
+      </select>
     </div>
   </div>
   <div class="form-group row">
@@ -118,7 +127,7 @@
 
 
 
-<div *ngIf="data">
+<div *ngIf="data.length>0">
   {{hideloader()}}
   <div class="panel panel-primary">
     <div class="panel-body">
@@ -180,17 +189,17 @@
         <ng-container *ngFor="let item of mf.data; let i = index">
           <tr>
             <td>{{i+1}}</td>
-            <td *ngIf="item.status==0"><span class="label label-warning">{{item.Name}}</span></td>
-            <td *ngIf="item.status==1"><span class="label label-info">{{item.Name}}</span></td>
-            <td>{{item.ID}}</td>
-            <td>{{item.Occupation}}</td>
-            <td>{{item.Mobile}}</td>
+            <td *ngIf="item.status==0"><span class="label label-warning">{{item.name}}</span></td>
+            <td *ngIf="item.status==1"><span class="label label-info">{{item.name}}</span></td>
+            <td>{{item.id}}</td>
+            <td>{{item.occupation}}</td>
+            <td>{{item.number1}}</td>
             <td>{{item.village}}</td>
             <td>{{item.location}}</td>
             <td>{{item.city}}</td>
             <td>{{item.installdate}}</td>
-            <td>{{item.Witness}}</td>
-            <td>{{item.Witness_ID}}</td>
+            <td>{{item.witness}}</td>
+            <td>{{item.witnessid}}</td>
 
           </tr>
 

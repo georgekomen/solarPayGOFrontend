@@ -68,7 +68,7 @@ export class IssuesComponent implements OnInit {
     //this.searchData = data1;
     this.customer_ids = [];
     for (let key in data1) {
-      this.customer_ids.push(data1[key].Customer_id);
+      this.customer_ids.push(data1[key].id);
     }
   }
 

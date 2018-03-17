@@ -4,6 +4,7 @@ import { ToasterService, Toast } from 'angular2-toaster';
 import { UserServiceService } from '../user-service.service';
 import { GeneralFilterPipe } from "app/general-filter.pipe";
 import {Customer} from "./shared/customer";
+import {InvoiceItem} from "./shared/invoiceItem";
 
 @Component({
   selector: 'app-customer-details',
@@ -11,13 +12,13 @@ import {Customer} from "./shared/customer";
   styleUrls: ['./customer-details.component.css'],
 })
 export class CustomerDetailsComponent implements OnInit {
-  data: any[];
+  data: Customer[] = [];
   filterQuery = "";
   rowsOnPage = 100;
   sortOrder = "asc";
   showlinkbutton = true;
   customer1: Customer = new Customer();
-
+  invoiceItems: InvoiceItem[]=[];
   Fshowlinkbutton() {
     this.showlinkbutton = false;
   }
@@ -49,10 +50,17 @@ export class CustomerDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this._SunamiService.getCustomerDetails().subscribe(
-      (data) => this.data = data, //Bind to view
+      (data) => this.data = data,
       err => {
         this.popToast("no internet", err);
       });
+    this.getInvoiceItems();
+  }
+
+  getInvoiceItems() {
+    this._SunamiService.getInvoiceItems().subscribe(res => {
+      this.invoiceItems = res;
+    });
   }
 
   fetchDetailsIfExisting(id) {
@@ -60,8 +68,7 @@ export class CustomerDetailsComponent implements OnInit {
     this._SunamiService.getSingleCustomerDetails(id.value).subscribe(res => {
       // Todo - fill all fields next time
       this.hideloader();
-      this.customer1.date1 = res['installdate'].substring(0, res['installdate'].indexOf('T'));
-      this.customer1.package = res['Package'];
+      this.customer1.date1 = res;
     }, error2 => {
       this.hideloader();
     });

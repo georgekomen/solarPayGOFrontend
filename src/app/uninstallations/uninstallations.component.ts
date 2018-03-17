@@ -69,7 +69,7 @@ export class UninstallationsComponent implements OnInit {
     //this.customers = data2;
     this.customers = [];
     for (let key in data2) {
-      this.customers.push(data2[key].Customer_id);
+      this.customers.push(data2[key].id);
     }
   }
 
