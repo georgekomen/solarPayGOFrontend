@@ -85,7 +85,7 @@
     <label class="col-sm-2 col-form-label">Package</label>
     <div class="col-sm-10">
       <select class="form-control input-sm" [(ngModel)]="customer1.package">
-           <option *ngFor="let item of invoiceItems" [value]="item">{{item}}</option>
+           <option *ngFor="let item of invoiceItems" [value]="item.Item">{{item.Item}}</option>
       </select>
     </div>
   </div>
@@ -102,7 +102,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Date</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="customer1.date1" type="date" id="myDate" value="2014-02-09">
+      <input [placeholder]="customer1.installdate" [(ngModel)]="customer1.installdate" type="date" id="myDate" value="2014-02-09">
     </div>
   </div>
   <div class="form-group row">

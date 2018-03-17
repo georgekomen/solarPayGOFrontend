@@ -8,6 +8,7 @@ import { ToasterService, Toast } from 'angular2-toaster';
 import { GeneralFilterPipe } from "app/general-filter.pipe";
 declare let jsPDF;
 import { CsvService } from "angular2-json2csv";
+import {SunamiserviceService} from "./sunamiservice.service";
 
 @Injectable()
 
@@ -18,7 +19,9 @@ export class UserServiceService {
   public static email: string;
   public static name2: string = "";
    _http: Http;
-   toasterService: ToasterService
+   toasterService: ToasterService;
+   private url1:string = "//localhost:57339/api/customers";
+   // private url1:string = "//api.sunamiapp.net/api/customers";
 
   constructor(private ToasterService: ToasterService, _Http: Http, private _csvService: CsvService) {
     this.toasterService = ToasterService;
@@ -85,7 +88,7 @@ export class UserServiceService {
     const options = new RequestOptions({
       headers: headers
     });
-    return this._http.get('//api.sunamiapp.net/api/customers/getUser?id=' + email2, options)
+    return this._http.get(`${this.url1}/getUser?id=${email2}`, options)
       .map((res: Response) => res.json())
       //...errors if any
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

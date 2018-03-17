@@ -31,6 +31,7 @@ export class CustomerDetailsComponent implements OnInit {
     this.customer1.recordedBy = UserServiceService.email;
     this.customer1.latG="";
     this.customer1.lonG="";
+    this.customer1.date1 = this.customer1.installdate;
     if (this.customer1.id != null || this.customer1.id != "") {
       this._SunamiService.postNewCustomer([this.customer1]).subscribe(
         (data) => this.popToast("success", data), //Bind to view
@@ -63,12 +64,17 @@ export class CustomerDetailsComponent implements OnInit {
     });
   }
 
-  fetchDetailsIfExisting(id) {
+  fetchDetailsIfExisting(idd) {
+    this.customer1 = new Customer();
     this.showloader();
-    this._SunamiService.getSingleCustomerDetails(id.value).subscribe(res => {
+    this._SunamiService.getSingleCustomerDetails(idd.value).subscribe(res => {
       // Todo - fill all fields next time
       this.hideloader();
-      this.customer1.date1 = res;
+      if(res != null){
+        this.customer1 = res;
+        this.customer1.installdate = this.customer1.installdate.toString().substring(0,this.customer1.installdate.toString().indexOf('T'));
+      }
+
     }, error2 => {
       this.hideloader();
     });
