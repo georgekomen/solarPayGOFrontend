@@ -38,6 +38,7 @@ export class CustomerDetailsComponent implements OnInit {
         err => {
           this.popToast("no internet", err);
         });
+      this.ngOnInit();
     }
     else {
       this.popToast("error", "enter id number please");
@@ -65,7 +66,6 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   fetchDetailsIfExisting(idd) {
-    this.customer1 = new Customer();
     this.showloader();
     this._SunamiService.getSingleCustomerDetails(idd.value).subscribe(res => {
       // Todo - fill all fields next time
