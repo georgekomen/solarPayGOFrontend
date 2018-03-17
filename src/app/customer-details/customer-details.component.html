@@ -2,108 +2,102 @@
 </app-loading-snipper>
 <div *ngIf="!showlinkbutton" class="col-sm-10">
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Customer Id</label>
+    <label class="col-sm-2 col-form-label">Customer Id</label>
     <div class="col-sm-10">
-      <input (change)="fetchDetailsIfExisting($event.target)" [(ngModel)]="id" type="text" class="form-control" placeholder="customer id">
+      <input (change)="fetchDetailsIfExisting($event.target)" [(ngModel)]="customer1.id" type="text" class="form-control" placeholder="customer id">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">customer name</label>
+    <label class="col-sm-2 col-form-label">customer name</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="name" type="text" class="form-control" placeholder="customer name">
+      <input [(ngModel)]="customer1.name" type="text" class="form-control" placeholder="customer name">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Phone number 1</label>
+    <label class="col-sm-2 col-form-label">Phone number 1</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="number1" type="text" class="form-control" placeholder="phone number 1">
+      <input [(ngModel)]="customer1.number1" type="text" class="form-control" placeholder="phone number 1">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Phone number 2</label>
+    <label class="col-sm-2 col-form-label">Phone number 2</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="number2" type="text" class="form-control" placeholder="phone number 2">
+      <input [(ngModel)]="customer1.number2" type="text" class="form-control" placeholder="phone number 2">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Phone number 3</label>
+    <label class="col-sm-2 col-form-label">Phone number 3</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="number3" type="text" class="form-control" placeholder="phone number 3">
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Box Address</label>
-    <div class="col-sm-10">
-      <input [(ngModel)]="box" type="text" class="form-control" placeholder="Box Address">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Occupation</label>
-    <div class="col-sm-10">
-      <input [(ngModel)]="occupation" type="text" class="form-control" placeholder="occupation">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Witness Name</label>
-    <div class="col-sm-10">
-      <input [(ngModel)]="witness" type="text" class="form-control" placeholder="witness">
+      <input [(ngModel)]="customer1.number3" type="text" class="form-control" placeholder="phone number 3">
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Witness Id</label>
+    <label class="col-sm-2 col-form-label">Box Address</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="witnessid" type="text" class="form-control" placeholder="witness id">
+      <input [(ngModel)]="customer1.box" type="text" class="form-control" placeholder="Box Address">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Witness Name</label>
+    <label class="col-sm-2 col-form-label">Occupation</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="witness" type="text" class="form-control" placeholder="witness">
+      <input [(ngModel)]="customer1.occupation" type="text" class="form-control" placeholder="occupation">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">village</label>
+    <label class="col-sm-2 col-form-label">Witness Name</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="village" type="text" class="form-control" placeholder="village">
+      <input [(ngModel)]="customer1.witness" type="text" class="form-control" placeholder="witness">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Witness Id</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="customer1.witnessid" type="text" class="form-control" placeholder="witness id">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">city</label>
+    <label class="col-sm-2 col-form-label">village</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="city" type="text" class="form-control" placeholder="city">
+      <input [(ngModel)]="customer1.village" type="text" class="form-control" placeholder="village">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
+    <label class="col-sm-2 col-form-label">city</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="description" type="text" class="form-control" placeholder="description">
+      <input [(ngModel)]="customer1.city" type="text" class="form-control" placeholder="city">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Location</label>
+    <label class="col-sm-2 col-form-label">Description</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="location" type="text" class="form-control" placeholder="location">
+      <input [(ngModel)]="customer1.description" type="text" class="form-control" placeholder="description">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Package</label>
+    <label class="col-sm-2 col-form-label">Location</label>
     <div class="col-sm-10">
-      <select class="form-control input-sm" [(ngModel)]="package">
+      <input [(ngModel)]="customer1.location" type="text" class="form-control" placeholder="location">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Package</label>
+    <div class="col-sm-10">
+      <select class="form-control input-sm" [(ngModel)]="customer1.package">
                     <option ngValue="single(100)">single(100)</option>
                     <option ngValue="double(200)">double(200)</option>
                 </select>
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Date</label>
+    <label class="col-sm-2 col-form-label">Date</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="date1" type="date" id="myDate" value="2014-02-09">
+      <input [(ngModel)]="customer1.date1" type="date" id="myDate" value="2014-02-09">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+    <label class="col-sm-3 col-form-label"></label>
     <div class="col-sm-4">
       <button type="submit" class="btn btn-primary" (click)="submit()">SUBMIT</button>
     </div>
@@ -115,7 +109,7 @@
 
 <div *ngIf="showlinkbutton" class="col-sm-10">
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+    <label class="col-sm-3 col-form-label"></label>
     <div class="col-sm-7">
       <button type="submit" class="btn btn-primary" (click)="Fshowlinkbutton()">REGISTER NEW CUSTOMER</button>
     </div>
