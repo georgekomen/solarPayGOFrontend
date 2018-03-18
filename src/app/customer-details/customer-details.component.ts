@@ -46,6 +46,10 @@ export class CustomerDetailsComponent implements OnInit {
     this.router.navigate(['textmodal', this.selectedCustomer.id]);
   }
 
+  reportIssue(){
+    this.router.navigate(['issuerecord', this.selectedCustomer.id]);
+  }
+
   uninstallCustomer(){
     this.router.navigate(['uninstall', this.selectedCustomer.id]);
   }

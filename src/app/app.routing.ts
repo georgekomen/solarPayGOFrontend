@@ -37,7 +37,8 @@ import {EventlogsComponent} from './eventlogs/eventlogs.component';
 import {MakePaymentComponent} from "./make-payment/make-payment.component"
 import {InvoiceItemComponent} from "./invoice-item/invoice-item.component"
 import {TextingModalComponent} from "./texting-modal/texting-modal.component";
-import {UninstallCustomerComponent} from "./uninstall-customer/uninstall-customer.component"
+import {UninstallCustomerComponent} from "./uninstall-customer/uninstall-customer.component";
+import {IssueRecordComponent} from "./issue-record/issue-record.component"
 const APP_ROUTES: Routes = [
   { path: 'paymentchart', component: PaymentChartComponent, canActivate: [AuthGuard] },
   { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuard] },
@@ -71,6 +72,7 @@ const APP_ROUTES: Routes = [
   { path: 'invoiceitem/:customer_id', component: InvoiceItemComponent, canActivate: [AuthGuard]  },
   { path: 'textmodal/:customer_id', component: TextingModalComponent, canActivate: [AuthGuard]  },
   { path: 'uninstall/:customer_id', component: UninstallCustomerComponent, canActivate: [AuthGuard]  },
+  { path: 'issuerecord/:customer_id', component: IssueRecordComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 //export const routing = RouterModule.forRoot(APP_ROUTES);

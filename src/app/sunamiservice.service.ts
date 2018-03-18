@@ -155,7 +155,7 @@ export class SunamiserviceService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  postNewIssues(issue: any[]): Observable<any[]> {
+  postNewIssues(issue: any[]): Observable<any> {
     let bodyString = JSON.stringify(issue); // Stringify payload
     return this._http.post(`${this.url1}/postNewIssues`, bodyString, this.options) // ...using post request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
