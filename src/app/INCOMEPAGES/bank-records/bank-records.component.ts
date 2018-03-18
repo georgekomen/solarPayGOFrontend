@@ -15,65 +15,16 @@ export class BankRecordsComponent implements OnInit {
   filterQuery = "";
   rowsOnPage = 100;
   sum1: number = 0;
-  showlinkbutton = true;
-
   payment: any[];
-  customer_ids: any[];
   customer_id: string = "";
-  Code1: string = "";
   amount = "";
   date1 = "";
-  bankname = "";
-  banknames = ["Equity", "KCB", "Co-op"];
   idToDelete;
   showOptionsDiv: boolean = false;
   paymentName;
-  Fshowlinkbutton() {
-    this.showlinkbutton = false;
-  }
-
-  CANCEL() {
-    //clear all fields
-    this.showlinkbutton = true;
-  }
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
     this.date1 = this.userservice.getdate();
-    this._SunamiService.getActiveCustomersDetails().subscribe(
-      (data) => this.createObj2(data), //Bind to view
-      err => {
-        // Log errors if any
-        this.popToast("no internet", err);
-      });
-  }
-
-  createObj2(data2: any[]) {
-    //this.customers = data2;
-    this.customer_ids = [];
-    for (let key in data2) {
-      this.customer_ids.push(data2[key].id);
-    }
-  }
-
-  linkpayment() {
-    this.payment = [];
-    if (this.customer_id != null || this.customer_id != "") {
-      this.payment.push({
-        loggedUser: UserServiceService.email, PayMode: "bank",bankname:this.bankname,
-        Customer_Id: this.customer_id, Code: this.Code1, amount: this.amount, date1: this.date1
-      });
-      this._SunamiService.postmakePayment(this.payment).subscribe(
-        (data) => this.popToast("result", data), //Bind to view
-        err => {
-          // Log errors if any
-          this.popToast("no internet", err);
-        });
-    }
-    else {
-      this.popToast("error!", "Please enter id number");
-    }
-    this.Code1 = "";
-    this.showlinkbutton = true;
   }
 
   popToast(t: string, b: string) {
@@ -89,18 +40,14 @@ export class BankRecordsComponent implements OnInit {
   ngOnInit() {
     this._SunamiService.getbankRecords().subscribe(
       (data) => this.allMpesaPayments(data),
-      err => { console.log(err); }
+      err => { this.popToast('error', err.json().message) }
     );
-
   }
 
   allMpesaPayments(data1: any[]) {
     this.data = data1;
     this.calcSum();
-
   }
-
-
 
   calcSum() {
     this.sum1 = 0;
@@ -116,7 +63,6 @@ export class BankRecordsComponent implements OnInit {
         this.sum1 += parseInt(GeneralFilterPipe.filteredArray[key].Amount);
       }
     }, 1000)
-
   }
 
   hideloader() {
@@ -126,7 +72,6 @@ export class BankRecordsComponent implements OnInit {
   exporttoexcel() {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
   }
-
 
   deleteRecord() {
     if (confirm(`are you sure you want to delete this payment linked to: ${this.paymentName}? this action is unreversable`)) {

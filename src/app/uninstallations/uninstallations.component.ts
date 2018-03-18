@@ -15,21 +15,13 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
 })
 export class UninstallationsComponent implements OnInit {
 
-  protected dataService: CompleterData;
   public customers: any[];
-  imei: string = "";
-  customer_id: string = "";
-  uninstallarray: any[];
   public data: any[];
-  public dataSwitch: any;
   public filterQuery = "";
   public rowsOnPage = 100;
   public sortOrder = "asc";
-  public showlinkbutton = true;
   Reason: string = "";
   public date1: string = "";
-  Payment: string="Payment issue";
-  Connected: string = "Connected to grid";
 
   constructor(private completerService: CompleterService, private _SunamiService: SunamiserviceService, private toasterService: ToasterService,private userservice: UserServiceService) {
     this.date1 = this.userservice.getdate();
@@ -37,11 +29,6 @@ export class UninstallationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUninstalledSystems();
-    this._SunamiService.getActiveCustomersDetails().subscribe(
-      (data) => this.createObj2(data),
-      err => {
-        this.popToast("no internet", err, this.data);
-      });
   }
 
   getUninstalledSystems() {
@@ -50,7 +37,7 @@ export class UninstallationsComponent implements OnInit {
       (data) => this.data = data, //Bind to view
       err => {
         // Log errors if any
-        this.popToast("no internet", err, this.data);
+        this.popToast("no internet", err);
       });
   }
 
@@ -62,45 +49,7 @@ export class UninstallationsComponent implements OnInit {
     }
   }
 
-  public submit() {
-    this.uninstallarray = [];
-    if (this.customer_id.length > 4 && this.Reason.length > 5) {
-      this.uninstallarray.push({ date1: this.date1, customer_id: this.customer_id, recorded_by: UserServiceService.email, reason: this.Reason });
-      this._SunamiService.postUninstall(this.uninstallarray).subscribe(
-        (data) => this.popToastpost("results", data), //Bind to view
-        err => {
-          // Log errors if any
-          this.popToast("no internet", err, this.data);
-        });
-    }
-    else {
-      this.popToast("error", "Fill all fields appropriately", this.data);
-    }
-    this.showlinkbutton = true;
-  }
-
-  Fshowlinkbutton() {
-    this.showlinkbutton = false;
-  }
-
-  CANCEL() {
-    //clear all fields
-    this.showlinkbutton = true;
-  }
-
-  public popToastpost(t: string, d: any[]) {
-    var toast: Toast = {
-      type: 'error',
-      title: t,
-      body: d
-    };
-    this.toasterService.pop(toast);
-    this.getUninstalledSystems();
-  }
-
-
-  public popToast(t: string, b: string, d: any[]) {
-    this.data = d;
+  public popToast(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,

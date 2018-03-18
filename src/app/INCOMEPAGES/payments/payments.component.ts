@@ -14,7 +14,6 @@ import { GeneralFilterPipe } from "app/general-filter.pipe";
 })
 export class PaymentsComponent implements OnInit {
   //public data: paymentRatesClass[];
-
   filterdiv: boolean = false;
   data: CustomerPayDetails[];
   data3: CustomerPayDetails[];
@@ -35,15 +34,11 @@ export class PaymentsComponent implements OnInit {
   debtOrPaid: string = " paid";
   excludeactive: boolean = true;
   excludeinactive: boolean = true;
-  invoiceItems: any[] = [];
   showOptionsDiv = false;
   currentlySelectedCustomer = '';
   showInvoiceCustomerDiv = false;
   isOnload: boolean = true;
-  selectedInvoiceItem: any;
-  invoiceDate;
   dateInterVals: any[] = [];
-
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService, private _datefilter: DateFilterPipe) {
 
@@ -52,8 +47,6 @@ export class PaymentsComponent implements OnInit {
   ngOnInit(): void {
     this.dateInterVals.push({startDate: '2016-01-01', endDate: this.userservice.getdate()});
     this.getPayRates();
-    this.invoiceDate = this.userservice.getdate();
-    this.getInvoiceItems();
   }
 
   getPayRates(){
@@ -81,9 +74,9 @@ export class PaymentsComponent implements OnInit {
   }
 
   OpenPayHistory() {
+    this.customer_id = this.currentlySelectedCustomer;
     this.showOptionsDiv = false;
     this.openModalWindow = true;
-    this.customer_id = this.currentlySelectedCustomer;
   }
 
   OpenSMS() {
@@ -95,6 +88,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   FshowInvoiceCustomerDiv() {
+    this.customer_id = this.currentlySelectedCustomer;
     this.showOptionsDiv = !this.showOptionsDiv;
     this.showInvoiceCustomerDiv = !this.showInvoiceCustomerDiv;
   }
@@ -103,24 +97,6 @@ export class PaymentsComponent implements OnInit {
     this.currentlySelectedCustomer = id;
     this.openModalWindow = false;
     this.showOptionsDiv = true;
-  }
-
-  invoiceCustomer(value: any) {
-    const customerName = this.data.find(t => t.Id === this.currentlySelectedCustomer).Name || '';
-    if (confirm('are you sure you want to invoice ' + customerName + ' a ' + value)) {
-      this._SunamiService.invoiceCustomer([{invoiceDate: this.invoiceDate, customerId: this.currentlySelectedCustomer, item: value, loogedUser: UserServiceService.email}]).subscribe(res => {
-        this.popToast("Result", res);
-      }, error2 => {
-        this.popToast("Error", error2);
-      });
-    }
-  }
-
-
-  getInvoiceItems() {
-    this._SunamiService.getInvoiceItems().subscribe(res => {
-      this.invoiceItems = res;
-    });
   }
 
   createdata(data1: any[], type: any) {
@@ -196,9 +172,6 @@ export class PaymentsComponent implements OnInit {
   }
 
   sortArrayDebt(data: any[]) {
-    //create a new array
-    //Amount, Invoice, Percent, To, Comment, Village, Phone, Status
-    //sort the complex array
     this.sumAmountInvoiced = 0;
     this.sumAmountDebt = 0;
     for (let key in data) {
@@ -210,20 +183,10 @@ export class PaymentsComponent implements OnInit {
     this.data3 = data;
   }
 
-
-
   sortArrayPaid(data: any[]) {
     this.sumAmountInvoiced = 0;
     this.sumAmountDebt = 0;
     for (let key in data) {
-
-      //clear debt for inactive customers
-      // if (data[key].Active_status === 'inactive' && this.isOnload) {
-      //   data[key].Debt = data[key].Debt;
-      //   data[key].Percent1 = 100;
-      //   data[key].Invoice = data[key].Amount;
-      // }
-
       this.sumAmountDebt += data[key].Debt;
       this.sumAmountInvoiced += data[key].Invoice;
       if (!this.isOnload) {

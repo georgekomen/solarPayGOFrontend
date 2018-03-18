@@ -1,66 +1,8 @@
-<div *ngIf="!showlinkbutton" class="col-sm-10">
-    <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">customer id</label>
-        <div class="col-sm-10">
-            <ng2-completer class="form-control" [(ngModel)]="customer_id" placeholder="customer id" [datasource]="customer_ids" [minSearchLength]="0"
-                [clearSelected]="false" [textSearching]=""></ng2-completer>
-
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Date</label>
-        <div class="col-sm-10">
-            <input [(ngModel)]="date1" type="date" id="myDate" value="2014-02-09">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Amount</label>
-        <div class="col-sm-10">
-            <input [(ngModel)]="amount" type="text" class="form-control" placeholder="amount">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">Bank Name</label>
-        <div class="col-sm-10">
-            <ng2-completer class="form-control" [(ngModel)]="bankname" placeholder="bank name" [datasource]="banknames" [minSearchLength]="0"
-                [clearSelected]="false" [textSearching]=""></ng2-completer>
-
-        </div>
-    </div>
-
-
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Reference Code</label>
-        <div class="col-sm-10">
-            <input [(ngModel)]="Code1" type="text" class="form-control" placeholder="code">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
-        <div class="col-sm-4">
-            <button type="submit" class="btn btn-primary" (click)="linkpayment()">SUBMIT</button>
-        </div>
-        <div class="col-sm-4">
-            <button type="submit" class="btn btn-warning" (click)="CANCEL()">CANCEL</button>
-        </div>
-    </div>
+<!--OPTIONS HERE -->
+<div *ngIf="showOptionsDiv" class="option_modal">
+  <button class="btn btn-danger" (click)="deleteRecord()">Delete Record</button>
+  <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv">cancel</button>
 </div>
-
-<div *ngIf="showlinkbutton" class="col-sm-10">
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
-        <div class="col-sm-7">
-            <button type="submit" class="btn btn-primary" (click)="Fshowlinkbutton()">Record New Bank Payment</button>
-        </div>
-    </div>
-</div>
-
-
-
-
 
 <div *ngIf="data" class="container-fluid">
     <div class="row">
@@ -120,13 +62,6 @@
                         </tr>
                     </thead>
 
-                     <!--OPTIONS HERE -->
-                    <div *ngIf="showOptionsDiv" class="option_modal">
-                        <button class="btn btn-danger" (click)="deleteRecord()">Delete Record</button>
-                        <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv">cancel</button>
-                    </div>
-
-
                     <tbody>
                         <ng-container *ngFor="let item of mf.data; let i = index">
 
@@ -156,3 +91,5 @@
                 </table>
             </div>
         </div>
+    </div>
+</div>

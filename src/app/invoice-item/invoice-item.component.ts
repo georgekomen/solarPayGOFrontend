@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SunamiserviceService} from "../sunamiservice.service";
 import {Toast, ToasterService} from "angular2-toaster";
 import {UserServiceService} from "../user-service.service";
@@ -16,12 +16,16 @@ export class InvoiceItemComponent implements OnInit {
   selectedInvoiceItem: Packages;
   invoice: InvoiceItem;
   invoicedItems: InvoiceItem[] = [];
+  @Input()
+  customer_id;
+
   constructor(private activatedRoute: ActivatedRoute, private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
 
   }
 
   ngOnInit() {
     this.invoice = new InvoiceItem();
+    this.invoice.customerId = this.customer_id;
     this.activatedRoute.params.subscribe((params: Params)=>{
       this.invoice.customerId = params['customer_id'];
     },error2 => {

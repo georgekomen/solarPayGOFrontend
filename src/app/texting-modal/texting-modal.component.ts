@@ -21,6 +21,7 @@ export class TextingModalComponent {
    rowsOnPage = 100;
   sortBy;
   sortOrder;
+  data: any[];
 
   constructor(private _SunamiService: SunamiserviceService,private userservice: UserServiceService, private activatedRoute:ActivatedRoute) {
   }
@@ -34,7 +35,6 @@ export class TextingModalComponent {
     },error2 => {
 
     });
-
     this.getMessages();
   }
   //"Jambo " + name + "\n" + msg +"\n Kumbuka una deni ya KSH" + deni + " tafadhali lipa au tutakatiza huusiano nawe"
@@ -62,8 +62,6 @@ export class TextingModalComponent {
     this.res = re;
     this.getMessages();
   }
-
-   data: any[];
 
    getMessages() {
     this.data = [];
