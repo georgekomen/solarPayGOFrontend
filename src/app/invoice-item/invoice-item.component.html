@@ -1,0 +1,36 @@
+<!--invoice div -->
+<div style="padding: 5em">
+  <span style="font-size: small; font-style: italic; color: firebrick"> select the item you want to invoice this customer and confirm your action</span> <br>
+
+  <select style="font-size: large;" class="form-control" [(ngModel)]="selectedInvoiceItem">
+    <option *ngFor="let item of invoiceItems" [ngValue]="item"> {{item.Item}}</option>
+  </select>
+
+  <div class="row">
+    <div class="col-md-4 title"> Item </div>
+    <div class="col-md-4 title"> Deposit Amount </div>
+    <div class="col-md-4 title"> Daily Amount </div>
+  </div>
+
+  <div *ngIf="selectedInvoiceItem" style="font-size: large;" class="row">
+    <div class="col-md-4"> {{selectedInvoiceItem.Item}}</div>
+    <div class="col-md-4"> {{selectedInvoiceItem.Deposit}}</div>
+    <div class="col-md-4"> {{selectedInvoiceItem.Amount}}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="date" style="font-size: large;" class="form-control" [(ngModel)]="invoice.invoiceDate"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-primary" (click)="invoiceCustomer()"> SAVE </button>
+    </div>
+
+  </div>
+</div>

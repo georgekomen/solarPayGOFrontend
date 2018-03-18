@@ -1,4 +1,4 @@
-export class InvoiceItem{
+export class Packages{
   Item: string;
   Deposit:number;
   Amount:number;

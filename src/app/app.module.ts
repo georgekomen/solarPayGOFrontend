@@ -56,7 +56,7 @@ import { BankRecordsComponent } from './INCOMEPAGES/bank-records/bank-records.co
 import { ListOfPurchaseOrderComponent } from './INVENTORY/list-of-purchase-order/list-of-purchase-order.component';
 import {EventlogsComponent} from "./eventlogs/eventlogs.component";
 import {MakePaymentComponent} from "./make-payment/make-payment.component"
-
+import {InvoiceItemComponent} from "./invoice-item/invoice-item.component"
 export const firebaseConfig = {
   apiKey: "AIzaSyBGIvamMbCC3gbrPJcHVs15zC0_cPHG_L8",
   authDomain: "sunamiapp.firebaseapp.com",
@@ -67,6 +67,7 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
+    InvoiceItemComponent,
     AppComponent,
     SuNavbarComponent,
     MapsComponent,

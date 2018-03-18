@@ -4,7 +4,7 @@ import { ToasterService, Toast } from 'angular2-toaster';
 import { UserServiceService } from '../user-service.service';
 import { GeneralFilterPipe } from "app/general-filter.pipe";
 import {Customer} from "./shared/customer";
-import {InvoiceItem} from "./shared/invoiceItem";
+import {Packages} from "./shared/invoiceItem";
 import {Router} from "@angular/router";
 
 @Component({
@@ -19,7 +19,7 @@ export class CustomerDetailsComponent implements OnInit {
   sortOrder = "asc";
   showlinkbutton = true;
   customer1: Customer = new Customer();
-  invoiceItems: InvoiceItem[]=[];
+  invoiceItems: Packages[]=[];
 
   showOptionsDiv: boolean = false;
   selectedCustomer: Customer;
@@ -36,6 +36,10 @@ export class CustomerDetailsComponent implements OnInit {
 
   makePayment(){
     this.router.navigate(['makepayment', this.selectedCustomer.id]);
+  }
+
+  invoiceCustomer(){
+    this.router.navigate(['invoiceitem', this.selectedCustomer.id]);
   }
 
   customerToEdit(item){
