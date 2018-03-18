@@ -1,5 +1,5 @@
 <!--invoice div -->
-<div style="padding: 5em">
+<div *ngIf="invoiceItems.length!=0" style="padding: 5em">
   <span style="font-size: small; font-style: italic; color: firebrick"> select the item you want to invoice this customer and confirm your action</span> <br>
 
   <select style="font-size: large;" class="form-control" [(ngModel)]="selectedInvoiceItem">
@@ -33,4 +33,25 @@
     </div>
 
   </div>
+</div>
+
+
+<div *ngIf="invoicedItems.length!=0">
+<div class="title">Items Already Invoiced</div>
+<div style="font-size: large; font-weight: bold; font-style: italic" class="row">
+  <div class="col-sm-2">
+    Item
+  </div>
+  <div class="col-sm-2">
+    Date Of Invoice
+  </div>
+</div>
+<div *ngFor="let item of invoicedItems" class="row">
+  <div class="col-sm-2">
+ {{item.item}}
+  </div>
+  <div class="col-sm-2">
+{{item.invoiceDate}}
+  </div>
+</div>
 </div>

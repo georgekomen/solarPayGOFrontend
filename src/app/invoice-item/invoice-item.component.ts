@@ -15,6 +15,7 @@ export class InvoiceItemComponent implements OnInit {
   invoiceItems: Packages[] = [];
   selectedInvoiceItem: Packages;
   invoice: InvoiceItem;
+  invoicedItems: InvoiceItem[] = [];
   constructor(private activatedRoute: ActivatedRoute, private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
 
   }
@@ -27,11 +28,18 @@ export class InvoiceItemComponent implements OnInit {
 
     });
     this.getInvoiceItems();
+    this.getCustomerInvoicedItems();
   }
 
   getInvoiceItems() {
     this._SunamiService.getInvoiceItems().subscribe(res => {
       this.invoiceItems = res;
+    });
+  }
+
+  getCustomerInvoicedItems() {
+    this._SunamiService.getCustomerInvoicedItems(this.invoice.customerId).subscribe(res => {
+      this.invoicedItems = res;
     });
   }
 
