@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { SunamiserviceService } from '../sunamiservice.service';
 import { ToasterService, Toast } from 'angular2-toaster';
 import 'rxjs/Rx';
@@ -10,7 +10,7 @@ import { UserServiceService } from '../user-service.service';
   styleUrls: ['./issues.component.css']
 })
 export class IssuesComponent implements OnInit {
-  customer_id: string = "";
+  customer_id: string;
   issuearray: any[];
   data: any[] = [];
   filterQuery = "";
@@ -20,13 +20,21 @@ export class IssuesComponent implements OnInit {
   solveissuediv: boolean = false;
   Id: Number = 0;
 
+  @Input() set _customer_id(id){
+    this.customer_id = id;
+    this._SunamiService.getIssuesPerCustomer(this.customer_id).subscribe(res=>{
+      this.data = [res];
+    });
+  }
+
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService) {
 
   }
 
-
   ngOnInit(): void {
-    this.getIssues();
+    if(this.customer_id == null || this.customer_id == ""){
+      this.getIssues();
+    }
   }
 
   getIssues() {

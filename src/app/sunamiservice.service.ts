@@ -8,8 +8,8 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class SunamiserviceService {
-   private url1:string = "//api.sunamiapp.net/api/customers";
-   // private url1:string = "//localhost:57339/api/customers";
+   // private url1:string = "//api.sunamiapp.net/api/customers";
+   private url1:string = "//localhost:57339/api/customers";
    headers: Headers = new Headers();
    options;
   constructor(private _http: Http) {
@@ -372,6 +372,13 @@ export class SunamiserviceService {
   }
 
   getAgentSales(id): Observable<any[]> {
+    return this._http.get(`${this.url1}/getAgentSales?id=${id}`, this.options)
+      .map((res: Response) => res.json())
+      //...errors if any
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getIssuesPerCustomer(id): Observable<any> {
     return this._http.get(`${this.url1}/getAgentSales?id=${id}`, this.options)
       .map((res: Response) => res.json())
       //...errors if any
