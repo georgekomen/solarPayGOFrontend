@@ -35,22 +35,11 @@ export class UninstallationsComponent implements OnInit {
     this.date1 = this.userservice.getdate();
   }
 
-
   ngOnInit(): void {
-
-    /*with delay
-     this._SunamiService.getPaymentRates().subscribe((data:paymentRatesClass[])=> {
-             setTimeout(()=> {
-                 this.data = data;
-             }, 6000);
-         });*/
-
     this.getUninstalledSystems();
-
     this._SunamiService.getActiveCustomersDetails().subscribe(
-      (data) => this.createObj2(data), //Bind to view
+      (data) => this.createObj2(data),
       err => {
-        // Log errors if any
         this.popToast("no internet", err, this.data);
       });
   }
@@ -106,7 +95,6 @@ export class UninstallationsComponent implements OnInit {
       body: d
     };
     this.toasterService.pop(toast);
-    //fetch new data afta registration
     this.getUninstalledSystems();
   }
 
