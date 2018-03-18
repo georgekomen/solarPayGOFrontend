@@ -42,6 +42,10 @@ export class CustomerDetailsComponent implements OnInit {
     this.router.navigate(['invoiceitem', this.selectedCustomer.id]);
   }
 
+  textCustomer(){
+    this.router.navigate(['textmodal', this.selectedCustomer.id]);
+  }
+
   customerToEdit(item){
     this.showOptionsDiv = true;
     this.selectedCustomer = item;

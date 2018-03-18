@@ -36,6 +36,7 @@ import { ListOfPurchaseOrderComponent } from './INVENTORY/list-of-purchase-order
 import {EventlogsComponent} from './eventlogs/eventlogs.component';
 import {MakePaymentComponent} from "./make-payment/make-payment.component"
 import {InvoiceItemComponent} from "./invoice-item/invoice-item.component"
+import {TextingModalComponent} from "./texting-modal/texting-modal.component"
 const APP_ROUTES: Routes = [
   { path: 'paymentchart', component: PaymentChartComponent, canActivate: [AuthGuard] },
   { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuard] },
@@ -67,6 +68,7 @@ const APP_ROUTES: Routes = [
   { path: 'lpo', component: ListOfPurchaseOrderComponent },
   { path: 'makepayment/:customer_id', component: MakePaymentComponent },
   { path: 'invoiceitem/:customer_id', component: InvoiceItemComponent },
+  { path: 'textmodal/:customer_id', component: TextingModalComponent },
   { path: '**', redirectTo: '' }
 ];
 //export const routing = RouterModule.forRoot(APP_ROUTES);

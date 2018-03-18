@@ -28,6 +28,7 @@ export class PaymentsComponent implements OnInit {
   percent: string = "";
   state: string = '';
   openModalWindow: boolean = false;
+  openSMSModalWindow: boolean = false;
   customer_id: any = "";
   debtAmount: number = 0;
   focusOnDebt: boolean = false;
@@ -83,6 +84,10 @@ export class PaymentsComponent implements OnInit {
     this.showOptionsDiv = false;
     this.openModalWindow = true;
     this.customer_id = this.currentlySelectedCustomer;
+  }
+
+  OpenSMS() {
+    this.openSMSModalWindow = true;
   }
 
   cancelImageModel() {

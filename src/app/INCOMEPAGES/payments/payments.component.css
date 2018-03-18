@@ -19,7 +19,7 @@ button {
 .paymentsmodal{
   background: #88CBFF;
   display: block;
-  position: fixed;
+  position: absolute;
   margin: .3em;
   padding: .5em;
   width: 98%;

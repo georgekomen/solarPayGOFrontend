@@ -9,6 +9,12 @@
 </div>
 
 <!--OPTIONS HERE -->
+<div *ngIf="openSMSModalWindow" class="paymentsmodal">
+  <button (click)="openSMSModalWindow = false"> Cancel </button>
+  <app-texting-modal [Cdata]="data3 | generalFilter : filterQuery"></app-texting-modal>
+</div>
+
+<!--OPTIONS HERE -->
 <div *ngIf="showOptionsDiv" class="option_modal">
   <button class="btn btn-danger" (click)="OpenPayHistory()"> Statement </button>
   <button class="btn btn-warning" (click)="FshowInvoiceCustomerDiv()"> Invoice Customer </button>
@@ -75,7 +81,8 @@
           <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
         </div>
         <div class="col-md-2">
-          <app-texting-modal [Cdata]="data3 | generalFilter : filterQuery"></app-texting-modal>
+          <button type="submit" class="btn btn-info" (click)="OpenSMS()">Send SMS</button>
+
         </div>
       </div>
       <div class="row">

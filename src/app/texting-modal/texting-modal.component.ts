@@ -3,6 +3,7 @@ import { SunamiserviceService } from '../sunamiservice.service';
 import { UserServiceService } from '../user-service.service';
 import { GeneralFilterPipe } from '../general-filter.pipe';
 import { CustomerPayDetails} from "../INCOMEPAGES/payments/payments.component";
+import {ActivatedRoute, Params} from "@angular/router";
 
 
 @Component({
@@ -11,7 +12,7 @@ import { CustomerPayDetails} from "../INCOMEPAGES/payments/payments.component";
   styleUrls: ['./texting-modal.component.css']
 })
 export class TextingModalComponent {
-  @Input() Cdata: CustomerPayDetails[];
+  @Input() Cdata: CustomerPayDetails[] = [];
    SMStext = "";
    SMS1: any[];
    SMSn: any[];
@@ -21,10 +22,19 @@ export class TextingModalComponent {
   sortBy;
   sortOrder;
 
-  constructor(private _SunamiService: SunamiserviceService,private userservice: UserServiceService) {
+  constructor(private _SunamiService: SunamiserviceService,private userservice: UserServiceService, private activatedRoute:ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe((params: Params)=>{
+      this.Cdata[0] = new CustomerPayDetails();
+      this.Cdata[0].Id = params['customer_id'];
+      this.Cdata[0].Amount = 0;
+      this.Cdata[0].Invoice = 0;
+    },error2 => {
+
+    });
+
     this.getMessages();
   }
   //"Jambo " + name + "\n" + msg +"\n Kumbuka una deni ya KSH" + deni + " tafadhali lipa au tutakatiza huusiano nawe"
@@ -48,7 +58,7 @@ export class TextingModalComponent {
   }
 
    res1(re:any){
-    this.res = re
+    this.res = re;
     this.getMessages();
   }
 
