@@ -356,4 +356,25 @@ export class SunamiserviceService {
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
+
+  registerAgent(update: any): Observable<any> {
+    let bodyString = JSON.stringify(update);
+    return this._http.post(`${this.url1}/registerAgent`,bodyString, this.options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'server error'));
+  }
+
+  getAgents(): Observable<any[]> {
+    return this._http.get(`${this.url1}/getAgents`, this.options)
+      .map((res: Response) => res.json())
+      //...errors if any
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getAgentSales(id): Observable<any[]> {
+    return this._http.get(`${this.url1}/getAgentSales?id=${id}`, this.options)
+      .map((res: Response) => res.json())
+      //...errors if any
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }
