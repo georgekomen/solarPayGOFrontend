@@ -23,7 +23,6 @@ import { SignupComponent } from './signup/signup.component';
 import { MembersComponent } from './members/members.component';
 import { AuthGuard } from './auth.service';
 import { ToasterModule } from 'angular2-toaster';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { MpesaPaymentsComponent } from './/INCOMEPAGES/mpesa-payments/mpesa-payments.component';
 import { MpesaFilterPipe } from './mpesa-filter.pipe';
 import { AllpaymentsComponent } from './INCOMEPAGES/allpayments/allpayments.component';
@@ -55,10 +54,13 @@ import { DateFilterPipe } from './date-filter.pipe';
 import { BankRecordsComponent } from './INCOMEPAGES/bank-records/bank-records.component';
 import { ListOfPurchaseOrderComponent } from './INVENTORY/list-of-purchase-order/list-of-purchase-order.component';
 import {EventlogsComponent} from "./eventlogs/eventlogs.component";
-import {MakePaymentComponent} from "./make-payment/make-payment.component"
+import {MakePaymentComponent} from "./make-payment/make-payment.component";
 import {InvoiceItemComponent} from "./invoice-item/invoice-item.component";
 import {UninstallCustomerComponent} from "./uninstall-customer/uninstall-customer.component";
-import {IssueRecordComponent} from "./issue-record/issue-record.component"
+import {IssueRecordComponent} from "./issue-record/issue-record.component";
+import {AgentRegistrationComponent} from "./Agents/agent-registration/agent-registration.component";
+import {AgentListComponent} from "./Agents/agent-list/agent-list.component";
+import {AgentSalesComponent} from "./Agents/agent-sales/agent-sales.component";
 export const firebaseConfig = {
   apiKey: "AIzaSyBGIvamMbCC3gbrPJcHVs15zC0_cPHG_L8",
   authDomain: "sunamiapp.firebaseapp.com",
@@ -69,6 +71,9 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
+    AgentRegistrationComponent,
+    AgentSalesComponent,
+    AgentListComponent,
     IssueRecordComponent,
     UninstallCustomerComponent,
     InvoiceItemComponent,

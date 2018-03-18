@@ -3,4 +3,5 @@ export class InvoiceItem{
   item;
   loogedUser;
   invoiceDate;
+  agentcode;
 }

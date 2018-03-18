@@ -1,15 +1,9 @@
 import { Routes, RouterModule } from "@angular/router";
-import { SuNavbarComponent } from './navbar/su-navbar.component';
 import { MapsComponent } from './mapInventory/maps.component';
 import { PaymentsComponent } from './INCOMEPAGES/payments/payments.component';
-import { DataFilterPipe } from './data-filter.pipe';
-import { DataTableModule } from "angular2-datatable";
 import { PaymentChartComponent } from './SUMMARYPAGES/payment-chart/payment-chart.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { LoadingSnipperComponent } from './loading-snipper/loading-snipper.component';
 import { SummaryPageComponent } from './SUMMARYPAGES/summary-page/summary-page.component';
 import { ModuleWithProviders } from '@angular/core';
-import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MembersComponent } from './members/members.component';
 import { AuthGuard } from './auth.service';
@@ -38,7 +32,11 @@ import {MakePaymentComponent} from "./make-payment/make-payment.component"
 import {InvoiceItemComponent} from "./invoice-item/invoice-item.component"
 import {TextingModalComponent} from "./texting-modal/texting-modal.component";
 import {UninstallCustomerComponent} from "./uninstall-customer/uninstall-customer.component";
-import {IssueRecordComponent} from "./issue-record/issue-record.component"
+import {IssueRecordComponent} from "./issue-record/issue-record.component";
+import {AgentRegistrationComponent} from "./Agents/agent-registration/agent-registration.component";
+import {AgentListComponent} from "./Agents/agent-list/agent-list.component";
+import {AgentSalesComponent} from "./Agents/agent-sales/agent-sales.component";
+
 const APP_ROUTES: Routes = [
   { path: 'paymentchart', component: PaymentChartComponent, canActivate: [AuthGuard] },
   { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuard] },
@@ -73,6 +71,9 @@ const APP_ROUTES: Routes = [
   { path: 'textmodal/:customer_id', component: TextingModalComponent, canActivate: [AuthGuard]  },
   { path: 'uninstall/:customer_id', component: UninstallCustomerComponent, canActivate: [AuthGuard]  },
   { path: 'issuerecord/:customer_id', component: IssueRecordComponent, canActivate: [AuthGuard] },
+  { path: 'agentregister', component: AgentRegistrationComponent },
+  { path: 'agentlist', component: AgentListComponent },
+  { path: 'agentsales/:agentcode', component: AgentSalesComponent },
   { path: '**', redirectTo: '' }
 ];
 //export const routing = RouterModule.forRoot(APP_ROUTES);
