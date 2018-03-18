@@ -20,6 +20,7 @@ button {
   background: #88CBFF;
   display: block;
   position: absolute;
+  overflow-y: scroll;
   margin: .3em;
   padding: .5em;
   width: 98%;
@@ -27,6 +28,11 @@ button {
   z-index: 1;
   box-shadow: 0.2em 0.2em #1C6CAB;
   border: solid 0.3em #1C6CAB;
+}
+.cancelbtn{
+  background-color: firebrick;
+  color: white;
+  font-size: medium;
 }
 .invoice_modal{
   /*center it*/

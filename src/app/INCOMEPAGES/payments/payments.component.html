@@ -4,19 +4,19 @@
 
 <!--OPTIONS HERE -->
 <div *ngIf="openModalWindow" class="paymentsmodal">
-  <button (click)="openModalWindow = false"> Cancel </button>
+  <button class="cancelbtn" (click)="openModalWindow = false"> CLOSE </button>
   <app-allpayments [Cdata]="customer_id"></app-allpayments>
 </div>
 
 <!--OPTIONS HERE -->
 <div *ngIf="openSMSModalWindow" class="paymentsmodal">
-  <button (click)="openSMSModalWindow = false"> Cancel </button>
+  <button class="cancelbtn" (click)="openSMSModalWindow = false"> CLOSE </button>
   <app-texting-modal [Cdata]="data3 | generalFilter : filterQuery"></app-texting-modal>
 </div>
 
 <!--OPTIONS HERE -->
 <div *ngIf="showInvoiceCustomerDiv" class="paymentsmodal">
-  <button (click)="showInvoiceCustomerDiv = false"> Cancel </button>
+  <button class="cancelbtn" (click)="showInvoiceCustomerDiv = false"> CLOSE </button>
   <app-invoice-item [_customer_id]="customer_id"></app-invoice-item>
 </div>
 
@@ -56,7 +56,6 @@
           <input class="form-control" [(ngModel)]="filterQuery" placeholder="search" (keyup)="changesumgen()" />
         </div>
         <div class="col-md-2">
-          <!--another filter here-->
           Filter from date:
           <input type="date" class="form-control" [(ngModel)]="querydate1" />
         </div>
@@ -94,7 +93,7 @@
       </div>
     </div>
   </div>
-  <div class="table table-responsive">
+  <div style="height: 430px; overflow-y: scroll" class="table table-responsive">
     <table class="table table-striped" [mfData]="data3 | generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
            [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
       <thead>
