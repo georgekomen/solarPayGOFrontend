@@ -66,11 +66,11 @@ const APP_ROUTES: Routes = [
   { path: 'assets', component: AssetsComponent, canActivate: [AuthGuard] },
   { path: 'stocks', component: StocksComponent, canActivate: [AuthGuard] },
   { path: 'eventlogs', component: EventlogsComponent, canActivate: [AuthGuard] },
-  { path: 'lpo', component: ListOfPurchaseOrderComponent },
-  { path: 'makepayment/:customer_id', component: MakePaymentComponent },
-  { path: 'invoiceitem/:customer_id', component: InvoiceItemComponent },
-  { path: 'textmodal/:customer_id', component: TextingModalComponent },
-  { path: 'uninstall/:customer_id', component: UninstallCustomerComponent },
+  { path: 'lpo', component: ListOfPurchaseOrderComponent, canActivate: [AuthGuard]  },
+  { path: 'makepayment/:customer_id', component: MakePaymentComponent, canActivate: [AuthGuard]  },
+  { path: 'invoiceitem/:customer_id', component: InvoiceItemComponent, canActivate: [AuthGuard]  },
+  { path: 'textmodal/:customer_id', component: TextingModalComponent, canActivate: [AuthGuard]  },
+  { path: 'uninstall/:customer_id', component: UninstallCustomerComponent, canActivate: [AuthGuard]  },
   { path: '**', redirectTo: '' }
 ];
 //export const routing = RouterModule.forRoot(APP_ROUTES);
