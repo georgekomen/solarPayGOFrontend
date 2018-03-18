@@ -14,20 +14,30 @@ import {ActivatedRoute, Params} from "@angular/router";
 export class InvoiceItemComponent implements OnInit {
   invoiceItems: Packages[] = [];
   selectedInvoiceItem: Packages;
-  invoice: InvoiceItem;
+  invoice: InvoiceItem = new InvoiceItem();
   invoicedItems: InvoiceItem[] = [];
-  @Input()
-  customer_id;
+  customer_id1: string = "";
+
+  @Input() set _customer_id(customer_id: any){
+    this.customer_id1 = customer_id;
+    this.invoice.customerId = this.customer_id1;
+    this.init();
+  }
 
   constructor(private activatedRoute: ActivatedRoute, private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
 
   }
 
   ngOnInit() {
-    this.invoice = new InvoiceItem();
-    this.invoice.customerId = this.customer_id;
+    this.init();
+  }
+
+  init(){
     this.activatedRoute.params.subscribe((params: Params)=>{
-      this.invoice.customerId = params['customer_id'];
+      const id  = params['customer_id'];
+      if(id != null && id != undefined){
+        this.invoice.customerId = id;
+      }
     },error2 => {
 
     });

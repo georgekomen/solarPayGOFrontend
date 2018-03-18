@@ -28,16 +28,19 @@ export class TextingModalComponent {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params)=>{
-      this.Cdata[0] = new CustomerPayDetails();
-      this.Cdata[0].Id = params['customer_id'];
-      this.Cdata[0].Amount = 0;
-      this.Cdata[0].Invoice = 0;
+      const id = params['customer_id'];
+      if(id != null && id != undefined) {
+        this.Cdata[0] = new CustomerPayDetails();
+        this.Cdata[0].Id = id;
+        this.Cdata[0].Amount = 0;
+        this.Cdata[0].Invoice = 0;
+      }
     },error2 => {
 
     });
     this.getMessages();
   }
-  //"Jambo " + name + "\n" + msg +"\n Kumbuka una deni ya KSH" + deni + " tafadhali lipa au tutakatiza huusiano nawe"
+
    sendSMS() {
      if (confirm('are you sure you want to proceed?')) {
        this.SMSn = [];
