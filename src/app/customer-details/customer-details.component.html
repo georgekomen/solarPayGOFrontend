@@ -44,19 +44,7 @@
       <input [(ngModel)]="customer1.occupation" type="text" class="form-control" placeholder="occupation">
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Witness Name</label>
-    <div class="col-sm-10">
-      <input [(ngModel)]="customer1.witness" type="text" class="form-control" placeholder="witness">
-    </div>
-  </div>
 
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Witness Id</label>
-    <div class="col-sm-10">
-      <input [(ngModel)]="customer1.witnessid" type="text" class="form-control" placeholder="witness id">
-    </div>
-  </div>
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">village</label>
     <div class="col-sm-10">
@@ -106,6 +94,30 @@
     </div>
   </div>
   <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Witness Name</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="customer1.witness" type="text" class="form-control" placeholder="witness name">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Witness Mobile</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="customer1.witnessnumber" type="text" class="form-control" placeholder="witness phone number">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Witness Id</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="customer1.witnessid" type="text" class="form-control" placeholder="witness id">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Agent  Code</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="customer1.agentcode" type="text" class="form-control" placeholder="agent code">
+    </div>
+  </div>
+  <div class="form-group row">
     <label class="col-sm-3 col-form-label"></label>
     <div class="col-sm-4">
       <button type="submit" class="btn btn-primary" (click)="submit()">SUBMIT</button>
@@ -115,6 +127,8 @@
     </div>
   </div>
 </div>
+
+
 
 <div *ngIf="showlinkbutton" class="col-sm-10">
   <div class="form-group row">
@@ -126,8 +140,14 @@
 </div>
 
 
+<!--OPTIONS HERE -->
+<div *ngIf="showOptionsDiv" class="option_modal">
+  <button class="btn btn-danger" (click)="EditCustomer()"> EditCustomer</button>
+  <button class="btn btn-warning" (click)="showOptionsDiv = false"> Cancel </button>
+</div>
 
-<div *ngIf="data.length>0">
+
+<div *ngIf="data.length>0 && showlinkbutton">
   {{hideloader()}}
   <div class="panel panel-primary">
     <div class="panel-body">
@@ -189,8 +209,8 @@
         <ng-container *ngFor="let item of mf.data; let i = index">
           <tr>
             <td>{{i+1}}</td>
-            <td *ngIf="item.status==0"><span class="label label-warning">{{item.name}}</span></td>
-            <td *ngIf="item.status==1"><span class="label label-info">{{item.name}}</span></td>
+            <td (click)="customerToEdit(item)" *ngIf="item.status==0"><span class="label label-warning">{{item.name}}</span></td>
+            <td (click)="customerToEdit(item)" *ngIf="item.status==1"><span class="label label-info">{{item.name}}</span></td>
             <td>{{item.id}}</td>
             <td>{{item.occupation}}</td>
             <td>{{item.number1}}</td>
