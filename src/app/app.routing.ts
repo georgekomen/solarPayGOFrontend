@@ -34,7 +34,7 @@ import { AssetsComponent } from './assets/assets.component';
 import { StocksComponent } from './INVENTORY/./stocks/stocks.component';
 import { ListOfPurchaseOrderComponent } from './INVENTORY/list-of-purchase-order/list-of-purchase-order.component';
 import {EventlogsComponent} from './eventlogs/eventlogs.component';
-
+import {MakePaymentComponent} from "./make-payment/make-payment.component"
 const APP_ROUTES: Routes = [
   { path: 'paymentchart', component: PaymentChartComponent, canActivate: [AuthGuard] },
   { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuard] },
@@ -64,6 +64,7 @@ const APP_ROUTES: Routes = [
   { path: 'stocks', component: StocksComponent, canActivate: [AuthGuard] },
   { path: 'eventlogs', component: EventlogsComponent, canActivate: [AuthGuard] },
   { path: 'lpo', component: ListOfPurchaseOrderComponent },
+  { path: 'makepayment/:customer_id', component: MakePaymentComponent },
   { path: '**', redirectTo: '' }
 ];
 //export const routing = RouterModule.forRoot(APP_ROUTES);

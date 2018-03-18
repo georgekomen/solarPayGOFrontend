@@ -31,7 +31,7 @@
             <textarea placeholder="'Jambo ' + name + '\n' + msg +' una deni ya KSH' + deni + ' tafadhali lipa. Malipo ni kwa Mpesa till number: 784289 (Buy goods & services)'"
               [(ngModel)]="SMStext" class="form-control" rows="3"></textarea>
           </div>
-          <!-- 
+          <!--
              <table *ngFor="let u of SMS1">
                  <tr >
                    <td> {{u.recipients[0].number}} </td>
@@ -57,7 +57,7 @@
         </div>
       </div>
 
-      <div style="height: 400px; overflow-y: scroll" class="table table-responsive">
+      <div class="table table-responsive">
         <table class="table table-striped" [mfData]="data | generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
           [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
           <thead>

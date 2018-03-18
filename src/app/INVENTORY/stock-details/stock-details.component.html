@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" id="openModalButton" [hidden]="true" class="btn btn-primary" data-toggle="modal" data-target="#myModal4">     
+<button type="button" id="openModalButton" [hidden]="true" class="btn btn-primary" data-toggle="modal" data-target="#myModal4">
      </button>
 <!-- Modal -->
 <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -51,7 +51,7 @@
           <div class="panel-body">
             <div class="form-group row">
 
-              <div style="height: 400px; overflow-y: scroll" class="table table-responsive">
+              <div class="table table-responsive">
                 <table class="table table-striped" [mfData]="data| generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
                   [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                   <thead>

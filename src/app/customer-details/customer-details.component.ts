@@ -5,6 +5,7 @@ import { UserServiceService } from '../user-service.service';
 import { GeneralFilterPipe } from "app/general-filter.pipe";
 import {Customer} from "./shared/customer";
 import {InvoiceItem} from "./shared/invoiceItem";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-customer-details',
@@ -22,6 +23,7 @@ export class CustomerDetailsComponent implements OnInit {
 
   showOptionsDiv: boolean = false;
   selectedCustomer: Customer;
+
   Fshowlinkbutton() {
     this.showlinkbutton = false;
   }
@@ -30,6 +32,10 @@ export class CustomerDetailsComponent implements OnInit {
     this.showlinkbutton = false;
     this.showOptionsDiv = false;
     this.customer1 = this.selectedCustomer;
+  }
+
+  makePayment(){
+    this.router.navigate(['makepayment', this.selectedCustomer.id]);
   }
 
   customerToEdit(item){
@@ -66,7 +72,7 @@ export class CustomerDetailsComponent implements OnInit {
     }
   }
 
-  constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
+  constructor(private router: Router, private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
     this.customer1.date1 = this.userservice.getdate();
   }
 

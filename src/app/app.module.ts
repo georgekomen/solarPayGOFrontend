@@ -52,10 +52,10 @@ import { StocksComponent } from './INVENTORY/./stocks/stocks.component';
 import { AddStockComponent } from './INVENTORY/./add-stock/add-stock.component';
 import { StockDetailsComponent } from './INVENTORY/./stock-details/stock-details.component';
 import { DateFilterPipe } from './date-filter.pipe';
-import { BaddebtsComponent } from './INCOMEPAGES/baddebts/baddebts.component';
 import { BankRecordsComponent } from './INCOMEPAGES/bank-records/bank-records.component';
 import { ListOfPurchaseOrderComponent } from './INVENTORY/list-of-purchase-order/list-of-purchase-order.component';
 import {EventlogsComponent} from "./eventlogs/eventlogs.component";
+import {MakePaymentComponent} from "./make-payment/make-payment.component"
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBGIvamMbCC3gbrPJcHVs15zC0_cPHG_L8",
@@ -105,10 +105,10 @@ export const firebaseConfig = {
     AddStockComponent,
     StockDetailsComponent,
     DateFilterPipe,
-    BaddebtsComponent,
     BankRecordsComponent,
     ListOfPurchaseOrderComponent,
-    EventlogsComponent
+    EventlogsComponent,
+    MakePaymentComponent
   ],
 
   imports: [

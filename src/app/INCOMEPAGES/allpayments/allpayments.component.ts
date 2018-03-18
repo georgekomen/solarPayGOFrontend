@@ -36,7 +36,6 @@ export class AllpaymentsComponent implements OnInit {
   //detect any changes in bound data
   ngOnChanges(changes: any) {
     console.log(this.Cdata);
-    document.getElementById("openModalButton").click();
     this.requestData();
   }
 

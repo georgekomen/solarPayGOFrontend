@@ -14,6 +14,8 @@ import { GeneralFilterPipe } from "app/general-filter.pipe";
 })
 export class PaymentsComponent implements OnInit {
   //public data: paymentRatesClass[];
+
+  filterdiv: boolean = false;
   data: CustomerPayDetails[];
   data3: CustomerPayDetails[];
   filterQuery = "";

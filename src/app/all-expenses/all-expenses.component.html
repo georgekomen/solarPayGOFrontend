@@ -13,7 +13,7 @@
       <select class="form-control input-sm" [(ngModel)]="category">
             <ng-container *ngFor="let item of data1">
                <option [ngValue] =item.Name>{{item.Name}}</option>
-            </ng-container>                               
+            </ng-container>
         </select>
     </div>
 
@@ -112,7 +112,7 @@
     </div>
   </div>
 
-  <div style="height: 600px; overflow-y: scroll" class="table table-responsive">
+  <div class="table table-responsive">
     <table class="table table-striped" [mfData]="data | generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
       [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
       <thead>
