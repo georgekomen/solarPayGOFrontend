@@ -11,68 +11,24 @@ import { UserServiceService } from '../../user-service.service';
   styleUrls: ['./cash-records.component.css']
 })
 export class CashRecordsComponent implements OnInit {
-   data: any[];
-   filterQuery = "";
-   rowsOnPage = 100;
-   sum1: number = 0;
-   showlinkbutton = true;
-
-   payment: any[];
-   customer_ids: any[];
-   customer_id: string = "";
-   Code1: string = "";
-   amount = "";
-   date1 = "";
-
-   Fshowlinkbutton() {
-    this.showlinkbutton = false;
-  }
-
-   CANCEL() {
-    //clear all fields
-    this.showlinkbutton = true;
-  }
+  data: any[];
+  filterQuery = "";
+  rowsOnPage = 100;
+  sum1: number = 0;
+  showlinkbutton = true;
+  payment: any[];
+  customer_id: string = "";
+  amount = "";
+  date1 = "";
+  idToDelete;
+  showOptionsDiv: boolean = false;
+  paymentName;
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
     this.date1 = this.userservice.getdate();
-    this._SunamiService.getActiveCustomersDetails().subscribe(
-      (data) => this.createObj2(data), //Bind to view
-      err => {
-        // Log errors if any
-        this.popToast("no internet", err);
-      });
   }
 
-   createObj2(data2: any[]) {
-    //this.customers = data2;
-    this.customer_ids = [];
-    for (let key in data2) {
-      this.customer_ids.push(data2[key].Customer_id);
-    }
-  }
-
-   linkpayment() {
-    this.payment = [];
-    if (this.customer_id != null || this.customer_id != "") {
-      this.payment.push({
-        loggedUser: UserServiceService.email, PayMode: "cash",
-        Customer_Id: this.customer_id, Code: this.Code1, amount: this.amount, date1: this.date1
-      });
-      this._SunamiService.postmakePayment(this.payment).subscribe(
-        (data) => this.popToast("result", data), //Bind to view
-        err => {
-          // Log errors if any
-          this.popToast("no internet", err);
-        });
-    }
-    else {
-      this.popToast("error!", "Please enter id number");
-    }
-    this.Code1 = "";
-    this.showlinkbutton = true;
-  }
-
-   popToast(t: string, b: string) {
+  popToast(t: string, b: string) {
     var toast: Toast = {
       type: 'error',
       title: t,
@@ -87,25 +43,21 @@ export class CashRecordsComponent implements OnInit {
       (data) => this.allMpesaPayments(data),
       err => { console.log(err); }
     );
-
   }
 
-   allMpesaPayments(data1: any[]) {
+  allMpesaPayments(data1: any[]) {
     this.data = data1;
     this.calcSum();
-
   }
 
-
-
-   calcSum() {
+  calcSum() {
     this.sum1 = 0;
     for (let key in this.data) {
       this.sum1 += parseInt(this.data[key].Amount);
     }
   }
 
-   changesum() {
+  changesum() {
     setTimeout(() => {
       this.sum1 = 0;
       for (let key in GeneralFilterPipe.filteredArray) {
@@ -115,7 +67,7 @@ export class CashRecordsComponent implements OnInit {
 
   }
 
-   hideloader() {
+  hideloader() {
     document.getElementById("loading").style.display = "none";
   }
 
@@ -123,10 +75,7 @@ export class CashRecordsComponent implements OnInit {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
   }
 
-   idToDelete;
-   showOptionsDiv: boolean = false;
-   paymentName;
-   deleteRecord() {
+  deleteRecord() {
     if (confirm(`are you sure you want to delete this payment linked to: ${this.paymentName}? this action is unreversable`)) {
       this._SunamiService.deletePayment(this.idToDelete).subscribe(res => {
         this.showOptionsDiv = false;
@@ -138,7 +87,7 @@ export class CashRecordsComponent implements OnInit {
     }
   }
 
-   setIdToDelete(value,name) {
+  setIdToDelete(value,name) {
     this.showOptionsDiv = true;
     this.idToDelete = value;
     this.paymentName = name;

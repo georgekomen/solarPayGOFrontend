@@ -47,7 +47,7 @@ export class UnprocessedMpesaComponent implements OnInit {
         //this.customers = data2;
         this.customer_ids = [];
         for (let key in data2) {
-            this.customer_ids.push(data2[key].Customer_id);
+            this.customer_ids.push(data2[key].id);
         }
     }
 

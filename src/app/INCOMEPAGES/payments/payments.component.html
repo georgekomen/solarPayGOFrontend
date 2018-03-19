@@ -2,7 +2,23 @@
 </app-loading-snipper>
 
 
+<!--OPTIONS HERE -->
+<div *ngIf="openModalWindow" class="paymentsmodal">
+  <button class="cancelbtn" (click)="openModalWindow = false"> CLOSE </button>
+  <app-allpayments [Cdata]="customer_id"></app-allpayments>
+</div>
 
+<!--OPTIONS HERE -->
+<div *ngIf="openSMSModalWindow" class="paymentsmodal">
+  <button class="cancelbtn" (click)="openSMSModalWindow = false"> CLOSE </button>
+  <app-texting-modal [Cdata]="data3 | generalFilter : filterQuery"></app-texting-modal>
+</div>
+
+<!--OPTIONS HERE -->
+<div *ngIf="showInvoiceCustomerDiv" class="paymentsmodal">
+  <button class="cancelbtn" (click)="showInvoiceCustomerDiv = false"> CLOSE </button>
+  <app-invoice-item [_customer_id]="customer_id"></app-invoice-item>
+</div>
 
 <!--OPTIONS HERE -->
 <div *ngIf="showOptionsDiv" class="option_modal">
@@ -11,83 +27,11 @@
   <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv"> Cancel </button>
 </div>
 
-
-
-
-<!--invoice div -->
-<div *ngIf="showInvoiceCustomerDiv" class="invoice_modal">
-  <span style="font-size: small; font-style: italic; color: firebrick"> select the item you want to invoice this customer and confirm your action</span> <br>
-
-  <select style="font-size: large;" class="form-control" [(ngModel)]="selectedInvoiceItem">
-    <option *ngFor="let item of invoiceItems" [ngValue]="item"> {{item.Item}}</option>
-  </select>
-
-  <div class="row">
-    <div class="col-md-4 title"> Item </div>
-    <div class="col-md-4 title"> Deposit Amount </div>
-    <div class="col-md-4 title"> Daily Amount </div>
-  </div>
-
-  <div *ngIf="selectedInvoiceItem" style="font-size: large;" class="row">
-       <div class="col-md-4"> {{selectedInvoiceItem.Item}}</div>
-       <div class="col-md-4"> {{selectedInvoiceItem.Deposit}}</div>
-       <div class="col-md-4"> {{selectedInvoiceItem.Amount}}</div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <input type="date" style="font-size: large;" class="form-control" [(ngModel)]="invoiceDate"/>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <button class="btn btn-danger" (click)="showInvoiceCustomerDiv = !showInvoiceCustomerDiv"> Cancel </button>
-    </div>
-    <div class="col-md-6">
-      <button class="btn btn-primary" (click)="showInvoiceCustomerDiv = !showInvoiceCustomerDiv" (click)="invoiceCustomer(selectedInvoiceItem.Item)"> SAVE </button>
-    </div>
-
-  </div>
-</div>
-
-
-
-
-
 <div *ngIf="data">
   {{hideloader()}}
-
-  <!--<div class="col-md-2">
-              <label class="label-control">Rows on page</label>
-              <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
-                  <option [ngValue]="10">10</option>
-                  <option [ngValue]="20">20</option>
-                  <option [ngValue]="50">50</option>
-                  <option [ngValue]="100">100</option>
-                  <option [ngValue]="500">500</option>
-              </select>
-          </div>
-          <div class="col-md-2">
-                          <label class="col-xs-12 label-control">Sort by</label>
-                          <select class="form-control input-sm" [(ngModel)]="sortBy">
-                             <option ngValue ="Name">Name</option>
-                             <option ngValue="Percent">Percent</option>
-                             <option ngValue="Comment">Comment</option>
-                             <option [ngValue]="sortByWordLength">Comment</option>
-                          </select>
-                  </div>
-              <div class="col-md-2">
-                      <label class="col-xs-12 label-control">Sort Order</label>
-                      <select class="form-control input-sm" [(ngModel)]="sortOrder">
-                          <option ngValue="asc">Ascending</option>
-                          <option ngValue="desc">Descending</option>
-                      </select>
-              </div>
-          </div>-->
-
   <div class="panel panel-primary">
     <div class="panel-body">
+      <div *ngIf="filterdiv" id="filterdiv">
       <div class="row">
         <div class="col-md-3">
           <h3> Customer Payments</h3>
@@ -96,40 +40,27 @@
           <input type="checkbox" [(ngModel)]="focusOnDebt" (click)="focusChange()" />Focus on Debt?
         </div>
         <div class="col-md-2">
-
+          <input type="checkbox" [(ngModel)]="excludeinactive" (click)="excludeInactive()" />show active customers?
         </div>
         <div class="col-md-2">
           <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
         </div>
         <div class="col-md-2">
-          <app-texting-modal [Cdata]="data | dataFilter : filterQuery"></app-texting-modal>
-        </div>
+          <button type="submit" class="btn btn-info" (click)="OpenSMS()">Send SMS</button>
 
-        <div class="col-md-1">
-          <div *ngIf="openModalWindow">
-            <app-allpayments [Cdata]="customer_id"></app-allpayments>
-          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-2">
+          Filter:
           <input class="form-control" [(ngModel)]="filterQuery" placeholder="search" (keyup)="changesumgen()" />
         </div>
         <div class="col-md-2">
-          Group:
-          <select class="form-control input-sm" [(ngModel)]="group" (change)="groupfilter()">
-            <option value="below50">below 50%</option>
-            <option value="above50">above 50%</option>
-            <option value="all">all</option>
-          </select>
+          Filter from date:
+          <input type="date" class="form-control" [(ngModel)]="querydate1" />
         </div>
         <div class="col-md-2">
-          Installation Status:
-          <select class="form-control input-sm" [(ngModel)]="installstatus" (change)="exxc()">
-            <option value="active">active</option>
-            <option value="inactive">unistalled</option>
-            <option value="all">all</option>
-          </select>
+          <input type="checkbox" [(ngModel)]="excludeactive" (click)="excludeActive()" />show inactive customers?
         </div>
         <div class="col-md-2">
 
@@ -141,23 +72,28 @@
 
         </div>
       </div>
+      </div>
       <div class="row">
+        <div style="font-size: small" class="col-md-2">
+          <button *ngIf="!filterdiv" (click)="filterdiv = !filterdiv" class="btn btn-info">SHOW FILTER</button>
+          <button *ngIf="filterdiv" (click)="filterdiv = !filterdiv" class="btn btn-info">HIDE FILTER</button>
+        </div>
         <div class="col-md-3">
           <h4> <span class="label label-success">Paid {{ (sumAmountInvoiced - sumAmountDebt) | currency:'KSH':true}}</span></h4>
         </div>
-        <div class="col-md-4">
-          <h4> <span class="label label-info">Invoiced {{ sumAmountInvoiced| currency:'KSH':true}}</span></h4>
+        <div class="col-md-3">
+          <h4> <span class="label label-info">Invoice {{ sumAmountInvoiced| currency:'KSH':true}}</span></h4>
         </div>
         <div class="col-md-3">
-          <h4> <span class="label label-warning">Not Paid {{sumAmountDebt | currency:'KSH':true}} </span></h4>
+          <h4> <span class="label label-warning">Debt {{sumAmountDebt | currency:'KSH':true}} </span></h4>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
           <h4> <span class="label label-primary">{{percent}}%  {{debtOrPaid}}</span></h4>
         </div>
       </div>
     </div>
   </div>
-  <div style="height: 400px; overflow-y: scroll" class="table table-responsive">
+  <div style="height: 430px; overflow-y: scroll" class="table table-responsive">
     <table class="table table-striped" [mfData]="data3 | generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
            [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
       <thead>

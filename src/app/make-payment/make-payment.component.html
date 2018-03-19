@@ -1,0 +1,59 @@
+<div style="padding: 2em" class="row">
+<div class="col-sm-10">
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Customer Id</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="payment.Customer_Id" type="text" class="form-control" placeholder="customer id">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Payment Mode</label>
+    <div class="col-sm-5">
+      <select class="form-control input-md" [(ngModel)]="payment.PayMode">
+        <option *ngFor="let pay of paymodes" [value]="pay">{{pay}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Date</label>
+    <div class="col-sm-5">
+      <input class="form-control input-md" [(ngModel)]="payment.date1" type="date" id="myDate" value="2014-02-09">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Amount</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="payment.amount" type="text" class="form-control" placeholder="amount">
+    </div>
+  </div>
+  <div *ngIf="payment.PayMode=='bank'" class="form-group row">
+    <label class="col-sm-2 col-form-label">Bank Name</label>
+    <div class="col-sm-10">
+      <ng2-completer class="form-control" [(ngModel)]="payment.bankname" placeholder="bank name" [datasource]="banknames" [minSearchLength]="0"
+                     [clearSelected]="false" [textSearching]=""></ng2-completer>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Reference Code</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="payment.Code" type="text" class="form-control" placeholder="code">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-4">
+
+    </div>
+    <div class="col-sm-4">
+      <button type="submit" class="btn btn-primary" (click)="linkpayment()">SUBMIT</button>
+    </div>
+    <div class="col-sm-4">
+
+    </div>
+  </div>
+</div>
+</div>
+<app-allpayments [Cdata]="payment.Customer_Id"></app-allpayments>

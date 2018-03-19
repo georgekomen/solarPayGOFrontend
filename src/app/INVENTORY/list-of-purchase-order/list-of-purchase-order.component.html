@@ -20,7 +20,7 @@
 
 <div class="container">
   <h1>ITEMS</h1>
-    <div style="height: 250px; overflow-y: scroll" class="table table-responsive">
+    <div class="table table-responsive">
     <table class="table table-striped" [mfData]="items | async" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
       [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
       <thead>

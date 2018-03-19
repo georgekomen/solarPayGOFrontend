@@ -1,0 +1,68 @@
+<app-loading-snipper>
+</app-loading-snipper>
+<div *ngIf="data.length>0">
+  <div>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3">
+            <h3> Agent Sales</h3>
+          </div>
+          <div class="col-md-3">
+            <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search" />
+          </div>
+          <div class="col-md-3">
+            <button type="submit" class="btn btn-warning" (click)="exporttoexcel()">export to excel</button>
+          </div>
+          <div class="col-md-3">
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="table table-responsive">
+      <table class="table table-striped" [mfData]="data| generalFilter : filterQuery " #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+             [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+        <thead>
+        <tr>
+          <th style="width: auto">
+            Index
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="Name">Customer Id</mfDefaultSorter>
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="Id">Item</mfDefaultSorter>
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="install_date">Date sold</mfDefaultSorter>
+          </th>
+          <th style="width: auto">
+            <mfDefaultSorter by="Uninstalled_on">Date Taken</mfDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let item of mf.data; let i = index">
+          <tr>
+            <td>{{i+1}}</td>
+            <td>{{item.customer_id}}</td>
+            <td>{{item.item}}</td>
+            <td>{{item.date_given}}</td>
+            <td>{{item.date_taken}}</td>
+          </tr>
+
+        </ng-container>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="12">
+            <mfBootstrapPaginator [rowsOnPageSet]="[100,500]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

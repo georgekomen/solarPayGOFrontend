@@ -1,3 +1,9 @@
+<!--OPTIONS HERE -->
+<div *ngIf="showOptionsDiv" class="option_modal">
+  <button class="btn btn-danger" (click)="deleteRecord()">Delete Record</button>
+  <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv">cancel</button>
+</div>
+
 <div *ngIf="data" class="container-fluid">
     <div class="row">
         <div class="col-md-3">
@@ -49,13 +55,6 @@
                             </th>
                         </tr>
                     </thead>
-
-                     <!--OPTIONS HERE -->
-                    <div *ngIf="showOptionsDiv" class="option_modal">
-                        <button class="btn btn-danger" (click)="deleteRecord()">Delete Record</button>
-                        <button class="btn btn-primary" (click)="showOptionsDiv = !showOptionsDiv">cancel</button>
-                    </div>
-
 
                     <tbody>
                         <ng-container *ngFor="let item of mf.data; let i = index">

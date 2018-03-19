@@ -160,18 +160,20 @@ export class AllExpensesComponent implements OnInit {
     if (this.amount > 1 && this.recepient != "" && this.account != "" && this.date1 != "") {
       this.expense.push({ pic1: this.base64textString, category: this.category, amount: this.amount, recipient: this.recepient, dateset: this.date1, account: this.account, ref_code: this.code, recordedBy: UserServiceService.email, vendor: this.vendor });
       this._SunamiService.postExpense(this.expense).subscribe(
-        (data) => this.popToast1("success", data.toString()), //Bind to view
-        err => {
-          // Log errors if any
-          this.popToast1("no internet", err);
-          this.hideloader();
+        (data) => {
+          this.popToast1("success", data.toString());
+          this.showlinkbutton = true;
+        }, err => {
+              // Log errors if any
+              this.popToast1("no internet", err);
+              this.hideloader();
         });
     }
     else {
       this.popToast1("error", "Fill all fields appropriately");
     }
     this.expense = [];
-    this.showlinkbutton = true;
+
   }
 
    changesum() {

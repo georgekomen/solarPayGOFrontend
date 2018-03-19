@@ -14,9 +14,11 @@ import { GeneralFilterPipe } from "app/general-filter.pipe";
 })
 export class PaymentsComponent implements OnInit {
   //public data: paymentRatesClass[];
-  data: customerPayDetails[];
-  data3: customerPayDetails[];
+  filterdiv: boolean = false;
+  data: CustomerPayDetails[];
+  data3: CustomerPayDetails[];
   filterQuery = "";
+  querydate1: Date;
   rowsOnPage = 100;
   sortBy = "";
   sortOrder = "asc";
@@ -25,21 +27,18 @@ export class PaymentsComponent implements OnInit {
   percent: string = "";
   state: string = '';
   openModalWindow: boolean = false;
+  openSMSModalWindow: boolean = false;
   customer_id: any = "";
   debtAmount: number = 0;
   focusOnDebt: boolean = false;
   debtOrPaid: string = " paid";
-  invoiceItems: any[] = [];
+  excludeactive: boolean = true;
+  excludeinactive: boolean = true;
   showOptionsDiv = false;
   currentlySelectedCustomer = '';
   showInvoiceCustomerDiv = false;
   isOnload: boolean = true;
-  selectedInvoiceItem: any;
-  invoiceDate;
   dateInterVals: any[] = [];
-  group;
-  installstatus;
-
 
   constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService, private _datefilter: DateFilterPipe) {
 
@@ -48,8 +47,6 @@ export class PaymentsComponent implements OnInit {
   ngOnInit(): void {
     this.dateInterVals.push({startDate: '2016-01-01', endDate: this.userservice.getdate()});
     this.getPayRates();
-    this.invoiceDate = this.userservice.getdate();
-    this.getInvoiceItems();
   }
 
   getPayRates(){
@@ -77,9 +74,13 @@ export class PaymentsComponent implements OnInit {
   }
 
   OpenPayHistory() {
+    this.customer_id = this.currentlySelectedCustomer;
     this.showOptionsDiv = false;
     this.openModalWindow = true;
-    this.customer_id = this.currentlySelectedCustomer;
+  }
+
+  OpenSMS() {
+    this.openSMSModalWindow = true;
   }
 
   cancelImageModel() {
@@ -87,6 +88,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   FshowInvoiceCustomerDiv() {
+    this.customer_id = this.currentlySelectedCustomer;
     this.showOptionsDiv = !this.showOptionsDiv;
     this.showInvoiceCustomerDiv = !this.showInvoiceCustomerDiv;
   }
@@ -95,24 +97,6 @@ export class PaymentsComponent implements OnInit {
     this.currentlySelectedCustomer = id;
     this.openModalWindow = false;
     this.showOptionsDiv = true;
-  }
-
-  invoiceCustomer(value: any) {
-    const customerName = this.data.find(t => t.Id === this.currentlySelectedCustomer).Name || '';
-    if (confirm('are you sure you want to invoice ' + customerName + ' a ' + value)) {
-      this._SunamiService.invoiceCustomer([{invoiceDate: this.invoiceDate, customerId: this.currentlySelectedCustomer, item: value, loogedUser: UserServiceService.email}]).subscribe(res => {
-        this.popToast("Result", res);
-      }, error2 => {
-        this.popToast("Error", error2);
-      });
-    }
-  }
-
-
-  getInvoiceItems() {
-    this._SunamiService.getInvoiceItems().subscribe(res => {
-      this.invoiceItems = res;
-    });
   }
 
   createdata(data1: any[], type: any) {
@@ -131,8 +115,7 @@ export class PaymentsComponent implements OnInit {
         Village: data1[key].Village,
         Phone: data1[key].Phone,
         Status: data1[key].Status,
-        Active_status: type,
-        Description: parseInt(data1[key].Description)
+        Active_status: type
       });
     }
     this.data.sort(function (a, b) { return (a.Percent1 > b.Percent1) ? 1 : ((b.Percent1 > a.Percent1) ? -1 : 0); });
@@ -140,31 +123,32 @@ export class PaymentsComponent implements OnInit {
 
   }
 
-  exxc() {
+  excludeInactive() {
     this.isOnload = true;
-    if (this.installstatus == 'active') {
-      this.data3 = this.data.filter(f => f.Active_status == "active");
-    }
-    else if (this.installstatus == 'inactive') {
-      this.data3 = this.data.filter(f => f.Active_status == "inactive");
-    }
-    else if (this.installstatus == 'all') {
-      this.data3 = this.data;
-    }
-    //redo calculations
-    this.fc1();
+    this.excludeinactive = !this.excludeinactive;
+    this.exxc();
   }
 
-  groupfilter(){
-    if(this.group == 'below50'){
-      this.data3 = this.data.filter(f => f.Description < 50 && f.Active_status == 'active');
+  excludeActive() {
+    this.isOnload = true;
+    this.excludeactive = !this.excludeactive;
+    this.exxc();
+  }
+
+  exxc() {
+    if (this.excludeinactive == true && this.excludeactive == false) {
+      this.data3 = this.data.filter(f => f.Active_status == "active");
     }
-    else if(this.group == 'above50'){
-      this.data3 = this.data.filter(f => f.Description >= 50 && f.Active_status == 'active');
+    else if (this.excludeactive == true && this.excludeinactive == false) {
+      this.data3 = this.data.filter(f => f.Active_status == "inactive");
     }
-    else if(this.group == 'all'){
-      this.data3 = this.data.filter(f => (f.Description >0 || f.Description < 0)  && f.Active_status == 'active');
+    else if (this.excludeinactive == true && this.excludeactive == true) {
+      this.data3 = this.data;
     }
+    else {
+      this.data3 = [];
+    }
+
     //redo calculations
     this.fc1();
   }
@@ -176,19 +160,18 @@ export class PaymentsComponent implements OnInit {
 
   fc1() {
     if (this.focusOnDebt == true) {
+
       this.debtOrPaid = " debt";
       this.sortArrayDebt(this.data3);
     }
     else {
+
       this.debtOrPaid = " paid";
       this.sortArrayPaid(this.data3);
     }
   }
 
   sortArrayDebt(data: any[]) {
-    //create a new array
-    //Amount, Invoice, Percent, To, Comment, Village, Phone, Status
-    //sort the complex array
     this.sumAmountInvoiced = 0;
     this.sumAmountDebt = 0;
     for (let key in data) {
@@ -200,20 +183,10 @@ export class PaymentsComponent implements OnInit {
     this.data3 = data;
   }
 
-
-
   sortArrayPaid(data: any[]) {
     this.sumAmountInvoiced = 0;
     this.sumAmountDebt = 0;
     for (let key in data) {
-
-      //clear debt for inactive customers
-      if (data[key].Active_status === 'inactive' && this.isOnload) {
-        data[key].Debt = 0;
-        data[key].Percent1 = 100;
-        data[key].Invoice = data[key].Amount;
-      }
-
       this.sumAmountDebt += data[key].Debt;
       this.sumAmountInvoiced += data[key].Invoice;
       if (!this.isOnload) {
@@ -268,6 +241,11 @@ export class PaymentsComponent implements OnInit {
   }
 
 
+  filterbydate() {
+    this.data3 = this.data.filter(f => f.From >= this.querydate1);
+    //this.data = this._datefilter.transform(this.data, this.dates1);
+  }
+
   switch1(d: any) {
     this.popToast("Results", d);
   }
@@ -311,19 +289,18 @@ export class PaymentsComponent implements OnInit {
   }
 }
 
-interface customerPayDetails {
-  Id: string,
-  Name: string,
-  From: Date,
-  Amount: number,
-  Invoice: number,
-  Debt: number,
-  Percent1: number,
-  To: Date,
-  Comment: string,
-  Village: string,
-  Phone: string,
-  Status: string,
-  Active_status: string,
-  Description: number
+export class CustomerPayDetails {
+  Id: string;
+  Name: string;
+  From: Date;
+  Amount: number;
+  Invoice: number;
+  Debt: number;
+  Percent1: number;
+  To: Date;
+  Comment: string;
+  Village: string;
+  Phone: string;
+  Status: string;
+  Active_status: string;
 }

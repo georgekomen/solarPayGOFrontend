@@ -7,26 +7,26 @@
 
 <div style="margin-top:1cm" *ngIf="!showlinkbutton" class="col-sm-10">
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">EXPENSE CATEGORY</label>
+    <label class="col-sm-2 col-form-label">EXPENSE CATEGORY</label>
 
     <div class="col-sm-10">
-      <select class="form-control input-sm" [(ngModel)]="category">
+      <select class="form-control input-md" [(ngModel)]="category">
             <ng-container *ngFor="let item of data1">
                <option [ngValue] =item.Name>{{item.Name}}</option>
-            </ng-container>                               
+            </ng-container>
         </select>
     </div>
 
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">AMOUNT</label>
+    <label class="col-sm-2 col-form-label">AMOUNT</label>
     <div class="col-sm-10">
       <input [(ngModel)]="amount" type="text" class="form-control" placeholder="AMOUNT">
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">RECIPIENT</label>
+    <label class="col-sm-2 col-form-label">RECIPIENT</label>
     <div *ngIf="userNames" class="col-sm-10">
       <ng2-completer class="form-control" [(ngModel)]="recepient" placeholder="RECIPIENT" [datasource]="userNames" [minSearchLength]="0"
         [clearSelected]="false" [textSearching]=""></ng2-completer>
@@ -34,21 +34,21 @@
   </div>
 
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">VENDOR</label>
+    <label class="col-sm-2 col-form-label">VENDOR</label>
     <div class="col-sm-10">
       <input [(ngModel)]="vendor" type="text" class="form-control" placeholder="VENDOR">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">DATE</label>
+    <label class="col-sm-2 col-form-label">DATE</label>
     <div class="col-sm-10">
       <input [(ngModel)]="date1" type="date" id="myDate" value="2014-02-09">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">ACCOUNT</label>
+    <label class="col-sm-2 col-form-label">ACCOUNT</label>
     <div class="col-sm-10">
-      <select class="form-control input-sm" [(ngModel)]="account">
+      <select class="form-control input-md" [(ngModel)]="account">
                     <option [ngValue]="OfficeMpesa">Office Mpesa</option>
                     <option [ngValue]="EquityBank">Equity Bank</option>
                     <option [ngValue]="OfficePettyCash">Office Petty Cash</option>
@@ -56,20 +56,20 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">TRANSACTION CODE</label>
+    <label class="col-sm-2 col-form-label">TRANSACTION CODE</label>
     <div class="col-sm-10">
       <input [(ngModel)]="code" type="text" class="form-control" placeholder="TRANSACTION CODE">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Receipt Image</label>
+    <label class="col-sm-2 col-form-label">Receipt Image</label>
     <div class="col-sm-10">
       <input type="file" id="filePicker" (change)="handleFileSelect($event)">
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+    <label class="col-sm-3 col-form-label"></label>
     <div class="col-sm-4">
       <button type="submit" class="btn btn-primary" (click)="submitData()">SUBMIT</button>
     </div>
@@ -82,14 +82,14 @@
 <div *ngIf="showlinkbutton" class="col-sm-10">
 
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-3 col-form-label"></label>
+    <label class="col-sm-3 col-form-label"></label>
     <div class="col-sm-7">
       <button type="submit" class="btn btn-primary" (click)="Fshowlinkbutton()">ADD NEW EXPENSE</button>
     </div>
   </div>
 </div>
 
-<div *ngIf="data">
+<div *ngIf="data && showlinkbutton">
 
   <div class="panel panel-primary">
 
@@ -112,7 +112,7 @@
     </div>
   </div>
 
-  <div style="height: 600px; overflow-y: scroll" class="table table-responsive">
+  <div class="table table-responsive">
     <table class="table table-striped" [mfData]="data | generalFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
       [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
       <thead>

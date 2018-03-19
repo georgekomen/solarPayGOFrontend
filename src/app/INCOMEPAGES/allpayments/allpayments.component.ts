@@ -25,21 +25,12 @@ export class AllpaymentsComponent implements OnInit {
 
   ngOnInit() {
 
-    /*this._SunamiService.getActiveCustomersDetails().subscribe(
-      (data) => this.data1 = data, //Bind to view
-      err => {
-        // Log errors if any
-        this.popToast("no internet", err);
-      });*/
   }
 
-  //detect any changes in bound data
   ngOnChanges(changes: any) {
     console.log(this.Cdata);
-    document.getElementById("openModalButton").click();
     this.requestData();
   }
-
 
   changesum() {
     setTimeout(() => {
@@ -52,7 +43,7 @@ export class AllpaymentsComponent implements OnInit {
 
   requestData() {
     this.data = null;
-    this._SunamiService.getPaymentPerCustomer(this.Cdata).subscribe( //pass in this.Customer_Id
+    this._SunamiService.getPaymentPerCustomer(this.Cdata).subscribe(
       (data) => this.datagot(data),
       err => {
         this.popToast("no internet", err);

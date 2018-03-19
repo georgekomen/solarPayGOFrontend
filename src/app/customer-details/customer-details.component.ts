@@ -1,79 +1,106 @@
 import { Component, OnInit } from '@angular/core';
 import { SunamiserviceService } from '../sunamiservice.service';
-import { paymentRatesClass, paymentRatesClassPerClient } from '../classes/paymentRates';
 import { ToasterService, Toast } from 'angular2-toaster';
 import { UserServiceService } from '../user-service.service';
 import { GeneralFilterPipe } from "app/general-filter.pipe";
+import {Customer} from "./shared/customer";
+import {Packages} from "./shared/invoiceItem";
+import {Router} from "@angular/router";
 
 @Component({
-    selector: 'app-customer-details',
-    templateUrl: './customer-details.component.html',
-    styleUrls: ['./customer-details.component.css'],
+  selector: 'app-customer-details',
+  templateUrl: './customer-details.component.html',
+  styleUrls: ['./customer-details.component.css'],
 })
 export class CustomerDetailsComponent implements OnInit {
-    //public data: paymentRatesClass[];
-     data: any[];
-     dataSwitch: any;
-     filterQuery = "";
-     rowsOnPage = 100;
-     sortOrder = "asc";
-     showlinkbutton = true;
+  data: Customer[] = [];
+  filterQuery = "";
+  rowsOnPage = 100;
+  sortOrder = "asc";
+  showlinkbutton = true;
+  customer1: Customer = new Customer();
+  invoiceItems: Packages[]=[];
 
-     invoiceItems: any[] = [];
-     id = "";
-     name = "";
-     number1 = "";
-     number2 = "";
-     number3 = "";
-     box = "";
-     occupation = "";
-     witness = "";
-     witnessid = "";
-     village = "";
-     city = "";
-     description = "";
-     latG = "";
-     lonG = "";
-     recordedBy = "";
-     date1 = "";
-     location = "";
-     package = "";
+  showOptionsDiv: boolean = false;
+  selectedCustomer: Customer;
 
-     Fshowlinkbutton() {
-        this.showlinkbutton = false;
+  Fshowlinkbutton() {
+    this.showlinkbutton = false;
+  }
+
+  EditCustomer(){
+    this.showlinkbutton = false;
+    this.showOptionsDiv = false;
+    this.customer1 = this.selectedCustomer;
+  }
+
+  makePayment(){
+    this.router.navigate(['makepayment', this.selectedCustomer.id]);
+  }
+
+  invoiceCustomer(){
+    this.router.navigate(['invoiceitem', this.selectedCustomer.id]);
+  }
+
+  textCustomer(){
+    this.router.navigate(['textmodal', this.selectedCustomer.id]);
+  }
+
+  reportIssue(){
+    this.router.navigate(['issuerecord', this.selectedCustomer.id]);
+  }
+
+  uninstallCustomer(){
+    this.router.navigate(['uninstall', this.selectedCustomer.id]);
+  }
+
+  customerToEdit(item){
+    this.showOptionsDiv = true;
+    this.selectedCustomer = item;
+  }
+
+  CANCEL() {
+    this.showlinkbutton = true;
+    this.customer1 = new Customer();
+  }
+
+  submit() {
+    this.customer1.recordedBy = UserServiceService.email;
+    this.customer1.date1 = this.customer1.installdate;
+    if ((this.customer1.id != null || this.customer1.id != "") && this.customer1.village != null ) {
+      this._SunamiService.postNewCustomer([this.customer1]).subscribe(
+        (data) => {
+          this.popToast("success", data);
+
+          setTimeout(()=>{
+            this.showlinkbutton = true;
+            this.ngOnInit();
+          },2000);
+        },err => {
+          this.popToast("no internet", err);
+        });
+
     }
-
-     CANCEL() {
-        //clear all fields
-        this.showlinkbutton = true;
+    else {
+      this.popToast("error", "make sure you entered id number and the village name");
     }
+  }
 
-     customer: any[];
-     submit() {
-        this.customer = [];
-        if (this.id != null || this.id != "") {
-            this.customer.push({
-                recordedBy: UserServiceService.email, latG: "", lonG: "", id: this.id, name: this.name, number1: this.number1,
-                number2: this.number2, number3: this.number3, box: this.box, occupation: this.occupation, witness: this.witness, witnessid: this.witnessid,
-                village: this.village, city: this.city, description: this.description, location: this.location, date1: this.date1, package: this.package
-            });
+  constructor(private router: Router, private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
+    this.customer1.date1 = this.userservice.getdate();
+  }
 
-            this._SunamiService.postNewCustomer(this.customer).subscribe(
-                (data) => this.popToast("success", data), //Bind to view
-                err => {
-                    // Log errors if any
-                    this.popToast("no internet", err);
-                });
-        }
-        else {
-            this.popToast("error", "enter id number please");
-        }
-        this.showlinkbutton = true;
-    }
-
-    constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
-        this.date1 = this.userservice.getdate();
-    }
+  ngOnInit(): void {
+    this._SunamiService.getCustomerDetails().subscribe(data =>{
+        this.data = data;
+        this.data.forEach(res=>{
+          res.installdate = res.installdate.toString().substring(0,res.installdate.toString().indexOf('T'));
+        });
+      },err => {
+        this.popToast("no internet", err);
+      });
+    this.getInvoiceItems();
+  }
 
   getInvoiceItems() {
     this._SunamiService.getInvoiceItems().subscribe(res => {
@@ -81,75 +108,46 @@ export class CustomerDetailsComponent implements OnInit {
     });
   }
 
-    ngOnInit(): void {
-      this.getInvoiceItems();
-        /*with delay
-         this._SunamiService.getPaymentRates().subscribe((data:paymentRatesClass[])=> {
-                 setTimeout(()=> {
-                     this.data = data;
-                 }, 6000);
-             });*/
-        this._SunamiService.getCustomerDetails().subscribe(
-            (data) => this.data = data, //Bind to view
-            err => {
-                // Log errors if any
-                this.popToast("no internet", err);
-            });
-    }
-
-  fetchDetailsIfExisting(id) {
-      this.showloader();
-      this._SunamiService.getSingleCustomerDetails(id.value).subscribe(res => {
-       // Todo - fill all fields next time
-        this.hideloader();
-       this.date1 = res['installdate'].substring(0, res['installdate'].indexOf('T'));
-       this.package = res['Package'];
-      }, error2 => {
-        this.hideloader();
-      });
-
-    /*
-      ID;
-        Occupation;
-        Mobile;
-        Mobile2;
-        Mobile3;
-        village;
-        location;
-        city;
-        Witness;
-        Witness_ID;
-        status;
-      */
+  fetchDetailsIfExisting(idd) {
+    this.showloader();
+    this._SunamiService.getSingleCustomerDetails(idd.value).subscribe(res => {
+      // Todo - fill all fields next time
+      this.hideloader();
+      if(res != null){
+        //this.customer1 = res;
+        //this.customer1.installdate = this.customer1.installdate.toString().substring(0,this.customer1.installdate.toString().indexOf('T'));
+        this.popToast('error','the id is already registered to a customer');
+        setTimeout(()=>{
+          this.CANCEL();
+        },2000);
+      } else {
+        const id = this.customer1.id;
+        this.customer1 = new Customer();
+        this.customer1.id = id;
+      }
+    }, error2 => {
+      this.hideloader();
+    });
   }
-    /*
-        private filterByVillage(){
-             this.filterQuery="Village"+this.filterVillage;
-             if(this.filterVillage == ""){
-                 this.filterQuery = "";
-             }
-        }*/
 
+  hideloader() {
+    document.getElementById("loading").style.display = "none";
+  }
 
-     hideloader() {
-        document.getElementById("loading").style.display = "none";
-    }
-
-   showloader() {
+  showloader() {
     document.getElementById("loading").style.display = "block";
   }
 
-     popToast(t: string, b: string) {
-        var toast: Toast = {
-            type: 'error',
-            title: t,
-            body: b
-        };
-        this.toasterService.pop(toast);
-    }
+  popToast(t: string, b: string) {
+    var toast: Toast = {
+      type: 'error',
+      title: t,
+      body: b
+    };
+    this.toasterService.pop(toast);
+  }
 
-     exporttoexcel() {
-        this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
-    }
-
+  exporttoexcel() {
+    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+  }
 }
