@@ -41,6 +41,7 @@ export class LinkControllerComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params)=>{
       const id = params['customer_id'];
       if(id != null && id != undefined && id != 0) {
+        this.customer_id = id;
         this.showlinkbutton = false;
         this.getSystemDetailsPerCustomer(id);
       } else {
@@ -55,7 +56,9 @@ export class LinkControllerComponent implements OnInit {
     this._SunamiService.getSystemDetailsPerCustomer(id).subscribe(
       (data) => {
         this.data = data;
-        this.showlinkbutton = true;
+        if(this.data.length > 0){
+          this.showlinkbutton = true;
+        }
       },err => {
             this.popToast("no internet", err, this.data);
       });
@@ -120,7 +123,7 @@ export class LinkControllerComponent implements OnInit {
       body: d
     };
     this.toasterService.pop(toast);
-    this.getSytems();
+    this.getSystemDetailsPerCustomer(this.customer_id);
   }
 
   popToast(t: string, b: string, d: any[]) {
