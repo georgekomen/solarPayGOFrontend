@@ -50,6 +50,10 @@ export class CustomerDetailsComponent implements OnInit {
     this.router.navigate(['issuerecord', this.selectedCustomer.id]);
   }
 
+  linkController(){
+    this.router.navigate(['link-controller', this.selectedCustomer.id]);
+  }
+
   uninstallCustomer(){
     this.router.navigate(['uninstall', this.selectedCustomer.id]);
   }

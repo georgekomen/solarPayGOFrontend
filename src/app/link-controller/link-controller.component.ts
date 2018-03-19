@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SunamiserviceService } from '../sunamiservice.service';
-import { paymentRatesClass, paymentRatesClassPerClient } from '../classes/paymentRates';
 import { ToasterService, Toast } from 'angular2-toaster';
-import { CompleterService, CompleterData } from 'ng2-completer';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { UserServiceService } from '../user-service.service';
 import { GeneralFilterPipe } from '../general-filter.pipe';
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-link-controller',
@@ -16,14 +14,12 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
 })
 export class LinkControllerComponent implements OnInit {
 
-  dataService: CompleterData;
   searchData: any[];
   customers: any[];
   imei: string = "";
   customer_id: string = "";
   controller: any[];
   data: any[];
-  dataSwitch: any;
   filterQuery = "";
   rowsOnPage = 100;
   sortOrder = "asc";
@@ -31,50 +27,55 @@ export class LinkControllerComponent implements OnInit {
   imeitoUnlink;
   showOptionsDiv: boolean = false;
 
-  constructor(private completerService: CompleterService, private _SunamiService: SunamiserviceService, private toasterService: ToasterService,private userservice: UserServiceService) {
+  constructor(private activatedRoute: ActivatedRoute, private _SunamiService: SunamiserviceService, private toasterService: ToasterService,private userservice: UserServiceService) {
 
   }
 
-
   ngOnInit(): void {
-
-    /*with delay
-     this._SunamiService.getPaymentRates().subscribe((data:paymentRatesClass[])=> {
-             setTimeout(()=> {
-                 this.data = data;
-             }, 6000);
-         });*/
-
-    this.getSytems();
     this._SunamiService.getFreeImei().subscribe(
-      (data) => this.createObj1(data), //Bind to view
+      (data) => this.createObj1(data),
       err => {
-        // Log errors if any
         this.popToast("no internet", err, this.data);
       });
 
-    this._SunamiService.getCustomersWithNoController().subscribe(
-      (data) => this.createObj2(data), //Bind to view
-      err => {
-        // Log errors if any
-        this.popToast("no internet", err, this.data);
+    this.activatedRoute.params.subscribe((params: Params)=>{
+      const id = params['customer_id'];
+      if(id != null && id != undefined && id != 0) {
+        this.showlinkbutton = false;
+        this.getSystemDetailsPerCustomer(id);
+      } else {
+        this.init();
+      }
+    },error2 => {
+
+    });
+  }
+
+  getSystemDetailsPerCustomer(id){
+    this._SunamiService.getSystemDetailsPerCustomer(id).subscribe(
+      (data) => {
+        this.data = data;
+        this.showlinkbutton = true;
+      },err => {
+            this.popToast("no internet", err, this.data);
       });
+  }
+
+  init(){
+    this.showlinkbutton = true;
+    this.getSytems();
   }
 
   getSytems() {
-    this.data = null;
+    this.data = [];
     this._SunamiService.getSystemDetails().subscribe(
-      (data) => this.data = data, //Bind to view
+      (data) => this.data = data,
       err => {
-        // Log errors if any
         this.popToast("no internet", err, this.data);
       });
   }
 
-
-
   createObj1(data1: any[]) {
-    //this.searchData = data1;
     this.searchData = [];
     for (let key in data1) {
       this.searchData.push(data1[key].FreeImei);
@@ -82,7 +83,6 @@ export class LinkControllerComponent implements OnInit {
   }
 
   createObj2(data2: any[]) {
-    //this.customers = data2;
     this.customers = [];
     for (let key in data2) {
       this.customers.push(data2[key].Id);
@@ -94,9 +94,8 @@ export class LinkControllerComponent implements OnInit {
     if (this.imei.length > 10 && this.customer_id != "") {
       this.controller.push({ imei: this.imei, customer_id: this.customer_id, loogeduser: UserServiceService.email });
       this._SunamiService.postLinkController(this.controller).subscribe(
-        (data) => this.popToastpost("results", data), //Bind to view
+        (data) => this.popToastpost("results", data),
         err => {
-          // Log errors if any
           this.popToast("no internet", err, this.data);
         });
     }
@@ -111,10 +110,8 @@ export class LinkControllerComponent implements OnInit {
   }
 
   CANCEL(){
-    //clear all fields
     this.showlinkbutton = true;
   }
-
 
   popToastpost(t: string, d: any[]) {
     var toast: Toast = {
@@ -123,10 +120,8 @@ export class LinkControllerComponent implements OnInit {
       body: d
     };
     this.toasterService.pop(toast);
-    //fetch new data afta registration
     this.getSytems();
   }
-
 
   popToast(t: string, b: string, d: any[]) {
     this.data = d;
@@ -163,7 +158,6 @@ export class LinkControllerComponent implements OnInit {
       });
     } else {
       this.showOptionsDiv = false;
-
     }
   }
 
@@ -171,5 +165,4 @@ export class LinkControllerComponent implements OnInit {
     this.showOptionsDiv = true;
     this.imeitoUnlink = value;
   }
-
 }

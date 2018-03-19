@@ -53,7 +53,7 @@ const APP_ROUTES: Routes = [
   { path: 'customerdetails', component: CustomerDetailsComponent, canActivate: [AuthGuard] },
   { path: 'switchinglogs', component: SwitchinglogsComponent, canActivate: [AuthGuard] },
   { path: 'addcontroller', component: AddcontrollerComponent, canActivate: [AuthGuard] },
-  { path: 'link-controller', component: LinkControllerComponent, canActivate: [AuthGuard] },
+  { path: 'link-controller/:customer_id', component: LinkControllerComponent, canActivate: [AuthGuard] },
   { path: 'income', component: IncomeTabsComponent, canActivate: [AuthGuard] },
   { path: 'summarytabs', component: SummaryTabsComponent, canActivate: [AuthGuard] },
   { path: 'unistallation', component: UninstallationsComponent, canActivate: [AuthGuard] },
