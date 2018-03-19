@@ -4,6 +4,7 @@ import { UserServiceService } from '../user-service.service';
 import { GeneralFilterPipe } from '../general-filter.pipe';
 import { CustomerPayDetails} from "../INCOMEPAGES/payments/payments.component";
 import {ActivatedRoute, Params} from "@angular/router";
+import {Toast, ToasterService} from "angular2-toaster";
 
 
 @Component({
@@ -24,8 +25,18 @@ export class TextingModalComponent {
   data: any[] = [];
   customerid;
 
-  constructor(private _SunamiService: SunamiserviceService,private userservice: UserServiceService, private activatedRoute:ActivatedRoute) {
+  constructor(private toasterService: ToasterService, private _SunamiService: SunamiserviceService,private userservice: UserServiceService, private activatedRoute:ActivatedRoute) {
 
+  }
+
+  popToast(t: string, b: string) {
+    var toast: Toast = {
+      type: 'error',
+      title: t,
+      body: b
+    };
+
+    this.toasterService.pop(toast);
   }
 
   ngOnInit() {
@@ -55,13 +66,18 @@ export class TextingModalComponent {
   }
 
   sendSMS() {
+    if(this.Cdata.length > 3){
+      this.popToast('warning', 'Cannot send this custom message to ' + this.Cdata.length + ' customers, kindly pick one customer to send message to');
+      return;
+    }
+
     if (confirm('are you sure you want to proceed?')) {
       this.SMSn = [];
       this.SMS1 = [];
       this.Cdata.forEach(res => {
         this.SMSn.push({idnumber: res.Id, Invoice: res.Invoice, Paid: res.Amount});
       });
-      this.SMS1.push({recipients: this.SMSn, message:"send"+this.SMStext});
+      this.SMS1.push({sender: UserServiceService.email, recipients: this.SMSn, message:"send"+this.SMStext});
       this._SunamiService.postSMS(this.SMS1).subscribe(
         (res) => this.res1(res),
         err => {
@@ -72,13 +88,18 @@ export class TextingModalComponent {
   }
 
   remindDebt(){
+    if(this.Cdata.length > 3){
+      this.popToast('warning', 'Cannot send reminder to ' + this.Cdata.length + ' customers, kindly pick one customer to send message to');
+      return;
+    }
+
     if (confirm('are you sure you want to remind customer of his/her debt?')) {
       this.SMSn = [];
       this.SMS1 = [];
       this.Cdata.forEach(res => {
         this.SMSn.push({idnumber: res.Id, Invoice: res.Invoice, Paid: res.Amount});
       });
-      this.SMS1.push({recipients: this.SMSn, message: "remind  "});
+      this.SMS1.push({sender: UserServiceService.email, recipients: this.SMSn, message: "remind  "});
       this._SunamiService.postSMS(this.SMS1).subscribe(
         (res) => this.res1(res),
         err => {
