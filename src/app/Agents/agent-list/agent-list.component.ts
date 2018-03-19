@@ -22,6 +22,10 @@ export class AgentListComponent implements OnInit {
 
   }
 
+  getAgentsales(value){
+    this.router.navigate(['agentsales', value]);
+  }
+
   ngOnInit(): void {
     this.getAgents();
   }

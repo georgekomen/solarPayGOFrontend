@@ -51,7 +51,7 @@
         </thead>
         <tbody>
         <ng-container *ngFor="let item of mf.data; let i = index">
-          <tr>
+          <tr (click)="getAgentsales(item.idnumber)">
             <td>{{i+1}}</td>
             <td>{{item.firstname}} {{item.lastname}}</td>
             <td>{{item.idnumber}}</td>

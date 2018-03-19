@@ -66,8 +66,6 @@ export class CustomerDetailsComponent implements OnInit {
 
   submit() {
     this.customer1.recordedBy = UserServiceService.email;
-    this.customer1.latG="";
-    this.customer1.lonG="";
     this.customer1.date1 = this.customer1.installdate;
     if ((this.customer1.id != null || this.customer1.id != "") && this.customer1.village != null ) {
       this._SunamiService.postNewCustomer([this.customer1]).subscribe(
