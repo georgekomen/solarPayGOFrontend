@@ -72,7 +72,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Package</label>
     <div class="col-sm-10">
-      <select class="form-control input-sm" [(ngModel)]="customer1.package">
+      <select class="form-control input-md" [(ngModel)]="customer1.package">
            <option *ngFor="let item of invoiceItems" [value]="item.Item">{{item.Item}}</option>
       </select>
     </div>
@@ -80,7 +80,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Country</label>
     <div class="col-sm-10">
-      <select class="form-control input-sm" [(ngModel)]="customer1.country">
+      <select class="form-control input-md" [(ngModel)]="customer1.country">
         <option ngValue="Kenya">Kenya</option>
         <option ngValue="Uganda">Uganda</option>
         <option ngValue="Malawi">Malawi</option>
@@ -90,7 +90,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Date</label>
     <div class="col-sm-10">
-      <input [placeholder]="customer1.installdate" [(ngModel)]="customer1.installdate" type="date" id="myDate" value="2014-02-09">
+      <input class="form-control" [placeholder]="customer1.installdate" [(ngModel)]="customer1.installdate" type="date" id="myDate" value="2014-02-09">
     </div>
   </div>
   <div class="form-group row">
@@ -212,10 +212,10 @@
       </thead>
       <tbody>
         <ng-container *ngFor="let item of mf.data; let i = index">
-          <tr>
+          <tr (click)="customerToEdit(item)">
             <td>{{i+1}}</td>
-            <td (click)="customerToEdit(item)" *ngIf="item.status==0"><span class="label label-warning">{{item.name}}</span></td>
-            <td (click)="customerToEdit(item)" *ngIf="item.status==1"><span class="label label-info">{{item.name}}</span></td>
+            <td *ngIf="item.status==0"><span class="label label-warning">{{item.name}}</span></td>
+            <td *ngIf="item.status==1"><span class="label label-info">{{item.name}}</span></td>
             <td>{{item.id}}</td>
             <td>{{item.occupation}}</td>
             <td>{{item.number1}}</td>
