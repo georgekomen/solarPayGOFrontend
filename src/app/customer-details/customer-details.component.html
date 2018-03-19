@@ -154,13 +154,20 @@
 
 <!--OPTIONS HERE -->
 <div *ngIf="showOptionsDiv" class="option_modal">
-  <button class="btn btn-info" (click)="EditCustomer()"> EditCustomer</button>
+  <button class="btn btn-success" (click)="EditCustomer()"> EditCustomer</button>
+  <br>
   <button class="btn btn-info" (click)="makePayment()"> Make Payment</button>
-  <button class="btn btn-info" (click)="invoiceCustomer()"> Invoice Customer </button>
+  <br>
+  <button class="btn btn-success" (click)="invoiceCustomer()"> Invoice Customer </button>
+  <br>
   <button class="btn btn-info" (click)="textCustomer()"> Text Customer </button>
-  <button class="btn btn-info" (click)="linkController()"> Link Controller </button>
+  <br>
+  <button class="btn btn-success" (click)="linkController()"> Link Controller </button>
+  <br>
   <button class="btn btn-info" (click)="reportIssue()"> Report Issue </button>
-  <button class="btn btn-info" (click)="uninstallCustomer()"> Uninstall Customer </button>
+  <br>
+  <button class="btn btn-success" (click)="uninstallCustomer()"> Uninstall Customer </button>
+  <br>
   <button class="btn btn-warning" (click)="showOptionsDiv = false"> Cancel </button>
 </div>
 

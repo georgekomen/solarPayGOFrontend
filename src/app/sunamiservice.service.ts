@@ -391,4 +391,12 @@ export class SunamiserviceService {
       //...errors if any
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  getMessagesPerCustomer(id): Observable<any[]> {
+  return this._http.get(`${this.url1}/getMessagesPerCustomer?id=${id}`, this.options)
+  .map((res: Response) => res.json())
+  //...errors if any
+  .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
 }
