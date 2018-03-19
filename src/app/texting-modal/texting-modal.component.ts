@@ -61,7 +61,7 @@ export class TextingModalComponent {
       this.Cdata.forEach(res => {
         this.SMSn.push({idnumber: res.Id, Invoice: res.Invoice, Paid: res.Amount});
       });
-      this.SMS1.push({recipients: this.SMSn, message: this.SMStext});
+      this.SMS1.push({recipients: this.SMSn, message:"send"+this.SMStext});
       this._SunamiService.postSMS(this.SMS1).subscribe(
         (res) => this.res1(res),
         err => {
