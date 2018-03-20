@@ -42,7 +42,7 @@ export class SwitchinglogsComponent implements OnInit {
   }
 
    exporttoexcel() {
-    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "switch_logs");
   }
 
 }

@@ -102,7 +102,7 @@ export class AddcontrollerComponent implements OnInit {
   }
 
    exporttoexcel() {
-    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "controllers");
   }
 
    deleteController(){

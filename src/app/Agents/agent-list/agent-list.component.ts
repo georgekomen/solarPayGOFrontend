@@ -59,6 +59,6 @@ export class AgentListComponent implements OnInit {
   }
 
   exporttoexcel() {
-    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "agent_list");
   }
 }

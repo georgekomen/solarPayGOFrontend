@@ -71,6 +71,6 @@ export class AllpaymentsComponent implements OnInit {
   }
 
   exporttoexcel() {
-    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "all_payments");
   }
 }

@@ -19,7 +19,7 @@ export class EventlogsComponent implements OnInit {
   constructor(private sunamiService: SunamiserviceService, private userservice: UserServiceService) { }
 
   exporttoexcel() {
-    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "event_logs");
   }
 
   hideloader() {

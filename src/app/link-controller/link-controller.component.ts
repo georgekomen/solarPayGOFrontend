@@ -150,7 +150,7 @@ export class LinkControllerComponent implements OnInit {
   }
 
   exporttoexcel() {
-    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "linked_controllers");
   }
 
   unlink(){

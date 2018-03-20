@@ -72,7 +72,7 @@ export class CashRecordsComponent implements OnInit {
   }
 
   private exporttoexcel() {
-    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "cash_records");
   }
 
   deleteRecord() {

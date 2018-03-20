@@ -152,6 +152,6 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   exporttoexcel() {
-    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "test1");
+    this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "customer_list");
   }
 }
