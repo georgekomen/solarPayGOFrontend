@@ -23,7 +23,7 @@ export class AgentRegistrationComponent implements OnInit {
   submit() {
     if (this.agent.idnumber != null && this.agent.idnumber != "") {
       this._SunamiService.registerAgent(this.agent).subscribe(
-        (data) => this.popToast("results", data),
+        (data) => this.popToast("results", "successfully registered the agent"),
         err => {
           this.popToast("no internet", err);
         });
