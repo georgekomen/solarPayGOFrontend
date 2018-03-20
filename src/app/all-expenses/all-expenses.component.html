@@ -11,9 +11,7 @@
 
     <div class="col-sm-10">
       <select class="form-control input-md" [(ngModel)]="category">
-            <ng-container *ngFor="let item of data1">
-               <option [ngValue] =item.Name>{{item.Name}}</option>
-            </ng-container>
+               <option *ngFor="let item of data1" [value] ="item.Name">{{item.Name}}</option>
         </select>
     </div>
 
@@ -42,16 +40,16 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">DATE</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="date1" type="date" id="myDate" value="2014-02-09">
+      <input [(ngModel)]="date1" class="form-control" type="date" id="myDate" value="2014-02-09">
     </div>
   </div>
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">ACCOUNT</label>
     <div class="col-sm-10">
       <select class="form-control input-md" [(ngModel)]="account">
-                    <option [ngValue]="OfficeMpesa">Office Mpesa</option>
-                    <option [ngValue]="EquityBank">Equity Bank</option>
-                    <option [ngValue]="OfficePettyCash">Office Petty Cash</option>
+                    <option [value]="OfficeMpesa">Office Mpesa</option>
+                    <option [value]="EquityBank">Equity Bank</option>
+                    <option [value]="OfficePettyCash">Office Petty Cash</option>
                 </select>
     </div>
   </div>
@@ -64,7 +62,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Receipt Image</label>
     <div class="col-sm-10">
-      <input type="file" id="filePicker" (change)="handleFileSelect($event)">
+      <input type="file" class="form-control" id="filePicker" (change)="handleFileSelect($event)">
     </div>
   </div>
 

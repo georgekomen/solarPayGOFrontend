@@ -7,7 +7,7 @@
       <label class="col-md-2 col-form-label">Item: </label>
       <div class="col-sm-10">
         <select style="font-size: large;" class="form-control" [(ngModel)]="selectedInvoiceItem">
-          <option *ngFor="let item of invoiceItems" [ngValue]="item"> {{item.Item}}</option>
+          <option *ngFor="let item of invoiceItems" [value]="item"> {{item.Item}}</option>
         </select>
       </div>
     </div>

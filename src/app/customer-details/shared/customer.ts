@@ -1,6 +1,7 @@
 export class Customer{
   agentcode;
-  witnessnumber
+  witnessnumber;
+  gender;
   id;
   box;
   city;
