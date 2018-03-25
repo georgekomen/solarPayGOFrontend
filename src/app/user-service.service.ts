@@ -18,10 +18,11 @@ export class UserServiceService {
   public static level: number = 0;
   public static email: string;
   public static name2: string = "";
+  public static office_id: number[] = [];
    _http: Http;
    toasterService: ToasterService;
-   // private url1:string = "//localhost:57339/api/customers";
-   private url1:string = "//api.sunamiapp.net/api/customers";
+   private url1:string = "//localhost:57339/api/customers";
+   // private url1:string = "//api.sunamiapp.net/api/customers";
 
   constructor(private ToasterService: ToasterService, _Http: Http, private _csvService: CsvService) {
     this.toasterService = ToasterService;
@@ -71,6 +72,7 @@ export class UserServiceService {
       for (let key in UserServiceService.data) {
         UserServiceService.allowed = UserServiceService.data[key].allowed;
         UserServiceService.level = parseInt(UserServiceService.data[key].level);
+        UserServiceService.office_id = UserServiceService.data[key].office_id;
         console.log(UserServiceService.allowed);
         console.log(UserServiceService.level);
       }
