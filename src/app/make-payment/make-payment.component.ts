@@ -11,6 +11,7 @@ import {ActivatedRoute, Params} from "@angular/router";
   styleUrls: ['./make-payment.component.css']
 })
 export class MakePaymentComponent implements OnInit {
+  flag = 0;
   banknames = ["Equity", "KCB", "Co-op", "Other"];
   payment: Payment;
   paymodes = ['cash', 'bank', 'mtn_uganda', 'airtel_uganda', 'mpesa'];
@@ -31,6 +32,7 @@ export class MakePaymentComponent implements OnInit {
         this.payment.loggedUser = UserServiceService.email;
         this._SunamiService.postmakePayment([this.payment]).subscribe(data => {
           this.popToast("result", data);
+          this.flag++;
         }, err => {
           this.popToast("no internet", err);
         });

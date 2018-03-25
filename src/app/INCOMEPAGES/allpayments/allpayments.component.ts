@@ -11,6 +11,12 @@ import { UserServiceService } from '../../user-service.service';
   styleUrls: ['./allpayments.component.css']
 })
 export class AllpaymentsComponent implements OnInit {
+  flag = 0;
+  @Input() set _fetchData(fetchData){
+    if(fetchData != this.flag){
+      this.requestData();
+    }
+  }
   @Input() Cdata: any;
   data: any[];
   data1: any[];
