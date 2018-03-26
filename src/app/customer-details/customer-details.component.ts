@@ -83,12 +83,8 @@ export class CustomerDetailsComponent implements OnInit {
     this.router.navigate(['uninstall', this.selectedCustomer.id]);
   }
 
-  getSwitchLogs(){
-    this.router.navigate(['switchinglogs', this.selectedCustomer.id]);
-  }
-
-  getEventLogs(){
-    this.router.navigate(['eventlogs', this.selectedCustomer.id]);
+  getLogs(){
+    this.router.navigate(['switching', this.selectedCustomer.id]);
   }
 
   customerToEdit(item){

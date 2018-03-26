@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { SunamiserviceService } from '../sunamiservice.service';
 import { paymentRatesClass, paymentRatesClassPerClient } from '../classes/paymentRates';
 import { ToasterService, Toast } from 'angular2-toaster';
@@ -12,7 +12,8 @@ import {ActivatedRoute, Params} from "@angular/router";
   styleUrls: ['./switchinglogs.component.css']
 })
 export class SwitchinglogsComponent implements OnInit {
-  data: any[];
+  @Input() customer_id: string;
+  data: any[] = [];
   public filterQuery = "";
   public rowsOnPage = 100;
   constructor(private activatedRoute: ActivatedRoute,private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
@@ -21,20 +22,21 @@ export class SwitchinglogsComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params)=>{
-      const id = params['customer_id'];
-      if(id != null && id != undefined && id != 0) {
-        this._SunamiService.getswitchlogsPerCustomer(id).subscribe(
+      this.customer_id = params['customer_id'];
+    },error2 => {
+
+    });
+
+      if(this.customer_id != null && this.customer_id != undefined && this.customer_id != '') {
+        this._SunamiService.getswitchlogsPerCustomer(this.customer_id).subscribe(
           (data) => this.data = data, //Bind to view
           err => {
             // Log errors if any
             this.popToast("no internet", err);
           });
-      } else {
+      } else if(this.customer_id == '0') {
         this.getAlllogs();
       }
-    },error2 => {
-
-    });
   }
 
   getAlllogs(){
@@ -54,10 +56,6 @@ export class SwitchinglogsComponent implements OnInit {
     };
 
     this.toasterService.pop(toast);
-  }
-
-   hideloader() {
-    document.getElementById("loading").style.display = "none";
   }
 
    exporttoexcel() {

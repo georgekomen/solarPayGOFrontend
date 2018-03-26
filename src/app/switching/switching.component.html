@@ -1,0 +1,24 @@
+<div style="height: 100%; padding-left: 3em" *ngIf="customer_id !='' && customer_id != undefined && customer_id != null">
+  <div class="row">
+    <div class="col-sm-3">
+
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-primary" (click)="eventlogs = true">Event Logs</button>
+
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-primary" (click)="eventlogs = false">Switching Logs</button>
+
+    </div>
+    <div class="col-sm-3">
+
+    </div>
+  </div>
+  <div *ngIf="eventlogs">
+    <app-eventlogs [customer_id]="customer_id"></app-eventlogs>
+  </div>
+  <div *ngIf="!eventlogs">
+    <app-switchinglogs [customer_id]="customer_id"></app-switchinglogs>
+  </div>
+</div>
