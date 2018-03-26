@@ -159,10 +159,9 @@
   </div>
 </div>
 
-
 <!--OPTIONS HERE -->
 <div *ngIf="showOptionsDiv" class="option_modal">
-  <button class="btn btn-success" (click)="EditCustomer()"> EditCustomer</button>
+  <button class="btn btn-success" (click)="EditCustomer()"> Edit Customer</button>
   <br>
   <button class="btn btn-info" (click)="makePayment()"> Make Payment</button>
   <br>
@@ -176,11 +175,14 @@
   <br>
   <button class="btn btn-success" (click)="uninstallCustomer()"> Uninstall Customer </button>
   <br>
+  <button class="btn btn-info" (click)="getSwitchLogs()"> Switch Logs </button>
+  <br>
+  <button class="btn btn-success" (click)="getEventLogs()"> Event Logs </button>
+  <br>
   <button class="btn btn-warning" (click)="showOptionsDiv = false"> Cancel </button>
 </div>
 
-
-<div *ngIf="data.length>0 && showlinkbutton">
+<div *ngIf="getData().length>0 && showlinkbutton">
   {{hideloader()}}
   <div class="panel panel-primary">
     <div class="panel-body">
@@ -199,7 +201,7 @@
   </div>
 
   <div class="table table-responsive">
-    <table class="table table-striped" [mfData]="data | generalFilter : filterQuery " #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+    <table class="table table-striped" [mfData]="getData() | generalFilter : filterQuery " #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
       [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
       <thead>
         <tr>

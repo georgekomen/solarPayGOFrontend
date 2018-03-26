@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SunamiserviceService} from "../sunamiservice.service";
 import {UserServiceService} from "../user-service.service";
 import {GeneralFilterPipe} from "../general-filter.pipe";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-eventlogs',
@@ -16,7 +17,7 @@ export class EventlogsComponent implements OnInit {
   sortBy= '';
   sortOrder = '';
 
-  constructor(private sunamiService: SunamiserviceService, private userservice: UserServiceService) { }
+  constructor(private activatedRoute: ActivatedRoute, private sunamiService: SunamiserviceService, private userservice: UserServiceService) { }
 
   exporttoexcel() {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "event_logs");
@@ -27,8 +28,19 @@ export class EventlogsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sunamiService.eventlogs().subscribe(res => {
-      this.data = res;
+    this.activatedRoute.params.subscribe((params: Params)=>{
+      const id = params['customer_id'];
+      if(id != null && id != undefined && id != 0) {
+        this.sunamiService.eventlogsPerCustomer(id).subscribe(res => {
+          this.data = res;
+        });
+      } else {
+        this.sunamiService.eventlogs().subscribe(res => {
+          this.data = res;
+        });
+      }
+    },error2 => {
+
     });
   }
 

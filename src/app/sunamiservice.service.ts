@@ -8,8 +8,8 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class SunamiserviceService {
-   private url1:string = "//api.sunamiapp.net/api/customers";
-   // private url1:string = "//localhost:57339/api/customers";
+   // private url1:string = "//api.sunamiapp.net/api/customers";
+   private url1:string = "//localhost:57339/api/customers";
    headers: Headers = new Headers();
    options;
    constantParams: string;
@@ -89,6 +89,20 @@ export class SunamiserviceService {
 
   getPaymentPerCustomer(id: string): Observable<any[]> {
     return this._http.get(`${this.url1}/getPaymentPerCustomer?id=${id}&${this.constantParams}`, this.options)
+      .map((res: Response) => res.json())
+      //...errors if any
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getswitchlogsPerCustomer(id: string): Observable<any[]>{
+    return this._http.get(`${this.url1}/getswitchlogsPerCustomer?id=${id}&${this.constantParams}`, this.options)
+      .map((res: Response) => res.json())
+      //...errors if any
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  eventlogsPerCustomer(id: string): Observable<any[]>{
+    return this._http.get(`${this.url1}/eventlogsPerCustomer?id=${id}&${this.constantParams}`, this.options)
       .map((res: Response) => res.json())
       //...errors if any
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
