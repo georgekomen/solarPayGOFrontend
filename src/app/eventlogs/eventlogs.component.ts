@@ -27,8 +27,9 @@ export class EventlogsComponent implements OnInit {
 
 
   ngOnInit() {
+    let pathparam;
     this.activatedRoute.params.subscribe((params: Params)=>{
-      this.customer_id = params['customer_id'];
+      pathparam = params['customer_id'];
     },error2 => {
 
     });
@@ -37,7 +38,7 @@ export class EventlogsComponent implements OnInit {
         this.sunamiService.eventlogsPerCustomer(this.customer_id).subscribe(res => {
           this.data = res;
         });
-      } else if(this.customer_id == '0') {
+      } else if(pathparam == '0' || pathparam == 0) {
         this.sunamiService.eventlogs().subscribe(res => {
           this.data = res;
         });
