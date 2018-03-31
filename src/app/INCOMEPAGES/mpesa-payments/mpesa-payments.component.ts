@@ -66,6 +66,10 @@ export class MpesaPaymentsComponent implements OnInit {
         document.getElementById("loading").style.display = "none";
     }
 
+  getCurrency(): string{
+    return UserServiceService.currency;
+  }
+
      exporttoexcel(){
         this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray,"mpesa_payments");
     }

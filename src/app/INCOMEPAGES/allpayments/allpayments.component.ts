@@ -33,6 +33,10 @@ export class AllpaymentsComponent implements OnInit {
 
   }
 
+  getCurrency(): string{
+    return UserServiceService.currency;
+  }
+
   ngOnChanges(changes: any) {
     console.log(this.Cdata);
     this.requestData();

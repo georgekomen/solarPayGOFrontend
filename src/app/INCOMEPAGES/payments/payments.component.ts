@@ -284,6 +284,10 @@ export class PaymentsComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
+  getCurrency(): string{
+    return UserServiceService.currency;
+  }
+
   exporttoexcel() {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "all_payments");
   }

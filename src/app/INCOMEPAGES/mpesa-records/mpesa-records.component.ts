@@ -32,6 +32,10 @@ export class MpesaRecordsComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
+  getCurrency(): string{
+    return UserServiceService.currency;
+  }
+
   ngOnInit() {
     this._SunamiService.getMpesaRecords().subscribe(
       (data) => this.allMpesaPayments(data),
