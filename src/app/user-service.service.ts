@@ -22,8 +22,8 @@ export class UserServiceService {
   public static currency: string;
    _http: Http;
    toasterService: ToasterService;
-   private url1:string = "//localhost:57339/api/customers";
-   // private url1:string = "//api.sunamiapp.net/api/customers";
+   // private url1:string = "//localhost:57339/api/customers";
+   private url1:string = "//api.sunamiapp.net/api/customers";
 
   constructor(private ToasterService: ToasterService, _Http: Http, private _csvService: CsvService) {
     this.toasterService = ToasterService;

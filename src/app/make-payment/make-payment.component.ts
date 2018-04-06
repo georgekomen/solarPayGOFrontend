@@ -27,8 +27,11 @@ export class MakePaymentComponent implements OnInit {
   }
 
   linkpayment() {
+    if(this.payment.PayMode==null || this.payment.date1 == null || this.payment.amount == null){
+      this.popToast("error!", "Fill fields correctly");
+      return;
+    }
     if(confirm('Are you sure you want to proceed?')==true) {
-      if (this.payment.Customer_Id != null || this.payment.Customer_Id != "") {
         this.payment.loggedUser = UserServiceService.email;
         this._SunamiService.postmakePayment([this.payment]).subscribe(data => {
           this.popToast("result", data);
@@ -36,10 +39,6 @@ export class MakePaymentComponent implements OnInit {
         }, err => {
           this.popToast("no internet", err);
         });
-      }
-      else {
-        this.popToast("error!", "Please enter id number");
-      }
     }
   }
 
