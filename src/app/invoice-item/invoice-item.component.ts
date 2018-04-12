@@ -13,7 +13,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 })
 export class InvoiceItemComponent implements OnInit {
   invoiceItems: Packages[] = [];
-  selectedInvoiceItem: Packages;
+  selectedInvoiceItem: string;
   invoice: InvoiceItem = new InvoiceItem();
   invoicedItems: InvoiceItem[] = [];
   customer_id1: string = "";
@@ -59,7 +59,7 @@ export class InvoiceItemComponent implements OnInit {
 
   invoiceCustomer() {
     this.invoice.loogedUser = UserServiceService.email;
-    this.invoice.item = this.selectedInvoiceItem.Item;
+    this.invoice.item = this.selectedInvoiceItem;
     if (confirm('are you sure you want to proceed?')) {
       this._SunamiService.invoiceCustomer([this.invoice]).subscribe(res => {
         this.popToast("Result", res);
