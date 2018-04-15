@@ -22,6 +22,7 @@ export class CustomerDetailsComponent implements OnInit {
   invoiceItems: Packages[]=[];
   showOptionsDiv: boolean = false;
   selectedCustomer: Customer;
+  newCustomer: boolean = false;
 
   constructor(private router: Router, private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
     this.customer1.date1 = this.userservice.getdate();
@@ -51,6 +52,7 @@ export class CustomerDetailsComponent implements OnInit {
 
   Fshowlinkbutton() {
     this.showlinkbutton = false;
+    this.newCustomer = true;
   }
 
   EditCustomer(){
@@ -93,6 +95,7 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   CANCEL() {
+    this.newCustomer = false;
     this.showlinkbutton = true;
     this.customer1 = new Customer();
   }
@@ -103,6 +106,7 @@ export class CustomerDetailsComponent implements OnInit {
     if ((this.customer1.id != null || this.customer1.id != "") && this.customer1.village != null ) {
       this._SunamiService.postNewCustomer([this.customer1]).subscribe(
         (data) => {
+          this.newCustomer = false;
           this.popToast("success", data);
 
           setTimeout(()=>{
