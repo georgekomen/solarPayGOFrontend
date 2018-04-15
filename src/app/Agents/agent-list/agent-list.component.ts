@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 })
 export class AgentListComponent implements OnInit {
 
-  public data: AgentPayload[] = [];
+  public data: AgentPayload[];
   public filterQuery = "";
   public rowsOnPage = 100;
   public sortOrder = "asc";
@@ -37,6 +37,7 @@ export class AgentListComponent implements OnInit {
   getAgents() {
     this._SunamiService.getAgents().subscribe(
       (data) => {
+        this.data = [];
         this.data = data;
         this.hideloader();
       },
