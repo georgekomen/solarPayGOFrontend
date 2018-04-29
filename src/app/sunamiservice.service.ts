@@ -87,6 +87,12 @@ export class SunamiserviceService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
   }
 
+  deleteInvoice(customer_id: string, item: string): Observable<any> {
+    return this._http.get(`${this.url1}/deleteInvoice?id=${customer_id}&id1=${item}&${this.constantParams}`, this.options) // ...using post request
+      .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+  }
+
   getPaymentPerCustomer(id: string): Observable<any[]> {
     return this._http.get(`${this.url1}/getPaymentPerCustomer?id=${id}&${this.constantParams}`, this.options)
       .map((res: Response) => res.json())

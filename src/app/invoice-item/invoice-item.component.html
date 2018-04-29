@@ -64,6 +64,9 @@
       <div class="col-sm-4">
         Date Of Invoice
       </div>
+      <div class="col-sm-4">
+        Action
+      </div>
     </div>
     <div *ngFor="let item of invoicedItems" class="row">
       <div class="col-sm-4">
@@ -71,6 +74,9 @@
       </div>
       <div class="col-sm-4">
         {{item.invoiceDate}}
+      </div>
+      <div class="col-sm-4">
+        <i (click)="deleteInvoice(item.item)" class="material-icons" style="color:red"> delete </i>
       </div>
     </div>
   </div>

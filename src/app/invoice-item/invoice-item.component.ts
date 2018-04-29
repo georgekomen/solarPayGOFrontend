@@ -57,6 +57,15 @@ export class InvoiceItemComponent implements OnInit {
     });
   }
 
+  deleteInvoice(item){
+    if(confirm("Are you sure you want to delete "+item+" from this customer")){
+      this._SunamiService.deleteInvoice(this.invoice.customerId,item).subscribe(res=>{
+        this.popToast("Result", res);
+        this.init();
+      });
+    }
+  }
+
   invoiceCustomer() {
     this.invoice.loogedUser = UserServiceService.email;
     this.invoice.item = this.selectedInvoiceItem;
