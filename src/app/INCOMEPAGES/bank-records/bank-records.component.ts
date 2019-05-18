@@ -27,6 +27,10 @@ export class BankRecordsComponent implements OnInit {
     this.date1 = this.userservice.getdate();
   }
 
+  getCurrency(): string{
+    return UserServiceService.currency;
+  }
+
   popToast(t: string, b: string) {
     var toast: Toast = {
       type: 'error',

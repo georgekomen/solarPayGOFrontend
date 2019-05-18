@@ -23,4 +23,6 @@ export class Customer{
   package;
   status;
   installdate;
+  switch_payrate_threshold:number;
+  automate_switch: boolean;
 }

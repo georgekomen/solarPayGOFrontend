@@ -11,6 +11,7 @@ import {ActivatedRoute, Params} from "@angular/router";
   styleUrls: ['./make-payment.component.css']
 })
 export class MakePaymentComponent implements OnInit {
+  flag = 0;
   banknames = ["Equity", "KCB", "Co-op", "Other"];
   payment: Payment;
   paymodes = ['cash', 'bank', 'mtn_uganda', 'airtel_uganda', 'mpesa'];
@@ -26,18 +27,18 @@ export class MakePaymentComponent implements OnInit {
   }
 
   linkpayment() {
+    if(this.payment.PayMode==null || this.payment.date1 == null || this.payment.amount == null){
+      this.popToast("error!", "Fill fields correctly");
+      return;
+    }
     if(confirm('Are you sure you want to proceed?')==true) {
-      if (this.payment.Customer_Id != null || this.payment.Customer_Id != "") {
         this.payment.loggedUser = UserServiceService.email;
         this._SunamiService.postmakePayment([this.payment]).subscribe(data => {
           this.popToast("result", data);
+          this.flag++;
         }, err => {
           this.popToast("no internet", err);
         });
-      }
-      else {
-        this.popToast("error!", "Please enter id number");
-      }
     }
   }
 

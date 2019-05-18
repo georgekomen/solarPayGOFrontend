@@ -71,6 +71,10 @@ export class CashRecordsComponent implements OnInit {
     document.getElementById("loading").style.display = "none";
   }
 
+  getCurrency(): string{
+    return UserServiceService.currency;
+  }
+
   private exporttoexcel() {
     this.userservice.exporttoexcel(GeneralFilterPipe.filteredArray, "cash_records");
   }

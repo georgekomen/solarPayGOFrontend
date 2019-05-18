@@ -251,6 +251,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   toggleSwitch(k1: string) {
+    this.data3.find(gg=>gg.Id==k1).Status = this.data3.find(gg=>gg.Id==k1).Status == '1'? '0': '1';
     this._SunamiService.getSwitch(k1, UserServiceService.email).subscribe(
       (dataSwitch) => this.switch1(dataSwitch), //Bind to view
       err => {
@@ -282,6 +283,10 @@ export class PaymentsComponent implements OnInit {
       body: b
     };
     this.toasterService.pop(toast);
+  }
+
+  getCurrency(): string{
+    return UserServiceService.currency;
   }
 
   exporttoexcel() {

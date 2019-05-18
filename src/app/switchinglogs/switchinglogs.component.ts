@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { SunamiserviceService } from '../sunamiservice.service';
 import { paymentRatesClass, paymentRatesClassPerClient } from '../classes/paymentRates';
 import { ToasterService, Toast } from 'angular2-toaster';
 import { UserServiceService } from '../user-service.service';
 import { GeneralFilterPipe } from '../general-filter.pipe';
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-switchinglogs',
@@ -11,14 +12,35 @@ import { GeneralFilterPipe } from '../general-filter.pipe';
   styleUrls: ['./switchinglogs.component.css']
 })
 export class SwitchinglogsComponent implements OnInit {
-  data: any[];
+  @Input() customer_id: string;
+  data: any[] = [];
   public filterQuery = "";
   public rowsOnPage = 100;
-  constructor(private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
+  constructor(private activatedRoute: ActivatedRoute,private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
 
   }
 
   ngOnInit() {
+    let pathparam;
+    this.activatedRoute.params.subscribe((params: Params)=>{
+      pathparam = params['customer_id'];
+    },error2 => {
+
+    });
+
+      if(this.customer_id != null && this.customer_id != undefined && this.customer_id != '') {
+        this._SunamiService.getswitchlogsPerCustomer(this.customer_id).subscribe(
+          (data) => this.data = data, //Bind to view
+          err => {
+            // Log errors if any
+            this.popToast("no internet", err);
+          });
+      } else if(pathparam == '0' || pathparam == 0) {
+        this.getAlllogs();
+      }
+  }
+
+  getAlllogs(){
     this._SunamiService.getswitchlogs().subscribe(
       (data) => this.data = data, //Bind to view
       err => {
@@ -35,10 +57,6 @@ export class SwitchinglogsComponent implements OnInit {
     };
 
     this.toasterService.pop(toast);
-  }
-
-   hideloader() {
-    document.getElementById("loading").style.display = "none";
   }
 
    exporttoexcel() {

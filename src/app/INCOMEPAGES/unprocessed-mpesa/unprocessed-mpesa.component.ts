@@ -61,6 +61,10 @@ export class UnprocessedMpesaComponent implements OnInit {
         this.toasterService.pop(toast);
     }
 
+  getCurrency(): string{
+    return UserServiceService.currency;
+  }
+
      popToast2(b: string) {
         var toast: Toast = {
             type: 'error',

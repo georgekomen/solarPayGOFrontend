@@ -61,6 +61,7 @@ import {IssueRecordComponent} from "./issue-record/issue-record.component";
 import {AgentRegistrationComponent} from "./Agents/agent-registration/agent-registration.component";
 import {AgentListComponent} from "./Agents/agent-list/agent-list.component";
 import {AgentSalesComponent} from "./Agents/agent-sales/agent-sales.component";
+import {SwitchingComponent} from "./switching/switching.component"
 export const firebaseConfig = {
   apiKey: "AIzaSyBGIvamMbCC3gbrPJcHVs15zC0_cPHG_L8",
   authDomain: "sunamiapp.firebaseapp.com",
@@ -71,6 +72,7 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
+    SwitchingComponent,
     AgentRegistrationComponent,
     AgentSalesComponent,
     AgentListComponent,

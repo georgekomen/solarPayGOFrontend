@@ -139,6 +139,20 @@
       <input [(ngModel)]="customer1.agentcode" type="text" class="form-control" placeholder="agent code">
     </div>
   </div>
+  <div *ngIf="!newCustomer">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Auto switch payrate cutoff</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="customer1.switch_payrate_threshold" type="number" class="form-control" placeholder="Auto switch payrate cutoff">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Switch mode</label>
+      <div class="col-sm-10">
+        <input type="checkbox" [(ngModel)]="customer1.automate_switch" />Automate switching?
+      </div>
+    </div>
+  </div>
   <div class="form-group row">
     <label class="col-sm-3 col-form-label"></label>
     <div class="col-sm-4">
@@ -159,10 +173,9 @@
   </div>
 </div>
 
-
 <!--OPTIONS HERE -->
 <div *ngIf="showOptionsDiv" class="option_modal">
-  <button class="btn btn-success" (click)="EditCustomer()"> EditCustomer</button>
+  <button class="btn btn-success" (click)="EditCustomer()"> Edit Customer</button>
   <br>
   <button class="btn btn-info" (click)="makePayment()"> Make Payment</button>
   <br>
@@ -176,11 +189,12 @@
   <br>
   <button class="btn btn-success" (click)="uninstallCustomer()"> Uninstall Customer </button>
   <br>
+  <button class="btn btn-info" (click)="getLogs()"> Logs </button>
+  <br>
   <button class="btn btn-warning" (click)="showOptionsDiv = false"> Cancel </button>
 </div>
 
-
-<div *ngIf="data.length>0 && showlinkbutton">
+<div *ngIf="getData().length>0 && showlinkbutton">
   {{hideloader()}}
   <div class="panel panel-primary">
     <div class="panel-body">
@@ -199,7 +213,7 @@
   </div>
 
   <div class="table table-responsive">
-    <table class="table table-striped" [mfData]="data | generalFilter : filterQuery " #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+    <table class="table table-striped" [mfData]="getData() | generalFilter : filterQuery " #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
       [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
       <thead>
         <tr>

@@ -13,19 +13,46 @@ import {Router} from "@angular/router";
   styleUrls: ['./customer-details.component.css'],
 })
 export class CustomerDetailsComponent implements OnInit {
-  data: Customer[] = [];
+  public static data: Customer[] = [];
   filterQuery = "";
   rowsOnPage = 100;
   sortOrder = "asc";
   showlinkbutton = true;
   customer1: Customer = new Customer();
   invoiceItems: Packages[]=[];
-
   showOptionsDiv: boolean = false;
   selectedCustomer: Customer;
+  newCustomer: boolean = false;
+
+  constructor(private router: Router, private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
+    this.customer1.date1 = this.userservice.getdate();
+  }
+
+  public getData(): Customer[]{
+    return CustomerDetailsComponent.data;
+  }
+
+  ngOnInit(): void {
+    if(CustomerDetailsComponent.data.length == 0){
+      this.getCustomerList();
+    }
+    this.getInvoiceItems();
+  }
+
+  getCustomerList(){
+    this._SunamiService.getCustomerDetails().subscribe(data =>{
+      CustomerDetailsComponent.data = data;
+      CustomerDetailsComponent.data.forEach(res=>{
+        res.installdate = res.installdate.toString().substring(0,res.installdate.toString().indexOf('T'));
+      });
+    },err => {
+      this.popToast("no internet", err);
+    });
+  }
 
   Fshowlinkbutton() {
     this.showlinkbutton = false;
+    this.newCustomer = true;
   }
 
   EditCustomer(){
@@ -58,12 +85,17 @@ export class CustomerDetailsComponent implements OnInit {
     this.router.navigate(['uninstall', this.selectedCustomer.id]);
   }
 
+  getLogs(){
+    this.router.navigate(['switching', this.selectedCustomer.id]);
+  }
+
   customerToEdit(item){
     this.showOptionsDiv = true;
     this.selectedCustomer = item;
   }
 
   CANCEL() {
+    this.newCustomer = false;
     this.showlinkbutton = true;
     this.customer1 = new Customer();
   }
@@ -74,11 +106,12 @@ export class CustomerDetailsComponent implements OnInit {
     if ((this.customer1.id != null || this.customer1.id != "") && this.customer1.village != null ) {
       this._SunamiService.postNewCustomer([this.customer1]).subscribe(
         (data) => {
+          this.newCustomer = false;
           this.popToast("success", data);
 
           setTimeout(()=>{
             this.showlinkbutton = true;
-            this.ngOnInit();
+            this.getCustomerList();
           },2000);
         },err => {
           this.popToast("no internet", err);
@@ -88,22 +121,6 @@ export class CustomerDetailsComponent implements OnInit {
     else {
       this.popToast("error", "make sure you entered id number and the village name");
     }
-  }
-
-  constructor(private router: Router, private _SunamiService: SunamiserviceService, private toasterService: ToasterService, private userservice: UserServiceService) {
-    this.customer1.date1 = this.userservice.getdate();
-  }
-
-  ngOnInit(): void {
-    this._SunamiService.getCustomerDetails().subscribe(data =>{
-        this.data = data;
-        this.data.forEach(res=>{
-          res.installdate = res.installdate.toString().substring(0,res.installdate.toString().indexOf('T'));
-        });
-      },err => {
-        this.popToast("no internet", err);
-      });
-    this.getInvoiceItems();
   }
 
   getInvoiceItems() {

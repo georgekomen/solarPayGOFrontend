@@ -36,6 +36,7 @@ import {IssueRecordComponent} from "./issue-record/issue-record.component";
 import {AgentRegistrationComponent} from "./Agents/agent-registration/agent-registration.component";
 import {AgentListComponent} from "./Agents/agent-list/agent-list.component";
 import {AgentSalesComponent} from "./Agents/agent-sales/agent-sales.component";
+import {SwitchingComponent} from "./switching/switching.component"
 
 const APP_ROUTES: Routes = [
   { path: 'paymentchart', component: PaymentChartComponent, canActivate: [AuthGuard] },
@@ -51,7 +52,7 @@ const APP_ROUTES: Routes = [
   { path: 'allpayments', component: AllpaymentsComponent, canActivate: [AuthGuard] },
   { path: 'issues', component: IssuesComponent, canActivate: [AuthGuard] },
   { path: 'customerdetails', component: CustomerDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'switchinglogs', component: SwitchinglogsComponent, canActivate: [AuthGuard] },
+  { path: 'switchinglogs/:customer_id', component: SwitchinglogsComponent, canActivate: [AuthGuard] },
   { path: 'addcontroller', component: AddcontrollerComponent, canActivate: [AuthGuard] },
   { path: 'link-controller/:customer_id', component: LinkControllerComponent, canActivate: [AuthGuard] },
   { path: 'income', component: IncomeTabsComponent, canActivate: [AuthGuard] },
@@ -64,16 +65,17 @@ const APP_ROUTES: Routes = [
   { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },
   { path: 'assets', component: AssetsComponent, canActivate: [AuthGuard] },
   { path: 'stocks', component: StocksComponent, canActivate: [AuthGuard] },
-  { path: 'eventlogs', component: EventlogsComponent, canActivate: [AuthGuard] },
+  { path: 'eventlogs/:customer_id', component: EventlogsComponent, canActivate: [AuthGuard] },
   { path: 'lpo', component: ListOfPurchaseOrderComponent, canActivate: [AuthGuard]  },
   { path: 'makepayment/:customer_id', component: MakePaymentComponent, canActivate: [AuthGuard]  },
   { path: 'invoiceitem/:customer_id', component: InvoiceItemComponent, canActivate: [AuthGuard]  },
   { path: 'textmodal/:customer_id', component: TextingModalComponent, canActivate: [AuthGuard]  },
   { path: 'uninstall/:customer_id', component: UninstallCustomerComponent, canActivate: [AuthGuard]  },
   { path: 'issuerecord/:customer_id', component: IssueRecordComponent, canActivate: [AuthGuard] },
-  { path: 'agentregister', component: AgentRegistrationComponent },
-  { path: 'agentlist', component: AgentListComponent },
-  { path: 'agentsales/:agentcode', component: AgentSalesComponent },
+  { path: 'agentregister', component: AgentRegistrationComponent, canActivate: [AuthGuard] },
+  { path: 'agentlist', component: AgentListComponent, canActivate: [AuthGuard] },
+  { path: 'agentsales/:agentcode', component: AgentSalesComponent, canActivate: [AuthGuard] },
+  { path: 'switching/:customer_id', component: SwitchingComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 //export const routing = RouterModule.forRoot(APP_ROUTES);

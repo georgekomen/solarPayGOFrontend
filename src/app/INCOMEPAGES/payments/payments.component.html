@@ -79,13 +79,14 @@
           <button *ngIf="filterdiv" (click)="filterdiv = !filterdiv" class="btn btn-info">HIDE FILTER</button>
         </div>
         <div class="col-md-3">
-          <h4> <span class="label label-success">Paid {{ (sumAmountInvoiced - sumAmountDebt) | currency:'KSH':true}}</span></h4>
+
+          <h4> <span class="label label-success">Paid {{ (sumAmountInvoiced - sumAmountDebt) | currency:(getCurrency()):true}}</span></h4>
         </div>
         <div class="col-md-3">
-          <h4> <span class="label label-info">Invoice {{ sumAmountInvoiced| currency:'KSH':true}}</span></h4>
+          <h4> <span class="label label-info">Invoice {{ sumAmountInvoiced | currency:(getCurrency()):true}}</span></h4>
         </div>
         <div class="col-md-3">
-          <h4> <span class="label label-warning">Debt {{sumAmountDebt | currency:'KSH':true}} </span></h4>
+          <h4> <span class="label label-warning">Debt {{sumAmountDebt | currency:(getCurrency()):true}}</span></h4>
         </div>
         <div class="col-md-1">
           <h4> <span class="label label-primary">{{percent}}%  {{debtOrPaid}}</span></h4>
@@ -140,13 +141,13 @@
           <td *ngIf="item.Active_status == 'active'" (click)="selectCustomerAndShowOptionsDiv(item.Id)">{{item.Name}}</td>
           <td *ngIf="item.Active_status == 'inactive'" style="background-color: brown; color:white;" (click)="selectCustomerAndShowOptionsDiv(item.Id)">{{item.Name}}</td>
           <td>
-            <h5><span class="label label-success">{{item.Amount | currency:'KSH':true}} </span></h5>
+            <h5><span class="label label-success">{{item.Amount | currency:(getCurrency()):true}} </span></h5>
           </td>
           <td>
-            <h5><span class="label label-info">{{item.Invoice | currency:'KSH':true}} </span></h5>
+            <h5><span class="label label-info">{{item.Invoice | currency:(getCurrency()):true}}</span></h5>
           </td>
           <td>
-            <h5><span class="label label-danger">{{item.Debt | currency:'KSH':true}} </span></h5>
+            <h5><span class="label label-danger">{{item.Debt | currency:(getCurrency()):true}}</span></h5>
           </td>
           <td>
             <h5><span class="label label-primary">{{item.Percent1}}%  </span></h5>

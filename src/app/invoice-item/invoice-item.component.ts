@@ -13,7 +13,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 })
 export class InvoiceItemComponent implements OnInit {
   invoiceItems: Packages[] = [];
-  selectedInvoiceItem: Packages;
+  selectedInvoiceItem: string;
   invoice: InvoiceItem = new InvoiceItem();
   invoicedItems: InvoiceItem[] = [];
   customer_id1: string = "";
@@ -57,9 +57,18 @@ export class InvoiceItemComponent implements OnInit {
     });
   }
 
+  deleteInvoice(item){
+    if(confirm("Are you sure you want to delete "+item+" from this customer")){
+      this._SunamiService.deleteInvoice(this.invoice.customerId,item).subscribe(res=>{
+        this.popToast("Result", res);
+        this.init();
+      });
+    }
+  }
+
   invoiceCustomer() {
     this.invoice.loogedUser = UserServiceService.email;
-    this.invoice.item = this.selectedInvoiceItem.Item;
+    this.invoice.item = this.selectedInvoiceItem;
     if (confirm('are you sure you want to proceed?')) {
       this._SunamiService.invoiceCustomer([this.invoice]).subscribe(res => {
         this.popToast("Result", res);

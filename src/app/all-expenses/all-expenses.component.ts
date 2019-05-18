@@ -74,6 +74,10 @@ export class AllExpensesComponent implements OnInit {
     }
   }
 
+  getCurrency(): string{
+    return UserServiceService.currency;
+  }
+
   getExpenses() {
     this._SunamiService.getAllExpenses().subscribe(
       (data) => this.calcSum(data), //Bind to view

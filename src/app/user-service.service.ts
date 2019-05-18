@@ -18,6 +18,8 @@ export class UserServiceService {
   public static level: number = 0;
   public static email: string;
   public static name2: string = "";
+  public static office_id: number[] = [];
+  public static currency: string;
    _http: Http;
    toasterService: ToasterService;
    private url1:string = "//sunami.southeastasia.cloudapp.azure.com:57339/api/customers";
@@ -70,6 +72,8 @@ export class UserServiceService {
       for (let key in UserServiceService.data) {
         UserServiceService.allowed = UserServiceService.data[key].allowed;
         UserServiceService.level = parseInt(UserServiceService.data[key].level);
+        UserServiceService.office_id = UserServiceService.data[key].office_id;
+        UserServiceService.currency = UserServiceService.data[key].currency;
         console.log(UserServiceService.allowed);
         console.log(UserServiceService.level);
       }
@@ -87,7 +91,7 @@ export class UserServiceService {
     const options = new RequestOptions({
       headers: headers
     });
-    return this._http.get(`${this.url1}/getUser?id=${email2}`, options)
+    return this._http.get(`${this.url1}/getUser?id=${email2}&logedinUser=${email2}`, options)
       .map((res: Response) => res.json())
       //...errors if any
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
